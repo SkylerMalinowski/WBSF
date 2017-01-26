@@ -1,10 +1,11 @@
 # WBSF
 Software Engineering - Prof. Marsic - Web-Based Stock Forecaster
 
-Members:
-Skyler Malinowski; 
-Gregory Leonberg; 
-Vince Taylor; 
-Jack Aquino; 
-Jonatan Yanovsky; 
-Raj Balaji
+| Team Memebers | Sub Team |
+| ------------------ |:----------:|
+| Skyler Malinowski | Front End |
+| Gregory Leonberg | Front End |
+| Jack Aquino | Front ENd |
+| Jonatan Yanovsky | Back End |
+| Vince Taylor | Back End |
+| Raj Balaji | Back End |
