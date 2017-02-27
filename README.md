@@ -12,4 +12,3 @@ This project is one of implementing a web-based system such that users can regis
 | Skyler Malinowski |
 | Vince Taylor |
 | Jonatan Yanovsky |
-| Jake Lewandowski |
