@@ -5,10 +5,11 @@ This project is one of implementing a web-based system such that users can regis
 
 | Team Memebers |
 | ------------------ |
-| Skyler Malinowski |
-| Gregory Leonberg |
 | Jack Aquino |
-| Jonatan Yanovsky |
-| Vince Taylor |
 | Raj Balaji |
+| Gregory Leonberg |
+| Jake Lewandowski |
+| Skyler Malinowski |
+| Vince Taylor |
+| Jonatan Yanovsky |
 | Jake Lewandowski |
