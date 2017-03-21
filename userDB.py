@@ -1,7 +1,19 @@
 import sqlite3
+from flask import Flask, render_template, request, jsonify
+
+app = flask(__name__)
+
+# main function, initialize web app with IP and port
+if __name__ == '__main__':
+	app.run(
+		host = "127.0.0.1",
+		port = "80",
+		debug = True
+	)
 
 # creates user database if it does not exist already
 # otherwise, does nothing
+@app.route("/openTable")
 def openTable():
     conn = sqlite3.connect("userDB.db")
     cursor = conn.cursor()
@@ -14,6 +26,7 @@ def openTable():
 # takes username and password as input
 # returns False if user already exists with this username
 # otherwise returns True and creates new user
+@app.route("/addUser")
 def addUser(username, password):
     inputs = [(username), (password), (-1)]
     conn = sqlite3.connect("userDB.db")
@@ -41,6 +54,7 @@ def addUser(username, password):
 # takes username as input
 # returns False if user does not exist
 # otherwise deletes user and returns True
+@app.route("/remUser")
 def remUser(username):
     conn = sqlite3.connect("userDB.db")
     cursor = conn.cursor()
@@ -64,6 +78,7 @@ def remUser(username):
 # takes username and password as input
 # returns False if invalid credentials or user does not exist
 # otherwise returns True
+@app.route("/login")
 def login(username, password):
     conn = sqlite3.connect("userDB.db")
     cursor = conn.cursor()
@@ -80,6 +95,7 @@ def login(username, password):
         return False
 
 # prints the contents of the user database
+@app.route("/printTable")
 def printTable():
     conn = sqlite3.connect("userDB.db")
     cursor = conn.cursor()
@@ -90,6 +106,7 @@ def printTable():
     return
 
 # deletes the user database
+@app.route("/delTable")
 def delTable():
     conn = sqlite3.connect("userDB.db")
     cursor = conn.cursor()
@@ -100,6 +117,7 @@ def delTable():
 # takes username as input
 # returns -99 if user does not exist
 # otherwise returns user's level
+@app.route("/getLevel")
 def getLevel(username):
     conn = sqlite3.connect("userDB.db")
     cursor = conn.cursor()
@@ -116,6 +134,7 @@ def getLevel(username):
 # takes username and level as input
 # returns False if user does not exist
 # otherwise changes level and returns True
+@app.route("/setLevel")
 def setLevel(username, level):
     conn = sqlite3.connect("userDB.db")
     cursor = conn.cursor()
