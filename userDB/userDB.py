@@ -6,7 +6,6 @@ sessionID = 0
 
 import sqlite3
 from flask import Flask, render_template, request, jsonify, make_response, send_file
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 app = Flask(__name__)
 
