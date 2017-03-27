@@ -1,3 +1,5 @@
+# Unit Test for TestPlot.py as of march 25th 2017
+# Preformed by Vincent Taylor
 from yahoo_finance import Share
 from openpyxl import load_workbook # openpyxl is used for xlsx files, a.k.a excel files from 2010+, old excel files used xls
 from datetime import datetime
@@ -40,7 +42,7 @@ def get_companysymbol(var): # Looks up the current company
 	name = var
 	wb = load_workbook('companylist.xlsx')		
 	sheet_ranges = wb['Worksheet']      									# you need the name of the sheet which is in the bottom of the excel file once you open it
-	end_range = 3196														# the total number of companies in the list are 3195
+	end_range = 3197														# the total number of companies in the list are 3195
 	true = 0
 	num=0
 	for num in range(1,3196):			
@@ -50,16 +52,34 @@ def get_companysymbol(var): # Looks up the current company
 			break															# break the loop if you find the company you're looking for
 	if true==0:
 		print("Could not find the company symbol")							
-		return "null"
+		return 'null'
 	else:
 		return sheet_ranges['A'+str(num)].value	
 def main():
-	company_name=input("Enter the name of the company you're searching for ") 
-	var = get_companysymbol(company_name)	
-	if var!='null':								
-		timeBegin=input('Enter Start year ')
-		totalDataCurrent=fetchDataToday(var,timeBegin)
-		googData=fetchGoogData(var)
-		totalTogether(var,totalDataCurrent,googData)
+	# Name Checker
+	company_name=input("Enter the name of the company you're searching for ")
+	print(get_companysymbol(company_name))
+	print(get_companysymbol("wrong things"))
+	print(get_companysymbol('yahoo'))
+	var=get_companysymbol(company_name)
+	# FecthGoogData
+	googData=fetchGoogData(var)
+	print(googData)
+	# FetchDataToday
+	timeBegin=input('Enter Start year ')
+	totalDataCurrent=fetchDataToday(var,timeBegin)
+	print(totalDataCurrent)
+	# Fetch between two dates
+	timeEnd=input('Enter End year ')
+	totalData=fetchData(var,timeBegin,timeEnd)
+	#Testing each graphing 
+	totalTogether(var,totalDataCurrent,googData)
+	totalTogether(var,totalData,googData)
+	makeCandleStickGraph(var,totalDataCurrent)
+	makeCandleStickGraph(var,totalData)
+	makeLineGraph(var,totalDataCurrent,googData)
+	makeLineGraph(var,totalData,googData)
+
+	
 main() 
-#C:\\cygwin\bin\TestPlot.py
+#C:\\cygwin\bin\UnitTest3_27_17.py
