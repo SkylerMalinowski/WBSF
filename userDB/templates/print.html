@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script>
+			function print() {
+				var p = document.getElementById("Password").value;
+				
+				var req = new XMLHttpRequest();
+				req.onload = function(){
+					document.getElementById("response").innerHTML = req.responseText;
+				}
+				
+				req.open("GET", "/userDB/printTable/?p=" + p, true);
+				req.send();
+			}
+		</script>
+	</head>
+
+	<body>
+		
+		<a href="/">login</a><br>
+		<a href="/test/reg.html">Want to Register?</a><br>
+		<a href="/test/dereg.html">Deregister</a><br>
+		<a href="/test/logout.html">logout</a><br>
+		
+		<img src="/logo.JPG" alt="logo">
+		<p>Please enter the admin password:</p>
+		
+		<form action="javascript:print()">
+			Password: <input type="text" name="p" id=Password>
+			<br><br>
+			<input name="submit" type="submit" value="Submit" />
+		</form>
+		
+		<p id=response> </p>
+	
+	</body>
+
+</html>
