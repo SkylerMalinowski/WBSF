@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script>
+			function logout() {
+				var req = new XMLHttpRequest();
+				req.onload = function(){
+					document.getElementById("response").innerHTML = req.responseText;
+				}
+				
+				req.open("GET", "/userDB/logout/?s=" + window.name, true);
+				req.send();
+			}
+		</script>
+	</head>
+
+	<body>
+		
+		<a href="/test/print.html" onclick="location.replace('localhost:5000/test/print'), '_top'">Print user DB</a><br>
+		<a href="/test/reg.html">Want to Register?</a><br>
+		<a href="/test/dereg.html">Deregister</a><br>
+		<a href="/">login</a><br>
+		
+		<img src="/logo.JPG" alt="logo">
+		
+		<p>Press button to logout:</p>
+		
+		<form action="javascript:logout()">
+			<input name="submit" type="submit" value="log out" />
+		</form>
+		
+		<p id=response> </p>
+	
+	</body>
+
+</html>
