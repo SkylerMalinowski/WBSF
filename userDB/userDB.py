@@ -4,6 +4,8 @@ ADMIN = "GSVRJJJ"
 # used to verify user is logged in
 sessionID = 0
 
+from yahoo_finance import Share
+import feedparser
 import sqlite3
 from flask import Flask, render_template, request, jsonify, make_response, send_file
 
@@ -12,6 +14,35 @@ app = Flask(__name__)
 # main function, initialize web app with IP and port
 if __name__ == '__main__':
 	app.run(host = "127.0.0.1", port = 80, debug = False)
+
+# stock ticker and news stuff
+def getCurrentPrice(Sym):    
+	ticker = Share(Sym)
+	return ticker.get_price()
+
+def getPercentChange(Sym):
+	ticker = Share(Sym)
+	return ticker.get_percent_change()
+
+def getNewsTitle(feed):
+	return feed['feed']['title']
+
+def getNews(feed, n):
+	return feed['entries'][n]['title']
+
+@app.route('/ticker/')
+def ticker():
+	tick = request.args.get('s')
+	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
+	ret = "The current price of " + tick + " is $" + getCurrentPrice(tick) + ". This is a " + getPercentChange(tick) + " change."
+	return ret
+
+@app.route('/news/')
+def news():
+	tick = request.args.get('s')
+	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
+	ret = "The top headline for " + tick + " from " + getNewsTitle(feed) + " is: <br><br>" + getNews(feed, 0)
+	return ret
 
 # original home page
 @app.route('/')
