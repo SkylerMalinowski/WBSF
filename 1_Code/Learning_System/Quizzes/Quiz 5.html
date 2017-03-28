@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Quiz 5</title>
+	<link type='text/css' rel='stylesheet' href='quizStylesheet.css' />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
+	
+	<script type="text/javascript">
+		var questions = [{
+			question: "What do the 52-week high and low refer to?",
+			choices: ["The biggest change in price over the course of the last year","The index of stocks that have had large changes in their prices over the course of a year","The highest and lowest prices at which a stock has been traded over the last year","The highest and lowest values of the country's GDP over the course of a year"],
+			correctAnswer: 2	// index in choices[]
+		}, {
+			question: "What is the relationship between a company name and a ticker symbol?",
+			choices: ["A ticker symbol is a unique alphabetic name which identifies the stock of a company","The ticker symbol is the name that the company uses on all of its legal documents to refer to itself","The ticker symbol is the current price of a company's stock","There is no relationship between a company and a ticker symbol"],
+			correctAnswer: 0 
+		}, {
+			question: "What does it mean if a company doesn't have a value printed under 'Dividends per Share' in a stock table?",
+			choices: ["Every stock should have a value printed.  It's a typo","It means that the stock does not offer dividends","The stock offers dividends per share but does not wish to disclose that information","The company is participating in illegal embezzlment of funds"],
+			correctAnswer: 1
+		}, {
+			question: "What is the Trading Volume of a Stock?",
+			choices: ["Trading volume is the number of those stocks in circulation in total","The total number of shares traded for the day","The number of stocks remaining that can be bought by an investor","The limit of the number of stocks that can be traded that day"],
+			correctAnswer: 1
+		}, {
+			question: "What does it mean for a stock to be 'up for the day'?",
+			choices: ["Over the course of the day, the stock's price rose","Over the course of the day, the stock's price did not fall","Over the course of the day, The stock's price fell","Over the course of the day, the stock's price remained the same"],
+			correctAnswer: 1
+		}];
+	</script>
+</head>
+
+<body>
+	<div id='container'>
+		<div id='title'>
+			<h1>How to Read Stock Tables</h1>
+		</div>
+    
+		<div id='quiz'></div>
+		<div class='button' id='next'><a href='#'>Next</a></div>
+		<div class='button' id='prev'><a href='#'>Prev</a></div>
+		<div class='button' id='start'><a href='#'>Start Over</a></div>
+		<div class='button' id='menu'><a href='../menu.html'>Main Menu</a></div>
+		
+		<!--
+		<button class='' id='next'>Next</a></button>
+		<button class='' id='prev'>Prev</a></button>
+		<button class='' id='start'> Start Over</a></button>
+		-->
+	</div>
+
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+	<script type="text/javascript" src='questions.json'></script>
+	<script type='text/javascript' src='JavaScript/quiz.js'></script>
+</body>
+
+</html>
