@@ -1,6 +1,8 @@
 To run this:
 	"pip install flask"
 	"pip install sqlite3"
+	"pip install yahoo-finance"
+	"pip install feedparser"
 	
 	navigate to directory of this readme in terminal / command prompt
 	"set FLASK_APP=userDB.py"
