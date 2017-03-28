@@ -2,6 +2,8 @@
 <html>
 
 	<head>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 		<script>
 			function login() {
 				var u = document.getElementById("Username").value;
@@ -14,6 +16,30 @@
 				}
 				
 				req.open("GET", "/userDB/login/?u=" + u + "&p=" + p, true);
+				req.send();
+			}
+			
+			function price() {
+				var s = document.getElementById("Stock").value;
+				
+				var req = new XMLHttpRequest();
+				req.onload = function(){
+					document.getElementById("price").innerHTML = req.responseText;
+				}
+				
+				req.open("GET", "/ticker/?s=" + s, true);
+				req.send();
+			}
+			
+			function news() {
+				var s = document.getElementById("News").value;
+				
+				var req = new XMLHttpRequest();
+				req.onload = function(){
+					document.getElementById("news").innerHTML = req.responseText;
+				}
+				
+				req.open("GET", "/news/?s=" + s, true);
 				req.send();
 			}
 		</script>
@@ -38,7 +64,27 @@
 			<input name="submit" type="submit" value="Submit" />
 		</form>
 		
+		<br><br><br>
 		<p id=response> </p>
+		<br><br><br>
+		
+		<form action="javascript:price()">
+			Stock: <input type="text" name="s" id=Stock>
+			<br>
+			<input name="submit2" type="submit" value="Get Price Info" />
+		</form>
+		
+		<p id=price> </p>
+		<br><br><br>
+		
+		<form action="javascript:news()">
+			News: <input type="text" name="s2" id=News>
+			<br>
+			<input name="submit3" type="submit" value="Get News" />
+		</form>
+		
+		<p id=news> </p>
+		<br><br><br>
 	
 	</body>
 
