@@ -12,6 +12,8 @@
 |
 +---+---> 1_Code					// Code Base
 	|
+	+-------> Fetch_&_Plot			// Stock data acquisistion and plotting
+	|
 	+---+---> Learning_System		// Education System (Lessons, Quizzes, Menu)
 		|
 		+-------> Images			// Picture type files used by Learning_System
@@ -22,7 +24,7 @@
 			|
 			+-------> JavaScript	// Quiz .js
 	|
-	+---+---> userDB				// 
+	+---+---> userDB				// User account database
 		|
 		+-------> __pycache__		// 
 		|
