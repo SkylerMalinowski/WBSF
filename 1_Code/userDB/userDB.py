@@ -78,7 +78,7 @@ def openTable():
 	if password == ADMIN:
 		conn = sqlite3.connect("userDB.db")
 		cursor = conn.cursor()
-		cursor.execute("CREATE TABLE IF NOT EXISTS user(username TEXT, password TEXT, level INTEGER, session INTEGER);")
+		cursor.execute("CREATE TABLE IF NOT EXISTS user(username TEXT, password TEXT, level INTEGER, session INTEGER, quizTaken INTEGER, lessonState INTEGER);")
 		conn.commit()
 		conn.close()
 		return 'Table opened'
@@ -94,7 +94,7 @@ def openTable():
 def addUser():
 	username = request.args.get('u')
 	password = request.args.get('p')
-	inputs = [str(username), str(password), (-1), (-1)]
+	inputs = [str(username), str(password), (-1), (-1), (0), (0)]
 	
 	conn = sqlite3.connect("userDB.db")
 	cursor = conn.cursor()
@@ -104,12 +104,12 @@ def addUser():
 	conn.commit()
 	
 	if temp is None:
-		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?)", inputs)
+		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
 		return "User added"
 	elif temp[0] != username:
-		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?)", inputs)
+		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
 		return "User added"
@@ -276,3 +276,74 @@ def setLevel():
 		conn.commit()
 		conn.close()
 		return "Level set successfully"
+
+@app.route("/userDB/getLessonState/")
+def getLessonState():
+	session = request.args.get('s');
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()7
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)]
+	temp = cursor.fetchone()
+	conn.commit()
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("FROM user GET lessonState WHERE session=?", [(session)])
+		temp = cursor.fetchone()
+		conn.commit()
+		conn.close()
+		return temp
+	
+@app.route("/userDB/setLessonState/")
+def setLessonState():
+	session = request.args.get('s')
+	lState = request.args.get('l')
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("UPDATE user SET lessonState=? WHERE session=?", [(lState), (session)])
+		conn.commit()
+		conn.close()
+		return "Lesson State set successfully"
+
+@app.route("/userDB/getQuizTaken/")
+def getQuizTaken():
+	session = request.args.get('s');
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()7
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)]
+	temp = cursor.fetchone()
+	conn.commit()
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("FROM user GET quizTaken WHERE session=?", [(session)])
+		temp = cursor.fetchone()
+		conn.commit()
+		conn.close()
+		return temp
+
+@app.route("/userDB/setQuizTaken/")
+	session = request.args.get('s')
+	quiz = request.args.get('q')
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("UPDATE user SET quizTaken=? WHERE session=?", [(quiz), (session)])
+		conn.commit()
+		conn.close()
+		return "Quiz Taken set successfully"
