@@ -31,11 +31,9 @@ def Testing(XMatrix,YMatrix): # One's Matrix, Value of Y Matrix Returns the coef
 def difference(Ans,Y,cY):
 	diff1=Ans[len(Ans)-1] - Ans[len(Ans)-2]
 	diff2=Ans[len(Ans)-2] - Ans[len(Ans)-3]
-	diff3=Ans[len(Ans)-3] - Ans[len(Ans)-4]
 	y=len(Y)-1;
 	F=np.array(Y[y]+diff1)
 	F=np.append(F,Y[y]+diff2)
-	F=np.append(F,Y[y]+diff3)
 	for x in range(len(Ans)-3,1,-1):
 		diff=Ans[x]-Ans[x-1]
 		F=np.append(F,Y[y]+diff)
@@ -66,7 +64,6 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData):#,percison)
 		pass
 	Y=np.append(Y,float(x10*pow(i+1,10)+x9*pow(i+1,9)+x8*pow(i+1,8)+x7*pow(i+1,7)+x6*pow(i+1,6)+x5*pow(i+1,5)+x4*pow(i+1,4)+x3*pow(i+1,3)+x2*pow(i+1,2)+x1*pow(i+1,1)+xo*pow(i+1,0)))
 	Y=np.append(Y,float(x10*pow(i+2,10)+x9*pow(i+2,9)+x8*pow(i+2,8)+x7*pow(i+2,7)+x6*pow(i+2,6)+x5*pow(i+2,5)+x4*pow(i+2,4)+x3*pow(i+2,3)+x2*pow(i+2,2)+x1*pow(i+2,1)+xo*pow(i+2,0)))
-	Y=np.append(Y,float(x10*pow(i+3,10)+x9*pow(i+3,9)+x8*pow(i+3,8)+x7*pow(i+3,7)+x6*pow(i+3,6)+x5*pow(i+3,5)+x4*pow(i+3,4)+x3*pow(i+3,3)+x2*pow(i+3,2)+x1*pow(i+3,1)+xo*pow(i+3,0)))
 	u=difference(Y,yVals,cY)
 	input()
 	return u
