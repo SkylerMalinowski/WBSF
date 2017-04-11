@@ -54,7 +54,7 @@ def getIndex(num,index):
 		pass
 	a=np.append(a,datetime(int(time.strftime("%Y")),int(time.strftime("%m")),int(time.strftime("%d"))+1))
 	a=np.append(a,datetime(int(time.strftime("%Y")),int(time.strftime("%m")),int(time.strftime("%d"))+2))
-	#a=np.append(a,datetime(int(time.strftime("%Y")),int(time.strftime("%m")),int(time.strftime("%d"))+3))
+	a=np.append(a,datetime(int(time.strftime("%Y")),int(time.strftime("%m")),int(time.strftime("%d"))+3))
 	return a
 def get_companysymbol(var): # Looks up the current company 
 	name = var
@@ -93,13 +93,12 @@ def main():
 			totalDataCurrent=fetchDataToday(var,timeBegin)
 			googData=fetchGoogData(var)
 			y=fetchDataSpec('AAPL',int(time.strftime("%m"))-1)
-			#print(y)
 			C=len(y.High)
 			A=LATest.makeOne_Matrix(10,timeBegin,C)
 			B=LATest.makeY_Matrix(y.High)
 			D=LATest.Testing(A,B)
-			Foog=LATest.makeOutY(D,C+3,timeBegin,totalDataCurrent.High)
-			print(Foog[len(Foog)-1]-Foog[len(Foog)-4])# = change
+			Foog=LATest.makeOutY(D,C+3,timeBegin,totalDataCurrent.High,googData)
+			#print(Foog[len(Foog)-1]-Foog[len(Foog)-4])# = change
 			totalTogether(var,totalDataCurrent,googData,Foog)
 			Time=update(Time,var,googData)
 			

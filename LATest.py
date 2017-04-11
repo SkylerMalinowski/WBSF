@@ -27,8 +27,26 @@ def Testing(XMatrix,YMatrix): # One's Matrix, Value of Y Matrix Returns the coef
 	Final = np.matmul(Sec,YMatrix)
 	#print(Final)
 	return Final
-def makeOutY(FinalM,xVals,startYear,yVals):#,percison)
+
+def difference(Ans,Y,cY):
+	diff1=Ans[len(Ans)-1] - Ans[len(Ans)-2]
+	diff2=Ans[len(Ans)-2] - Ans[len(Ans)-3]
+	diff3=Ans[len(Ans)-3] - Ans[len(Ans)-4]
+	y=len(Y)-1;
+	F=np.array(Y[y]+diff1)
+	F=np.append(F,Y[y]+diff2)
+	F=np.append(F,Y[y]+diff3)
+	for x in range(len(Ans)-3,1,-1):
+		diff=Ans[x]-Ans[x-1]
+		F=np.append(F,Y[y]+diff)
+		y=y-1
+		pass
+	F=np.flip(F,0)
+	print(F)
+	return F
+def makeOutY(FinalM,xVals,startYear,yVals,currentData):#,percison)
 	i=setAxis(startYear)
+	cY=float(currentData[0]['LastTradePrice'])
 	y=len(yVals)
 	x10=float(FinalM.item(10,0))
 	x9=float(FinalM.item(9,0))
@@ -46,13 +64,12 @@ def makeOutY(FinalM,xVals,startYear,yVals):#,percison)
 	for x in range(i-xVals,i):
 		Y = np.append(Y,(float(x10*pow(x,10)+x9*pow(x,9)+x8*pow(x,8)+x7*pow(x,7)+x6*pow(x,6)+x5*pow(x,5)+x4*pow(x,4)+x3*pow(x,3)+x2*pow(x,2)+x1*pow(x,1)+xo*pow(x,0))))
 		pass
-	print(Y)
-	for x in range(xVals,0,-1):
-		Y[x]=Y[x]+yVals[y-x]
-		pass
-	print(Y)
-	return Y
-
+	Y=np.append(Y,float(x10*pow(i+1,10)+x9*pow(i+1,9)+x8*pow(i+1,8)+x7*pow(i+1,7)+x6*pow(i+1,6)+x5*pow(i+1,5)+x4*pow(i+1,4)+x3*pow(i+1,3)+x2*pow(i+1,2)+x1*pow(i+1,1)+xo*pow(i+1,0)))
+	Y=np.append(Y,float(x10*pow(i+2,10)+x9*pow(i+2,9)+x8*pow(i+2,8)+x7*pow(i+2,7)+x6*pow(i+2,6)+x5*pow(i+2,5)+x4*pow(i+2,4)+x3*pow(i+2,3)+x2*pow(i+2,2)+x1*pow(i+2,1)+xo*pow(i+2,0)))
+	Y=np.append(Y,float(x10*pow(i+3,10)+x9*pow(i+3,9)+x8*pow(i+3,8)+x7*pow(i+3,7)+x6*pow(i+3,6)+x5*pow(i+3,5)+x4*pow(i+3,4)+x3*pow(i+3,3)+x2*pow(i+3,2)+x1*pow(i+3,1)+xo*pow(i+3,0)))
+	u=difference(Y,yVals,cY)
+	input()
+	return u
 def setAxis(startYear):
 	i=(int(time.strftime("%Y")) - int(startYear))*365 + currentDayCount() + int(time.strftime("%d"))+1
 	return i;
@@ -86,27 +103,3 @@ def makeOne_Matrix(percision,startYear,DataSet): #Number of elements,percison wh
 			pass
 		pass
 	return(np.reshape(matrixx,(DataSet,percision+1)))
-
-
-#C:\\cygwin\bin\LATest.py
-	# a0
-	# a1
-	# a2
-	# a3
-	# ......
-	# an
-	# y=anx^n +- an-1x^n-1.......a0n^0
-	#def setAxis(startYear):
-#	i=(int(time.strftime("%Y")) - int(startYear))*365 + currentDayCount() + int(time.strftime("%d"))+1
-#	return i;
-#def currentDayCount():
-#	i=int(time.strftime("%m"))
-#	sum=0;
-#	for x in range(1,12):
-#		day_inMonth=28 +(x+floor(x/8))%2 + 2 % x + 2*floor(1/x)
-#		sum+=day_inMonth
-#		print(x)
-#		if x==i-1:
-#			break
-#		pass
-#	return sum
