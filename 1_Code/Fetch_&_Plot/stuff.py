@@ -1,19 +1,19 @@
-import plotly.plotly as py
+import plotly.plotly as py #Plotly Api
 import plotly.figure_factory as go
 import plotly.graph_objs as obj
-import time
-import pandas_datareader.data as web
-import json
-import LATest
-import os
+import time #To get time and date
+import pandas_datareader.data as web #Database Reader
+import json # JavaScript Object Notation
+import LATest # Linear Algebra File
+import os  #Os Path to get file to search from
 import os.path
-from yahoo_finance import Share
+from yahoo_finance import Share #Yahoo Finance Api
 from openpyxl import load_workbook # openpyxl is used for xlsx files, a.k.a excel files from 2010+, old excel files used xls
-from datetime import datetime
-from datetime import timedelta
-from googlefinance import getQuotes
-from plotly.graph_objs import *
-import numpy as np
+from datetime import datetime # Date
+from datetime import timedelta # Adding to date
+from googlefinance import getQuotes # Google Finance Api
+from plotly.graph_objs import * #Plotly Objects
+import numpy as np #Numpy for Matrix Handling
 
 
 
@@ -44,22 +44,21 @@ def fetchGoogData(stockSymbol): #Fetches current google data
 	return currentInfo
 
 def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy,sy): #plots all the graphs together
-	#fig=go.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index)
-	figure=obj.Trace(y=Webster.High,x=Webster.index,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol)
-	currentFigure=obj.Trace(y=currentInfo[0]['LastTradePrice'],x=currentInfo[0]['LastTradeDateTime'],line=dict(color=('rgb(0,0,0)')),name='Current Data for '+stockSymbol)
-	Predicts=obj.Trace(y=Predict,x=getIndex(len(Predict)),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol)
-	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol)
-	data=Data([figure,currentFigure,Predicts,point])
+	#fig=go.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index) #Candlestick
+	figure=obj.Trace(y=Webster.High,x=Webster.index,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol) #Past Data Line
+	currentFigure=obj.Trace(y=currentInfo[0]['LastTradePrice'],x=currentInfo[0]['LastTradeDateTime'],line=dict(color=('rgb(0,0,0)')),name='Current Data for '+stockSymbol) #Current Point
+	Predicts=obj.Trace(y=Predict,x=getIndex(len(Predict)),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #Prediction Line
+	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #point of prediciton
+	data=Data([figure,currentFigure,Predicts,point]) #Data Array of Figures
 
-	py.plot(data, filename=stockSymbol+'_Line')
+	py.plot(data, filename=stockSymbol+'_Line') #Plot The Function
 
-def getIndex(num):
-	num+=2
+def getIndex(num): #Get an index of days between num and today (order is by date)
+	num+=2 #Constant to shift
 	a=np.array((datetime.now()+timedelta(days=-num)).strftime('%y-%m-%d'))
 	for x in range(num-1,0,-1):
 		a=np.append(a,(datetime.now()+timedelta(days=-x)).strftime('%y-%m-%d'))
 		pass
-	print(a)
 	return a
 
 def get_companysymbol(var): # Looks up the current company 
@@ -87,16 +86,16 @@ def main():
 		company_name=input("Enter the name of the company you're searching for ") 
 		var = get_companysymbol(company_name)	
 		if var != 'null':								
-			timeBegin=int(input('Enter Start year ')) - 2
+			timeBegin=int(input('Enter Start year ')) - 2 #Gets the start date and pushes it back 2 years to show enough data to fit the screen nicely
 			
-			totalDataCurrent=fetchDataToday(var,timeBegin)
-			googData=fetchGoogData(var)
+			totalDataCurrent=fetchDataToday(var,timeBegin) # Total Data up until 3 days ago
+			googData=fetchGoogData(var) # Fetch Todays data
 			
-			Prediction_Data=fetchDataSpec('AAPL',(datetime.now()+timedelta(days=-30)).strftime('%m'))
+			Prediction_Data=fetchDataSpec('AAPL',(datetime.now()+timedelta(days=-30)).strftime('%m')) # Get the data from just the past month
 			
-			Prediction_Data_Length=len(Prediction_Data.High)
+			Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
 			
-			Coeffcients=LATest.coeffcients_Generator(LATest.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LATest.makeY_Matrix(Prediction_Data.High))
+			Coeffcients=LATest.coeffcients_Generator(LATest.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LATest.makeY_Matrix(Prediction_Data.High)) #coeffcients for function
 			
 			Prediction_Model=LATest.makeOutY(Coeffcients,Prediction_Data_Length+3,timeBegin,totalDataCurrent.High,googData) #Gets Prediciton Model
 			
