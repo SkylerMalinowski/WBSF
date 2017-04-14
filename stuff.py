@@ -21,41 +21,45 @@ def makeLineGraph(stockSymbol,Webster,currentInfo): # Makes Line graph for both 
 	currentFigure=obj.Trace(y=currentInfo[0]['LastTradePrice'],x=currentInfo[0]['LastTradeDateTime'],line=dict(color=('rgb(0,0,0)'))) # Current Point Data
 	data=[figure,currentFigure]
 	py.plot(data, filename=stockSymbol+'_Line')
+
 def makeCandleStickGraph(stockSymbol,Webster): # Makes a Candle Stick Graph
 	fig=go.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index) # Past Data
 	py.plot(fig,filename=stockSymbol+'_Candle',validate=False)
+
 def fetchData(stockSymbol,startYear,endYear): # Fecthes the data between any two year points
 	info=web.DataReader(stockSymbol,'yahoo',datetime(int(startYear),1,1),datetime(int(endYear),1,1)) 
 	return info
+
 def fetchDataToday(stockSymbol,startYear): # Fethes  past data to today
-	info=web.DataReader(stockSymbol,'yahoo',datetime(int(startYear),1,1),time.strftime("%d-%m-%Y"))
+	info=web.DataReader(stockSymbol,'yahoo',datetime(startYear,1,1),time.strftime("%d-%m-%Y"))
 	return info
+
 def fetchDataSpec(stockSymbol,month):
 	info=web.DataReader(stockSymbol,'yahoo',datetime(int(time.strftime("%Y")),int(month),1),time.strftime("%d-%m-%Y"))
 	return info
+
 def fetchGoogData(stockSymbol): #Fetches current google data
 	currentInfo=getQuotes(stockSymbol)
 	return currentInfo
-def totalTogether(stockSymbol,Webster,currentInfo,Predict): #plots all the graphs together
-	fig=go.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index)
+
+def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy,sy): #plots all the graphs together
+	#fig=go.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index)
 	figure=obj.Trace(y=Webster.High,x=Webster.index,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol)
 	currentFigure=obj.Trace(y=currentInfo[0]['LastTradePrice'],x=currentInfo[0]['LastTradeDateTime'],line=dict(color=('rgb(0,0,0)')),name='Current Data for '+stockSymbol)
-	Predicts=obj.Scatter(y=Predict,x=getIndex(30,Webster.index),line=dict(color=('rgb(0,123,100)')),name="Prediction "+stockSymbol)
-	fig['data'].extend([figure])
-	fig['data'].extend([currentFigure])
-	fig['data'].extend([Predicts])
-	py.plot(fig, filename=stockSymbol+'_Line',validate=False)
-	return fig
+	Predicts=obj.Trace(y=Predict,x=getIndex(30,Webster.index),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol)
+	point=obj.Trace(y=Pointy,x=currentInfo[0]['LastTradeDateTime'],line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol)
+	data=Data([figure,currentFigure,Predicts,point])
+	py.plot(data, filename=stockSymbol+'_Line')
+
+
 def getIndex(num,index):
 	length=len(index)
 	a=np.array(index[length-num])
 	for x in range(length-num,length):
 		a=np.append(a,index[x])
 		pass
-	a=np.append(a,datetime(int(time.strftime("%Y")),int(time.strftime("%m")),int(time.strftime("%d"))+1))
-	a=np.append(a,datetime(int(time.strftime("%Y")),int(time.strftime("%m")),int(time.strftime("%d"))+2))
-	a=np.append(a,datetime(int(time.strftime("%Y")),int(time.strftime("%m")),int(time.strftime("%d"))+3))
 	return a
+
 def get_companysymbol(var): # Looks up the current company 
 	name = var
 	wb = load_workbook('companylist.xlsx')		
@@ -73,15 +77,6 @@ def get_companysymbol(var): # Looks up the current company
 		return "null"
 	else:
 		return sheet_ranges['A'+str(num)].value	
-def update(time,name,cI):
-	currentTime=datetime.now().strftime('%M')
-	if int(currentTime)-int(time)>=15: #test Value is zero, 15 minutes min to see change
-		newDat=Scatter(y=cI[0]['LastTradePrice'],x=cI[0]['LastTradeDateTime'])
-		dat=Data([newDat])
-		plot_url = py.plot(dat, filename=name+'_Line', fileopt='extend')	
-		return currentTime
-	else:
-		return time
 def main():
 	var='' #just want update to repeat not entire thing 
 	while var!='null':
@@ -89,19 +84,15 @@ def main():
 		company_name=input("Enter the name of the company you're searching for ") 
 		var = get_companysymbol(company_name)	
 		if var != 'null':								
-			timeBegin=input('Enter Start year ')
+			timeBegin=int(input('Enter Start year ')) - 2
 			totalDataCurrent=fetchDataToday(var,timeBegin)
 			googData=fetchGoogData(var)
-			y=fetchDataSpec('AAPL',int(time.strftime("%m"))-1)
-			C=len(y.High)
-			A=LATest.makeOne_Matrix(10,timeBegin,C)
-			B=LATest.makeY_Matrix(y.High)
-			D=LATest.Testing(A,B)
-			Foog=LATest.makeOutY(D,C+3,timeBegin,totalDataCurrent.High,googData)
-			#print(Foog[len(Foog)-1]-Foog[len(Foog)-4])# = change
-			totalTogether(var,totalDataCurrent,googData,Foog)
-			Time=update(Time,var,googData)
-			
+			Prediction_Data=fetchDataSpec('AAPL',int(time.strftime("%m"))-1)
+			Prediction_Data_Length=len(Prediction_Data.High)
+			Coeffcients=LATest.coeffcients_Generator(LATest.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LATest.makeY_Matrix(Prediction_Data.High))
+			Prediction_Model=LATest.makeOutY(Coeffcients,Prediction_Data_Length+3,timeBegin,totalDataCurrent.High,googData)
+			pointY=LATest.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1])
+			totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY,timeBegin)
 	pass
 main() 
 #C:\\cygwin\bin\stuff.py
