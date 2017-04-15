@@ -30,6 +30,10 @@ def getNewsTitle(feed):
 def getNews(feed, n):
 	return feed['entries'][n]['title']
 
+@app.route('/helpers.js')
+def jsLoad():
+	return send_file("helpers.js")
+
 @app.route('/ticker/')
 def ticker():
 	tick = request.args.get('s')
@@ -281,8 +285,8 @@ def setLevel():
 def getLessonState():
 	session = request.args.get('s');
 	conn = sqlite3.connect("userDB.db")
-	cursor = conn.cursor()7
-	cursor.execute("SELECT username FROM user WHERE session=?", [(session)]
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
 	temp = cursor.fetchone()
 	conn.commit()
 	if temp is None:
@@ -317,8 +321,8 @@ def setLessonState():
 def getQuizTaken():
 	session = request.args.get('s');
 	conn = sqlite3.connect("userDB.db")
-	cursor = conn.cursor()7
-	cursor.execute("SELECT username FROM user WHERE session=?", [(session)]
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
 	temp = cursor.fetchone()
 	conn.commit()
 	if temp is None:
@@ -332,6 +336,7 @@ def getQuizTaken():
 		return temp
 
 @app.route("/userDB/setQuizTaken/")
+def setQuizTaken():
 	session = request.args.get('s')
 	quiz = request.args.get('q')
 	conn = sqlite3.connect("userDB.db")
