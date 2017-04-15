@@ -100,7 +100,14 @@ def main():
 			Prediction_Model=LATest.makeOutY(Coeffcients,Prediction_Data_Length+3,timeBegin,totalDataCurrent.High,googData) #Gets Prediciton Model
 			
 			pointY=LATest.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point
-			
+			# Note: make sure pointY is not too far ahead into the future. predict like 5 minutes ahead.
+			# 1. Store pointY and its timestamp into a new stock predictions database, pricePoints. 
+			# 2. wait until it is time for pointY, then check percent difference between actual and calculated
+			# 3. store percent difference into a new percentDifference stock table.
+			# 4. when you have enough data points in the percentDifference dB, find the trend, or check if 
+			# there is just randomness, no correlation or smooth transition of accuracy within a bound
+			# 5. a new dB called stock accuracy, store stock index name with accuracy as calculated above.
+			# 6. create a function to retrieve this accuracy for frontend use.
 			totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY,timeBegin) #Print Final Graph
 	pass
 main() 
