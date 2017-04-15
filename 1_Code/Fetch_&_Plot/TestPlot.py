@@ -38,7 +38,7 @@ def totalTogether(stockSymbol,Webster,currentInfo): #plots all the graphs togeth
 	py.plot(fig, filename=stockSymbol+'_Line',validate=False)
 def get_companysymbol(var): # Looks up the current company 
 	name = var
-	wb = load_workbook('companylist.xlsx')		
+	wb = load_workbook('../../4_Data_Collection/companylist.xlsx')		
 	sheet_ranges = wb['Worksheet']      									# you need the name of the sheet which is in the bottom of the excel file once you open it
 	end_range = 3196														# the total number of companies in the list are 3195
 	true = 0
