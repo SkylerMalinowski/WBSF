@@ -3,10 +3,11 @@
 
 <head>
 	<title>Quiz 6</title>
-	<link type='text/css' rel='stylesheet' href='quizStylesheet.css' />
+	<link type='text/css' rel='stylesheet' href='../Cascading Style Sheet/quizStylesheet.css' />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
 	
 	<script type="text/javascript">
+		var quizNum = 6;
 		var questions = [{
 			question: "What determine's a stock's supply?",
 			choices: ["A stock's supply is determined by how many are in circulation","A stock's supply is determined by the price of the stock","A stock's supply is determined by how many people are willing to sell their stock","A stock's supply is determined by the number of people who wish to buy the stock"],
@@ -33,7 +34,8 @@
 		<div class='button' id='next'><a href='#'>Next</a></div>
 		<div class='button' id='prev'><a href='#'>Prev</a></div>
 		<div class='button' id='start'><a href='#'>Start Over</a></div>
-		<div class='button' id='menu'><a href='../menu.html'>Main Menu</a></div>
+		<div class='button' id='menu'><a href='../learningMenu.html'>Learning Menu</a></div>
+		<div class='button' id='mmenu'><a onclick="href='../spotCheck.html',resetQuizzes();">Main Menu</a></div>
 		<!--
 		<button class='' id='next'>Next</a></button>
 		<button class='' id='prev'>Prev</a></button>
@@ -43,7 +45,8 @@
 
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 	<script type="text/javascript" src='questions.json'></script>
-	<script type='text/javascript' src='JavaScript/quiz.js'></script>
+	<script type='text/javascript' src='../JavaScript/quiz.js'></script>
+	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
 </body>
 
 </html>

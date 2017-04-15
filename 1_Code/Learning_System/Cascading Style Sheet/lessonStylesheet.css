@@ -14,7 +14,7 @@ head, body
 	background-color: #263238;
 	background-size: cover;
 	background-position: center center;
-	background-image: url('Images/stockmarket.png');
+	background-image: url('../Images/stockmarket.png');
 	color: white;
 	text-shadow: 0 0 30px #000000;
 }
@@ -68,11 +68,15 @@ head, body
 	margin: 0 30px;
 }
 
-.centered-text
+.footer-box
 {
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
+	padding: 5px 15px 5px 15px;
+	text-align: middle;
+	background-color: #263238;
+	background-size: cover;
+	background-position: center center;
+	color: white;
+	text-shadow: 0 0 30px #000000;
 }
 
 #colorschemes
@@ -81,3 +85,23 @@ head, body
 	width: 100%;
 	margin-top: 30px;
 }
+
+#sticky {
+	padding: 5px 0;
+	text-align: center;
+	background-color: #263238;
+	color: #fff;
+	font-size: 2.5em;
+	border-radius: 2.5ex;
+}
+
+#sticky.stick {
+	margin-top: 0 !important;
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	border-radius: 0 0 0 0;
+	width: 100%;
+}
+

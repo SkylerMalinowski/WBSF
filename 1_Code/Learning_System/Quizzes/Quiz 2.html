@@ -3,10 +3,11 @@
 
 <head>
 	<title>Quiz 2</title>
-	<link type='text/css' rel='stylesheet' href='quizStylesheet.css' />
+	<link type='text/css' rel='stylesheet' href='../Cascading Style Sheet/quizStylesheet.css' />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
 	
 	<script type="text/javascript">
+		var quizNum = 2;
 		var questions = [{
 			question: "What does it mean for a company to be private?",
 			choices: ["A Private company is new, and still deciding what to do for their business.","A Private company has no shares.","A Private company's shares are privately owned by a select few shareholders.","There is no such thing as a private company. Any company doing business is public"],
@@ -37,7 +38,8 @@
 		<div class='button' id='next'><a href='#'>Next</a></div>
 		<div class='button' id='prev'><a href='#'>Prev</a></div>
 		<div class='button' id='start'><a href='#'>Start Over</a></div>
-		<div class='button' id='menu'><a href='../menu.html'>Main Menu</a></div>
+		<div class='button' id='menu'><a href='../learningMenu.html'>Learning Menu</a></div>
+		<div class='button' id='mmenu'><a onclick="href='../spotCheck.html',resetQuizzes();">Main Menu</a></div>
 		<!--
 		<button class='' id='next'>Next</a></button>
 		<button class='' id='prev'>Prev</a></button>
@@ -47,7 +49,8 @@
 
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 	<script type="text/javascript" src='questions.json'></script>
-	<script type='text/javascript' src='JavaScript/quiz.js'></script>
+	<script type='text/javascript' src='../JavaScript/quiz.js'></script>
+	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
 </body>
 
 </html>

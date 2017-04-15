@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Learning Menu</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link type='text/css' rel='stylesheet' href='Cascading Style Sheet/menuStylesheet.css' />
+	<script type='text/javascript' src="../JavaScript/helpers.js"></script>
+	<script type='text/javascript'>
+		function quizLock( quizNum ) {
+			if( getLesson(quizNum) == 1 )
+				window.location.href = "Quizzes/Quiz 1.html";
+			else if( getLesson(quizNum) == 2 )
+				window.location.href = "Quizzes/Quiz 2.html";
+			else if( getLesson(quizNum) == 3 )
+				window.location.href = "Quizzes/Quiz 3.html";
+			else if( getLesson(quizNum) == 4 )
+				window.location.href = "Quizzes/Quiz 4.html";
+			else if( getLesson(quizNum) == 5 )
+				window.location.href = "Quizzes/Quiz 5.html";
+			else if( getLesson(quizNum) == 6 )
+				window.location.href = "Quizzes/Quiz 6.html";
+			else if( getLesson(quizNum) == 7 )
+				window.location.href = "Quizzes/Quiz 7.html";
+			else if( getLesson(quizNum) == 8 )
+				window.location.href = "Quizzes/Quiz 8.html";
+			else if( getLesson(quizNum) == 9 )
+				window.location.href = "Quizzes/Quiz 9.html";
+			else if( getLesson(quizNum) == 10 )
+				window.location.href = "Quizzes/Quiz 10.html";
+			else
+			{
+				alert("Please complete the required reading first.");
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div id="main-background">
+		<div class="center-vertical">
+			<div id="title">Learning Menu</div>
+		</div>
+	</div>
+	
+	<!-- Placement Test -->
+	<div>
+		<div data-role="header">
+			<h1>How Much Do I Know?</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div>
+				<div class="ui-block">
+					<input TYPE="button" VALUE="Placement Quiz" onclick="window.location.href='Quizzes/Placement Quiz.html'">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+	
+	<!-- Lesson 1 -->
+	<div>
+		<div data-role="header">
+			<h1>Lesson 1: What Are Stocks?</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 1.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(1)">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+	
+	<!-- Lesson 2 -->
+	<div>
+		<div data-role="header">
+			<h1>Lesson 2: What Kinds of Stocks?</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 2.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(2)">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+	
+	<!-- Lesson 3 -->
+	<div>
+		<div data-role="header">
+			<h1>Lesson 3: How Do Stocks Trade?</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 3.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(3)">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+	
+	<!-- Lesson 4 -->
+	<div>
+		<div data-role="header">
+			<h1>Lesson 4: What Types of Markets?</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 4.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(4)">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+	
+	<!-- Lesson 5 -->
+	<div>
+		<div data-role="header">
+			<h1>Lesson 5: How Do I Read Stock Tables?</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 5.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(5)">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+	
+	<!-- Lesson 6 -->
+	<div>
+		<div data-role="header">
+			<h1>Lesson 6: What Stocks Are Valuable?</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 6.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(6)">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+	
+</body>
+
+</html>

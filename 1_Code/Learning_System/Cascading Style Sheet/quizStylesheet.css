@@ -71,5 +71,11 @@ ul {
 }
 
 #menu {
+  display: none;
+  width: 120px;
+}
+
+#mmenu {
 	display: none;
+  width: 90px;
 }

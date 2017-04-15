@@ -3,10 +3,11 @@
 
 <head>
 	<title>Quiz 5</title>
-	<link type='text/css' rel='stylesheet' href='quizStylesheet.css' />
+	<link type='text/css' rel='stylesheet' href='../Cascading Style Sheet/quizStylesheet.css' />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
 	
 	<script type="text/javascript">
+		var quizNum = 5;
 		var questions = [{
 			question: "What do the 52-week high and low refer to?",
 			choices: ["The biggest change in price over the course of the last year","The index of stocks that have had large changes in their prices over the course of a year","The highest and lowest prices at which a stock has been traded over the last year","The highest and lowest values of the country's GDP over the course of a year"],
@@ -41,7 +42,8 @@
 		<div class='button' id='next'><a href='#'>Next</a></div>
 		<div class='button' id='prev'><a href='#'>Prev</a></div>
 		<div class='button' id='start'><a href='#'>Start Over</a></div>
-		<div class='button' id='menu'><a href='../menu.html'>Main Menu</a></div>
+		<div class='button' id='menu'><a href='../learningMenu.html'>Learning Menu</a></div>
+		<div class='button' id='mmenu'><a onclick="href='../spotCheck.html',resetQuizzes();">Main Menu</a></div>
 		
 		<!--
 		<button class='' id='next'>Next</a></button>
@@ -52,7 +54,8 @@
 
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 	<script type="text/javascript" src='questions.json'></script>
-	<script type='text/javascript' src='JavaScript/quiz.js'></script>
+	<script type='text/javascript' src='../JavaScript/quiz.js'></script>
+	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
 </body>
 
 </html>

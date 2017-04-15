@@ -13,10 +13,12 @@
 	<script src="js/parallax.js/parallax.min.js"></script>
 	<script src="js/jquery.scrollme.min.js"></script>
 	
+	<script type='text/javascript' src="../JavaScript/helpers.js"></script>
+	
 	<!-- https://www.google.com/fonts/#UsePlace:use/Collection:Open+Sans:400,300,600,400italic -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600" rel="stylesheet" type="text/css">
 	<!-- <styles></styles> -->
-	<link type='text/css' rel='stylesheet' href='lessonStylesheet.css' />
+	<link type='text/css' rel='stylesheet' href='../Cascading Style Sheet/lessonStylesheet.css' />
 	<!-- INLINE JAVASCRIPT -->
 	<script type="text/javascript">
 		function sticky_relocate() {
@@ -142,26 +144,35 @@
 		</div>
 	</div>
 	
-	<!-- Footer -->
+	<!-- Reading Progress -->
 	<div>
 		<div data-role="header">
-			<h1>Finished Reading</h1>
+			<h1>Reading Progress</h1>
 		</div>
-
+		
 		<div data-role="main" class="ui-content">
-			<div class="ui-grid-a">
+			<div class="ui-grid-b">
 				<div class="ui-block-a">
-					<input TYPE="button" VALUE="Return to Menu" onclick="window.location.href='../menu.html'">
+					<input TYPE="button" VALUE="Not Done Yet" onclick="window.location.href='../learningMenu.html'">
 				</div>
-
+				
 				<div class="ui-block-b">
-					<input TYPE="button" VALUE="Take Quiz" onclick="window.location.href='../Quizzes/Quiz 5.html'">
+					<input TYPE="button" VALUE="Finished Reading" onclick="window.location.href='../learningMenu.html',setLesson(5,1)">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Ready for the Quiz" onclick="window.location.href='../Quizzes/Quiz 1.html'">
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- -------- -->
-	
 </body>
+
+<footer>
+	<div class="footer-box">
+		<p align="center"><strong>Source: </strong><a href="http://www.investopedia.com/">http://www.investopedia.com/</a></p>
+	</div>
+</footer>
 
 </html>

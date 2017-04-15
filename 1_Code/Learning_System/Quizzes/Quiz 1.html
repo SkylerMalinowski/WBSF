@@ -3,10 +3,11 @@
 
 <head>
 	<title>Quiz 1</title>
-	<link type='text/css' rel='stylesheet' href='quizStylesheet.css' />
+	<link type='text/css' rel='stylesheet' href='../Cascading Style Sheet/quizStylesheet.css' />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
 	
 	<script type="text/javascript">
+		var quizNum = 1;
 		var questions = [{
 			question: "What benefits do shareholders have from owning shares?",
 			choices: ["Owning a share of a company means they are owners of the company, complete with the benefits and risks that the company has","They can vote in shareholder meetings and obtain a part of the company's profits","Shareholders are entitled to the assets of the corporation, such as building space, furniture, and office supplies","Owning shares of a company will guarantee a job with said company"],
@@ -41,7 +42,8 @@
 		<div class='button' id='next'><a href='#'>Next</a></div>
 		<div class='button' id='prev'><a href='#'>Prev</a></div>
 		<div class='button' id='start'><a href='#'>Start Over</a></div>
-		<div class='button' id='menu'><a href='../menu.html'>Main Menu</a></div>
+		<div class='button' id='menu'><a href='../learningMenu.html'>Learning Menu</a></div>
+		<div class='button' id='mmenu'><a onclick="href='../spotCheck.html',resetQuizzes();">Main Menu</a></div>
 		<!--
 		<button class='' id='next'>Next</a></button>
 		<button class='' id='prev'>Prev</a></button>
@@ -51,7 +53,8 @@
 
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
 	<script type="text/javascript" src='questions.json'></script>
-	<script type='text/javascript' src='JavaScript/quiz.js'></script>
+	<script type='text/javascript' src='../JavaScript/quiz.js'></script>
+	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
 </body>
 
 </html>
