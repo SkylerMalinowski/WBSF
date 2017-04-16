@@ -3,11 +3,10 @@ import time # Time
 import pandas_datareader.data as web #Database reader
 import numpy as np #Numpy
 import pandas as pd #Pandas Data Reader
-import time #Time
+import ArrayNCalc
 from math import floor #math floor
 from math import pow #math pow
 from datetime import datetime #Date time
-
 
 def coeffcients_Generator(XMatrix,YMatrix): # One's Matrix, Value of Generated_Data Matrix Returns the coeffcients for the equation
 	Tran = XMatrix.transpose()
@@ -23,35 +22,9 @@ def coeffcients_Generator(XMatrix,YMatrix): # One's Matrix, Value of Generated_D
 	return Final
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 
-def differenceBetweenDataPoints(Pulled_Data,Generated_Data,Current_Data): # get the differences and normalize the data
 
-	diff1=Pulled_Data[len(Pulled_Data)-1] - Pulled_Data[len(Pulled_Data)-2]
-
-	diff2=Pulled_Data[len(Pulled_Data)-2] - Pulled_Data[len(Pulled_Data)-3]
-
-	y=len(Generated_Data)-1;
-
-	Difference_Array=np.array(Generated_Data[y]+diff1)
-
-	Difference_Array=np.append(Difference_Array,Generated_Data[y]+diff2)
-
-	for x in range(len(Pulled_Data)-3,1,-1):
-
-		diff=Pulled_Data[x]-Pulled_Data[x-1]
-
-		Difference_Array=np.append(Difference_Array,Generated_Data[y]+diff)
-
-		y=y-1
-
-		pass
-
-	Difference_Array=np.flip(Difference_Array,0)
-
-	return Difference_Array
-
-	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the fucntion x
-	i=setAxis(startYear)
+	i=ArrayNCalc.setAxis(startYear)
 
 	Current_Data=float(currentData[0]['LastTradePrice'])
 
@@ -75,28 +48,14 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the
 		Generated_Data = np.append(Generated_Data,(float(x10*pow(x,10)+x9*pow(x,9)+x8*pow(x,8)+x7*pow(x,7)+x6*pow(x,6)+x5*pow(x,5)+x4*pow(x,4)+x3*pow(x,3)+x2*pow(x,2)+x1*pow(x,1)+xo*pow(x,0))))
 		pass
 
-	#for u in range(1,20):
-		#Generated_Data=np.append(Generated_Data,float(x10*pow(i+u,10)+x9*pow(i+u,9)+x8*pow(i+u,8)+x7*pow(i+u,7)+x6*pow(i+u,6)+x5*pow(i+u,5)+x4*pow(i+u,4)+x3*pow(i+u,3)+x2*pow(i+u,2)+x1*pow(i+u,1)+xo*pow(i+u,0)))
-		#pass
-
-	#print(len(Generated_Data))
-	#input()
-
-	return differenceBetweenDataPoints(Generated_Data,yVals,Current_Data)
-
+	
+	return ArrayNCalc.Normalize(ArrayNCalc.differenceBetweenDataPoints(Generated_Data),yVals)
+	
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
-
-def setAxis(startYear): #find the number of days between two dates
-
-	i=(int(time.strftime("%Y")) - int(startYear))*365 + currentDayCount() + int(time.strftime("%d"))+1
-
-	return i;
-
-	#(Gets the amount of days between 2 points)
 
 def getPointY(FinalM,date,prev):
 
-	i=setAxis(date)
+	i=ArrayNCalc.setAxis(date)
 
 	x10=float(FinalM.item(10,0))
 	x9=float(FinalM.item(9,0))
@@ -114,26 +73,6 @@ def getPointY(FinalM,date,prev):
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 
-def currentDayCount(): #Find the month days
-
-	i=int(time.strftime("%m"))
-
-	sum=0;
-
-	for x in range(1,12):
-
-		day_inMonth=28 +(x+floor(x/8))%2 + 2 % x + 2*floor(1/x)
-
-		sum+=day_inMonth
-
-		if x==i-1:
-
-			break
-		pass
-
-	return sum
-
-	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 
 def makeY_Matrix(yVals): 
 
@@ -151,7 +90,7 @@ def makeY_Matrix(yVals):
 
 def makeXVals_Matrix(percision,startYear,DataSet): #Number of elements,percison what power of X do we want to go to. Returns One's Matrix
 
-	i=setAxis(startYear)
+	i=ArrayNCalc.setAxis(startYear)
 
 	matrixx=np.array(i-DataSet)
 
@@ -178,7 +117,9 @@ def makeXVals_Matrix(percision,startYear,DataSet): #Number of elements,percison 
 	return(np.reshape(matrixx,(DataSet,percision+1)))
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
-#def CalculateACC()#Take in a value of precitions IE from prediciton model in stuff,take in the acutal data ie Prediciton Data
+
+
+#Take in a value of precitions IE from prediciton model in stuff,take in the acutal data ie Prediciton Data
 # Calculate the difference between Prediction model[x] and prediciton model[x-1] for every value in prediction model
 # do the same for prediction data. You hsould have two arrays by the end of this
 # compare differenceInPredcitionData[x]/DifferenceInPredicitonModel[x] and take the average divide by 30 and thats the confidence value
