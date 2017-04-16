@@ -1,22 +1,24 @@
-To run this (linux):
+*** To run on linux:
 
-```
-sudo apt-get install python
-sudo pip install flask
-pip install sqlite3 (if it errors, you already have it installed)
-pip install yahoo-finance
-pip install feedparser
-```
-	
-navigate to directory of this readme in terminal / command prompt
-close all web browsers and HTTP clients
+Install required libraries.
 
-```
-set FLASK_APP=userDB.py
-su
-flask run --port 80 --host=0.0.0.0
-```
+$ sudo apt-get install python
+$ sudo pip install flask
+$ pip -H install sqlite3
+$ pip install yahoo-finance
+$ pip install feedparser
 
-Website is now accessible via localhost (or your IP) by any internet connected machine.
+Open terminal in (or change directory to) "<dir>/WBSF/1_Code/userDB/"
 
-You can re-open a web browser and use the site.
+$ sudo su
+$ export FLASK_APP=userDB.py
+$ flask run --port <number> --host=0.0.0.0
+ex: $ flask run --port 80 --host=0.0.0.0
+
+Website is now accessible via your IP by any internet connected machine.
+Open a web browser to the given IP to access the site.
+
+
+*** To run on windows:
+
+
