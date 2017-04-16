@@ -22,7 +22,7 @@ def CalculatePercentError(predictionValues,actualValues):
 		Exe+=abs(A[x]-B[x+1])/((abs(A[x])+abs(B[x+1]))/2)
 		pass
 	
-	return (Exe/(limit-1))*100
+	return (Exe)
 
 def CalculateRelativeACC(predictionValues,actualValues):
 
@@ -37,7 +37,7 @@ def CalculateRelativeACC(predictionValues,actualValues):
 	for x in range(0,limit-2):
 		Exe+=abs((A[x]-B[x+1])/B[x+1])
 		pass
-	return (Exe/(limit-1))*100
+	return (Exe)
 
 def differenceBetweenDataPoints(Pulled_Data): # get the differences and normalize the data
 
