@@ -3,16 +3,9 @@
 
 	<head>
 		<script>
-			function print() {
+			function webPrint() {
 				var p = document.getElementById("Password").value;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					document.getElementById("response").innerHTML = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/printTable/?p=" + p, true);
-				req.send();
+				document.getElementById("response").innerHTML = print(p);
 			}
 		</script>
 	</head>
@@ -27,7 +20,7 @@
 		<img src="/logo.JPG" alt="logo">
 		<p>Please enter the admin password:</p>
 		
-		<form action="javascript:print()">
+		<form action="javascript:webPrint()">
 			Password: <input type="text" name="p" id=Password>
 			<br><br>
 			<input name="submit" type="submit" value="Submit" />
