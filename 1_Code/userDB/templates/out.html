@@ -3,14 +3,8 @@
 
 	<head>
 		<script>
-			function logout() {
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					document.getElementById("response").innerHTML = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/logout/?s=" + window.name, true);
-				req.send();
+			function webLogout() {
+				document.getElementById("response").innerHTML = logout();
 			}
 		</script>
 	</head>
@@ -26,7 +20,7 @@
 		
 		<p>Press button to logout:</p>
 		
-		<form action="javascript:logout()">
+		<form action="javascript:webLogout()">
 			<input name="submit" type="submit" value="log out" />
 		</form>
 		
