@@ -68,6 +68,10 @@ differenceBetweenDataPoints(Pulled_Data,Generated_Data,Current_Data)
 	Explanation:
 	This takes all the values in the predicted array and calculates the differences and returns that array
 
+CalculatePercentErrorACC(predictionValues,actualValues):
+	Input: Array(predictionValues), Array(actualValues)
+	Output: ACC(int)
+	Explanation: This uses experiemntal error to calcutlate the percent error found then subtracts it from 100 and rounds down to give accuracy
 
 makeOutY(FinalM,xVals,startYear,yVals,currentData)
 	Input: Matrix(FinalM),String(startYear),Array(yVals),List(Current_Data)

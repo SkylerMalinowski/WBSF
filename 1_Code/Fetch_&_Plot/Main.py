@@ -69,8 +69,6 @@ def main():
 			
 			#print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 
-			#print(ArrayNCalc.CalculatePercentError(Prediction_Model,Prediction_Data.High))
-
 			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
 
 	pass
