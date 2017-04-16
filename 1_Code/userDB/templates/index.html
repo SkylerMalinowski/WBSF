@@ -2,50 +2,30 @@
 <html>
 
 	<head>
+		<script src="../helpers.js"> </script>
 		<script>
-			function login() {
+			function webLogin() {
 				var u = document.getElementById("Username").value;
 				var p = document.getElementById("Password").value;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					document.getElementById("response").innerHTML = req.responseText;
-					window.name = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/login/?u=" + u + "&p=" + p, true);
-				req.send();
+				document.getElementById("response").innerHTML = login(u, p);
+				location.replace("../../Learning_System/spotCheck.html");
 			}
 			
-			function price() {
+			function webPrice() {
 				var s = document.getElementById("Stock").value;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					document.getElementById("price").innerHTML = req.responseText;
-				}
-				
-				req.open("GET", "/ticker/?s=" + s, true);
-				req.send();
+				document.getElementById("price").innerHTML = price(s);
 			}
 			
-			function news() {
+			function webNews() {
 				var s = document.getElementById("News").value;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					document.getElementById("news").innerHTML = req.responseText;
-				}
-				
-				req.open("GET", "/news/?s=" + s, true);
-				req.send();
+				document.getElementById("news").innerHTML = news(s);
 			}
 		</script>
 	</head>
 
 	<body>
 		
-		<a href="/test/print.html" onclick="location.replace('localhost:5000/test/print'), '_top'">Print user DB</a><br>
+		<a href="/test/print.html">Print user DB</a><br>
 		<a href="/test/reg.html">Want to Register?</a><br>
 		<a href="/test/dereg.html">Deregister</a><br>
 		<a href="/test/logout.html">logout</a><br>
