@@ -291,28 +291,6 @@ def setLevel():
 		conn.close()
 		return "Level set successfully"
 
-@app.route("/userDB/getQuiz/")
-def getQuizTaken():
-	session = request.args.get('s');
-	index = request.args.get('i');
-	
-	conn = sqlite3.connect("userDB.db")
-	cursor = conn.cursor()
-	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
-	temp = cursor.fetchone()
-	conn.commit()
-	
-	if temp is None:
-		conn.close()
-		return "Access Denied"
-	
-	else:
-		cursor.execute("SELECT quizStates FROM user WHERE session=?", [(session)])
-		temp = cursor.fetchone()
-		conn.commit()
-		conn.close()
-		return int(temp.split(',')[i-1])
-
 @app.route("/userDB/setQuiz/")
 def setQuizTaken():
 	session = request.args.get('s')
