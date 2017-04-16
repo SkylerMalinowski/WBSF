@@ -1,5 +1,6 @@
 import plotly.plotly as py #Plotly Api
 import plotly.figure_factory as go
+import ArrayNCalc
 import plotly.graph_objs as obj
 import time #To get time and date
 import pandas_datareader.data as web #Database Reader
@@ -65,7 +66,12 @@ def main():
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
+			print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+
+			print(ArrayNCalc.CalculatePercentError(Prediction_Model,Prediction_Data.High))
+			
 			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
+
 	pass
 
 main() 
