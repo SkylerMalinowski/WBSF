@@ -12,40 +12,38 @@ from math import pow #math pow
 from datetime import datetime # Date
 from datetime import timedelta # Adding to date
 
-# Function by Jon
-# assume that we are not storing confidence data in a dB, so we cannot calculate prediction over time
+ # Function by Jon
+  # assume that we are not storing confidence data in a dB, so we cannot calculate prediction over time
 def CalculateConfidenceRating(predictedValues, historicalValues):
-	# there will be less data points from predictedValues than historicalValues, so only do top 20 data points
+	# there will be less data points from predictedValues than historicalValues  
+	numDataPoints = len(predictedValues)
+	historicalIndex = len(historicalValues) - numDataPoints
+	Difference = [numDataPoints]
+	percentError = [numDataPoints]
 
-
-	Difference = [20]
-	percentError = [20]
-
-	for i in range(0, 19):
-		Difference.append(0) # dollar difference
-		percentError.append(0)
-	
-	# only compare last(most recent) 20 data points for accuracy.
-	for i in range(0, 19):
+	for i in range(0, numDataPoints - 1):
+  		Difference.append(0) # dollar difference
+  		percentError.append(0)
+	# only compare last(most recent) numDataPoints data points for accuracy.
+	for i in range(0, numDataPoints - 1):
 		Difference[i] = predictedValues[i] - historicalValues[historicalIndex + i]
 		percentError[i] = 100 * abs(predictedValues[i] - historicalValues[historicalIndex + i]) / historicalValues[historicalIndex + i]
-		# percentError calculated from % error formula = abs((calculated - real)/real) * 100
-		
 	avgPercentError = 0
 	avgDifference = 0 # compute averages
-
-	for i in range(0, 19):
+	for i in range(0, numDataPoints - 1):
 		avgPercentError += percentError[i]
 		avgDifference += Difference[i]
+	avgPercentError /= numDataPoints
+	avgDifference /= numDataPoints
 
-	avgPercentError /= 20
-	avgDifference /= 20
-
-	print("Avg Percent Error: %.2f Percent "% avgPercentError)
-	print("Avg Dollar Difference: $ %.2f "% avgDifference)
+	#print("Avg Percent Error: %.2f Percent "% avgPercentError)
+ 	#print("Avg Dollar Difference: $ %.2f "% avgDifference)
 
 	# return avg percent error
-		return avgPercentError
+
+	return avgPercentError
+
+	#Function by Vince
 def CalculateRelativeACC(predictionValues,actualValues):
 
 	limit=len(predictionValues)
@@ -62,7 +60,7 @@ def CalculateRelativeACC(predictionValues,actualValues):
 	Exe=floor(Exe/200*100)
 	return (Exe)
 
-
+	#Function by Vince
 def differenceBetweenDataPoints(Pulled_Data): # get the differences and normalize the data
 
 	diff1=Pulled_Data[len(Pulled_Data)-1] - Pulled_Data[len(Pulled_Data)-2]
@@ -84,7 +82,7 @@ def differenceBetweenDataPoints(Pulled_Data): # get the differences and normaliz
 	Difference_Array=np.flip(Difference_Array,0)
 
 	return Difference_Array
-
+	#Function by Vince
 def differenceBetweenDataPointsLimit(Pulled_Data,limit): # get the differences and normalize the data
 	
 	length=len(Pulled_Data)-1
@@ -108,7 +106,7 @@ def differenceBetweenDataPointsLimit(Pulled_Data,limit): # get the differences a
 	Difference_Array=np.flip(Difference_Array,0)
 
 	return Difference_Array
-
+	#Function by Vince
 def Normalize(differData,baseData):
 
 	y=len(baseData)-1;
@@ -128,7 +126,7 @@ def Normalize(differData,baseData):
 	return differData
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
-
+	#Function by Vince
 def setAxis(startYear): #find the number of days between two dates
 
 	i=(int(time.strftime("%Y")) - int(startYear))*365 + currentDayCount() + int(time.strftime("%d"))+1
@@ -136,7 +134,7 @@ def setAxis(startYear): #find the number of days between two dates
 	return i;
 
 	#(Gets the amount of days between 2 points)
-
+	#Function by Vince
 def currentDayCount(): #Find the month days
 
 	i=int(time.strftime("%m"))
@@ -155,7 +153,7 @@ def currentDayCount(): #Find the month days
 		pass
 
 	return sum
-
+	#Function by Vince
 def getWorkDates(length):
 
 	us_holidays = holidays.UnitedStates()
