@@ -5,10 +5,11 @@ import plotly.graph_objs as obj
 import time #To get time and date
 import pandas_datareader.data as web #Database Reader
 import json # JavaScript Object Notation
-from datetime import datetime # Date
-from datetime import timedelta # Adding to date
 from plotly.graph_objs import * #Plotly Objects
 import numpy as np #Numpy for Matrix Handling
+import ArrayNCalc
+from datetime import datetime
+from datetime import timedelta
 
 def makeLineGraph(stockSymbol,Webster,currentInfo): # Makes Line graph for both historic data (webster), current Stock Info (currentInfo)
 
@@ -34,23 +35,10 @@ def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy): #plots all th
 
 	currentFigure=obj.Trace(y=currentInfo[0]['LastTradePrice'],x=currentInfo[0]['LastTradeDateTime'],line=dict(color=('rgb(0,0,0)')),name='Current Data for '+stockSymbol) #Current Point
 
-	Predicts=obj.Trace(y=Predict,x=getIndex(len(Predict)),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #Prediction Line
+	Predicts=obj.Scatter(y=Predict,x=ArrayNCalc.getWorkDates(len(Predict)),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #Prediction Line
 
 	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #point of prediciton
 
 	data=Data([figure,currentFigure,Predicts,point]) #Data Array of Figures
 
 	py.plot(data, filename=stockSymbol+'_Line') #Plot The Function
-
-def getIndex(num): #Get an index of days between num and today (order is by date)
-
-
-	a=np.array((datetime.now()+timedelta(days=-num-3)).strftime('%y-%m-%d'))
-
-	for x in range(num+3,0,-1):
-
-		a=np.append(a,(datetime.now()+timedelta(days=-x)).strftime('%y-%m-%d'))
-
-		pass
-
-	return a

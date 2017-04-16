@@ -4,9 +4,52 @@ import pandas_datareader.data as web #Database reader
 import numpy as np #Numpy
 import pandas as pd #Pandas Data Reader
 import time #Time
+import holidays
+import string
+from datetime import date
 from math import floor #math floor
 from math import pow #math pow
-from datetime import datetime #Date time
+from datetime import datetime # Date
+from datetime import timedelta # Adding to date
+
+
+
+# Function by Jon
+# assume that we are not storing confidence data in a dB, so we cannot calculate prediction over time
+def CalculateConfidenceRating(predictedValues, historicalValues):
+	# there will be less data points from predictedValues than historicalValues, so only do top 20 data points
+
+	historicalIndex = len(historicalValues) - 20
+
+	Difference = [20]
+	percentError = [20]
+
+	for i in range(0, 19):
+		Difference.append(0) # dollar difference
+		percentError.append(0)
+	
+	# only compare last(most recent) 20 data points for accuracy.
+	for i in range(0, 19):
+		Difference[i] = predictedValues[i] - historicalValues[historicalIndex + i]
+		percentError[i] = 100 * abs(predictedValues[i] - historicalValues[historicalIndex + i]) / historicalValues[historicalIndex + i]
+		# percentError calculated from % error formula = abs((calculated - real)/real) * 100
+		
+	avgPercentError = 0
+	avgDifference = 0 # compute averages
+
+	for i in range(0, 19):
+		avgPercentError += percentError[i]
+		avgDifference += Difference[i]
+
+	avgPercentError /= 20
+	avgDifference /= 20
+
+	print("Avg Percent Error: %.2f Percent "% avgPercentError)
+	print("Avg Dollar Difference: $ %.2f "% avgDifference)
+
+	# return avg percent error
+	return avgPercentError
+
 
 def CalculatePercentError(predictionValues,actualValues):
 
@@ -131,5 +174,32 @@ def currentDayCount(): #Find the month days
 		pass
 
 	return sum
+def getWorkDates(length):
+	us_holidays = holidays.UnitedStates()
 
-	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
+	a=np.array(datetime.now())
+
+	for x in range(1,length):
+
+		a=np.append(a,datetime.now())
+
+		pass
+
+	x=0
+
+	for y in range(45,0,-1):
+		
+		Date=datetime.now()+timedelta(days=-y)
+
+		if Date.weekday()<=4 and not (Date in us_holidays) :
+			a[x]=Date
+			x+=1
+			pass
+
+		if(x==length):
+			break
+
+		pass
+
+	return a
+	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)C:\\cygwin\bin\Main.py
