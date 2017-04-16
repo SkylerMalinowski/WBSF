@@ -28,7 +28,6 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the
 
 	Current_Data=float(currentData[0]['LastTradePrice'])
 	y=len(yVals)
-	print(xVals)
 	x10=float(FinalM.item(10,0))
 	x9=float(FinalM.item(9,0))
 	x8=float(FinalM.item(8,0))

@@ -59,8 +59,7 @@ def main():
 			Prediction_Data=Fetching.fetchDataSpec('AAPL',(datetime.now()+timedelta(days=-45))) # Get the data from just the past month for the prediciton part
 			
 			Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
-			print(Prediction_Data_Length)
-			print((datetime.now()+timedelta(days=-45)))
+
 			
 			Coeffcients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.High)) #coeffcients for prediction fucntion a0-a10
 			
@@ -68,10 +67,10 @@ def main():
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
-			print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+			#print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 
-			print(ArrayNCalc.CalculatePercentError(Prediction_Model,Prediction_Data.High))
-			input()
+			#print(ArrayNCalc.CalculatePercentError(Prediction_Model,Prediction_Data.High))
+
 			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
 
 	pass
