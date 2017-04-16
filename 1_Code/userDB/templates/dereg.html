@@ -3,17 +3,10 @@
 
 	<head>
 		<script>
-			function dereg() {
+			function webDereg() {
 				var u = document.getElementById("Username").value;
 				var p = document.getElementById("Password").value;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					document.getElementById("response").innerHTML = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/remUser/?u=" + u + "&p=" + p, true);
-				req.send();
+				document.getElementById("response").innerHTML = dereg(u, p);
 			}
 		</script>
 	</head>
@@ -29,7 +22,7 @@
 		
 		<p>Please enter your login credentials:</p>
 		
-		<form action="javascript:dereg()">
+		<form action="javascript:webDereg()">
 			Username: <input type="text" name="u" id=Username>
 			<br>
 			Password: <input type="text" name="p" id=Password>
