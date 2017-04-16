@@ -69,6 +69,10 @@ def testout():
 def testdereg():
 	return render_template('dereg.html')
 
+@app.route('/learning/spotCheck.html')
+def spotCheck():
+	return render_template('../Learning_System/spotCheck.html')
+
 @app.route('/logo.JPG')
 def logo():
 	return send_file('logo.JPG', mimetype='image/jpg')
