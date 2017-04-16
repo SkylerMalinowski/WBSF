@@ -2,25 +2,19 @@
 <html>
 
 	<head>
+		<script src="../helpers.js"> </script>
 		<script>
-			function reg() {
+			function webReg() {
 				var u = document.getElementById("Username").value;
 				var p = document.getElementById("Password").value;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					document.getElementById("response").innerHTML = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/addUser/?u=" + u + "&p=" + p, true);
-				req.send();
+				document.getElementById("response").innerHTML = reg(u, p);
 			}
 		</script>
 	</head>
 
 	<body>
 		
-		<a href="/test/print.html" onclick="location.replace('localhost:5000/test/print'), '_top'">Print user DB</a><br>
+		<a href="/test/print.html">Print user DB</a><br>
 		<a href="/">Want to log in?</a><br>
 		<a href="/test/dereg.html">Deregister</a><br>
 		<a href="/test/logout.html">logout</a><br>
@@ -29,7 +23,7 @@
 		
 		<p>Please enter a username and password to register with:</p>
 		
-		<form action="javascript:reg()">
+		<form action="javascript:webReg()">
 			Username: <input type="text" name="u" id=Username>
 			<br>
 			Password: <input type="text" name="p" id=Password>

@@ -49,7 +49,7 @@ function logout() {
 	return req.responseText;
 }
 
-function login(u, p, callback) {
+function login(u, p) {
 	var req = new XMLHttpRequest();
 	req.onload = function(){
 		return req.responseText;

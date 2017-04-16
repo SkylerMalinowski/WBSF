@@ -46,7 +46,6 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the
 		Generated_Data = np.append(Generated_Data,(float(x10*pow(x,10)+x9*pow(x,9)+x8*pow(x,8)+x7*pow(x,7)+x6*pow(x,6)+x5*pow(x,5)+x4*pow(x,4)+x3*pow(x,3)+x2*pow(x,2)+x1*pow(x,1)+xo*pow(x,0))))
 		pass
 
-	
 	return ArrayNCalc.Normalize(ArrayNCalc.differenceBetweenDataPoints(Generated_Data),yVals)
 	input()
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
