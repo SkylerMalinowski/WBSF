@@ -1,138 +1,86 @@
-function getLessonState() {
-				var s = window.name;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					var ret = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/getLessonState/?s=" + s, true);
-				req.send();
-				return ret;
-			}
-
-function setLessonState(l) {
-				var s = window.name;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					var ret = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/setLessonState/?s=" + s + "&l=" + l, true);
-				req.send();
-				return ret;
-			}
-
-function setQuizTaken(q) {
-				var s = window.name;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					var ret = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/setQuizTaken/?s=" + s + "&q=" + q, true);
-				req.send();
-				return ret;
-			}
-
-function getQuizTaken() {
-				var s = window.name;
-				
-				var req = new XMLHttpRequest();
-				req.onload = function(){
-					var ret = req.responseText;
-				}
-				
-				req.open("GET", "/userDB/getQuizTaken/?s=" + s, true);
-				req.send();
-				
-				return ret;
-			}
-
 function dereg(u, p) {
 				var req = new XMLHttpRequest();
 				
 				req.onload = function(){
-					var ret = req.responseText;
+					return req.responseText;
 				}
 				
-				req.open("GET", "/userDB/remUser/?u=" + u + "&p=" + p, true);
+				req.open("GET", "/userDB/remUser/?u=" + u + "&p=" + p, false);
 				req.send();
 				
-				return ret;
+				return req.responseText;
 			}
 
 function reg(u, p) {
 				var req = new XMLHttpRequest();
 				
 				req.onload = function(){
-					var ret = req.responseText;
+					return req.responseText;
 				}
 				
-				req.open("GET", "/userDB/addUser/?u=" + u + "&p=" + p, true);
+				req.open("GET", "/userDB/addUser/?u=" + u + "&p=" + p, false);
 				req.send();
 				
-				return ret;
+				return req.responseText;
 			}
 
 function print(p) {
 				var req = new XMLHttpRequest();
 				
 				req.onload = function(){
-					var ret = req.responseText;
+					return req.responseText;
 				}
 				
-				req.open("GET", "/userDB/printTable/?p=" + p, true);
+				req.open("GET", "/userDB/printTable/?p=" + p, false);
 				req.send();
 				
-				return ret;
+				return req.responseText;
 			}
 
 function logout() {
 				var req = new XMLHttpRequest();
 				req.onload = function(){
-					var ret = req.responseText;
+					return req.responseText;
 				}
 				
-				req.open("GET", "/userDB/logout/?s=" + window.name, true);
+				req.open("GET", "/userDB/logout/?s=" + window.name, false);
 				req.send();
 				
-				return ret;
+				return req.responseText;
 			}
 
 function login(u, p, callback) {
 				var req = new XMLHttpRequest();
 				req.onload = function(){
-					var ret = req.responseText;
+					return req.responseText;
 					window.name = req.responseText;
 				}
 				
 				req.open("GET", "/userDB/login/?u=" + u + "&p=" + p, false);
 				req.send();
 				
-				return ret;
+				return req.responseText;
 			}
 			
-function price(s, callback) {
+function price(s) {
 				var req = new XMLHttpRequest();
 				req.onload = function(){
-					callback(req.responseText);
+					return req.responseText;
 				}
 				
 				req.open("GET", "/ticker/?s=" + s, false);
 				req.send();
+				return req.responseText
 			}
 			
 function news(s) {
 				var req = new XMLHttpRequest();
 				req.onload = function(){
-					var ret = req.responseText;
+					return req.responseText;
 				}
 				
 				req.open("GET", "/news/?s=" + s, false);
 				req.send();
 				
-				return ret;
+				return req.responseText;
 			}
