@@ -66,6 +66,8 @@ def main():
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
+			ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High) # Jon's prediction code
+			
 			print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 
 			print(ArrayNCalc.CalculatePercentError(Prediction_Model,Prediction_Data.High))
