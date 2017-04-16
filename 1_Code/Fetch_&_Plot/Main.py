@@ -56,20 +56,21 @@ def main():
 
 			googData=Fetching.fetchGoogData(var) # Fetch Todays data from google finance
 			
-			Prediction_Data=Fetching.fetchDataSpec('AAPL',(datetime.now()+timedelta(days=-30))) # Get the data from just the past month for the prediciton part
+			Prediction_Data=Fetching.fetchDataSpec('AAPL',(datetime.now()+timedelta(days=-45))) # Get the data from just the past month for the prediciton part
 			
 			Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
+
 			
 			Coeffcients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.High)) #coeffcients for prediction fucntion a0-a10
 			
-			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length+3,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
+			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
-			print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+			#print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 
-			print(ArrayNCalc.CalculatePercentError(Prediction_Model,Prediction_Data.High))
-			
+			#print(ArrayNCalc.CalculatePercentError(Prediction_Model,Prediction_Data.High))
+
 			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
 
 	pass

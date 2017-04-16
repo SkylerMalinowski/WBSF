@@ -25,11 +25,12 @@ totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy)
 	This prints two line plots one that mimics makeLineGraph and another that plots the prediciton array points and pointy(our prediciton point) note it calls get index to get the xvalues for the prediciton
 	. Also note that this combines four line charts to onto one graph
 
-getIndex(num)
+getWorkDates(length)
 	Input: int(num)
 	Output: Array of Timedates(Dates)
 	Explanation:
-	This gets all the dates from num days ago till now for plotting purposes so that the axis line up
+	This gets all the dates from num days ago till now for plotting purposes so that the axis line up these dates are work days only no holidays or weekedends
+	
 
 fetchData(stockSymbol,startYear,endYear)
 	Input: String(stockSymbol),string(startYear),string(endYear)
@@ -128,3 +129,5 @@ CalculateRelativeACC(predictionValues,actualValues)
 	Output: float (Exe)
 	Explanation:
 	Calcualtes relative error so we can see the average error per point
+
+holidays api
