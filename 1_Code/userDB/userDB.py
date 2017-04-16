@@ -82,7 +82,16 @@ def openTable():
 	if password == ADMIN:
 		conn = sqlite3.connect("userDB.db")
 		cursor = conn.cursor()
-		cursor.execute("CREATE TABLE IF NOT EXISTS user(username TEXT, password TEXT, level INTEGER, session INTEGER, quizTaken INTEGER, lessonState INTEGER);")
+		cursor.execute("""CREATE TABLE IF NOT EXISTS 
+							user(
+								username TEXT, 
+								password TEXT, 
+								level INTEGER, 
+								session INTEGER,
+								readingStates TEXT, 
+								quizStates TEXT,
+								placementTaken INTEGER,
+								modeSwitch INTEGER);""")
 		conn.commit()
 		conn.close()
 		return 'Table opened'
@@ -98,7 +107,8 @@ def openTable():
 def addUser():
 	username = request.args.get('u')
 	password = request.args.get('p')
-	inputs = [str(username), str(password), (-1), (-1), (0), (0)]
+	trash = "0,0,0,0,0,0,0,0,0,0"
+	inputs = [str(username), str(password), (-1), (-1), (trash), (trash), (0), (0)]
 	
 	conn = sqlite3.connect("userDB.db")
 	cursor = conn.cursor()
@@ -108,12 +118,12 @@ def addUser():
 	conn.commit()
 	
 	if temp is None:
-		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?)", inputs)
+		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
 		return "User added"
 	elif temp[0] != username:
-		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?)", inputs)
+		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
 		return "User added"
@@ -281,74 +291,179 @@ def setLevel():
 		conn.close()
 		return "Level set successfully"
 
-@app.route("/userDB/getLessonState/")
-def getLessonState():
-	session = request.args.get('s');
-	conn = sqlite3.connect("userDB.db")
-	cursor = conn.cursor()
-	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
-	temp = cursor.fetchone()
-	conn.commit()
-	if temp is None:
-		conn.close()
-		return "Access Denied"
-	else:
-		cursor.execute("FROM user GET lessonState WHERE session=?", [(session)])
-		temp = cursor.fetchone()
-		conn.commit()
-		conn.close()
-		return temp
-	
-@app.route("/userDB/setLessonState/")
-def setLessonState():
-	session = request.args.get('s')
-	lState = request.args.get('l')
-	conn = sqlite3.connect("userDB.db")
-	cursor = conn.cursor()
-	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
-	temp = cursor.fetchone()
-	conn.commit()
-	if temp is None:
-		conn.close()
-		return "Access Denied"
-	else:
-		cursor.execute("UPDATE user SET lessonState=? WHERE session=?", [(lState), (session)])
-		conn.commit()
-		conn.close()
-		return "Lesson State set successfully"
-
-@app.route("/userDB/getQuizTaken/")
+@app.route("/userDB/getQuiz/")
 def getQuizTaken():
 	session = request.args.get('s');
+	index = request.args.get('i');
+	
 	conn = sqlite3.connect("userDB.db")
 	cursor = conn.cursor()
 	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
 	temp = cursor.fetchone()
 	conn.commit()
+	
 	if temp is None:
 		conn.close()
 		return "Access Denied"
+	
 	else:
-		cursor.execute("FROM user GET quizTaken WHERE session=?", [(session)])
+		cursor.execute("SELECT quizStates FROM user WHERE session=?", [(session)])
 		temp = cursor.fetchone()
 		conn.commit()
 		conn.close()
-		return temp
+		return int(temp.split(',')[i-1])
 
-@app.route("/userDB/setQuizTaken/")
+@app.route("/userDB/setQuiz/")
 def setQuizTaken():
 	session = request.args.get('s')
-	quiz = request.args.get('q')
+	index = request.args.get('i')
+	val = request.args.get('v')
+	
 	conn = sqlite3.connect("userDB.db")
 	cursor = conn.cursor()
 	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
 	temp = cursor.fetchone()
 	conn.commit()
+	
 	if temp is None:
 		conn.close()
 		return "Access Denied"
 	else:
-		cursor.execute("UPDATE user SET quizTaken=? WHERE session=?", [(quiz), (session)])
+		cursor.execute("SELECT quizStates FROM user WHERE session=?", [(session)])
+		conn.commit()
+		temp = cursor.fetchone()
+		temp = temp.split(',')
+		temp[i-1] = val
+		"".join(temp)
+		cursor.execute("UPDATE user SET quizStates=? WHERE session=?", [(temp), (session)])
 		conn.commit()
 		conn.close()
 		return "Quiz Taken set successfully"
+
+@app.route("/userDB/getQuiz/")
+def getQuizTaken():
+	session = request.args.get('s');
+	index = request.args.get('i');
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	
+	else:
+		cursor.execute("SELECT lessonStates FROM user WHERE session=?", [(session)])
+		temp = cursor.fetchone()
+		conn.commit()
+		conn.close()
+		return int(temp.split(',')[i-1])
+
+@app.route("/userDB/setLesson/")
+def setLesson():
+	session = request.args.get('s')
+	index = request.args.get('i')
+	val = request.args.get('v')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("SELECT lessonStates FROM user WHERE session=?", [(session)])
+		conn.commit()
+		temp = cursor.fetchone()
+		temp = temp.split(',')
+		temp[i-1] = val
+		"".join(temp)
+		cursor.execute("UPDATE user SET lessonStates=? WHERE session=?", [(temp), (session)])
+		conn.commit()
+		conn.close()
+		return "Quiz Taken set successfully"
+
+@app.route("/userDB/getPlacement/")
+def getPlacement():
+	session = request.args.get('s')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("SELECT placementTaken FROM user WHERE session=?", [(session)])
+		temp = cursor.fetchone()
+		conn.commit()
+		conn.close()
+		return temp
+
+@app.route("/userDB/setPlacement/")
+def setPlacement():
+	session = request.args.get('s')
+	val = request.args.get('v')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("UPDATE user SET placementTaken=? WHERE session=?", [(val), (session)])
+		conn.commit()
+		conn.close()
+
+@app.route("/userDB/getMode/")
+def getMode():
+	session = request.args.get('s')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("SELECT modeSwitch FROM user WHERE session=?", [(session)])
+		temp = cursor.fetchone()
+		conn.commit()
+		conn.close()
+		return temp
+
+@app.route("/userDB/setMode/")
+def setMode():
+	session = request.args.get('s')
+	val = request.args.get('v')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "Access Denied"
+	else:
+		cursor.execute("UPDATE user SET modeSwitch=? WHERE session=?", [(val), (session)])
+		conn.commit()
+		conn.close()
