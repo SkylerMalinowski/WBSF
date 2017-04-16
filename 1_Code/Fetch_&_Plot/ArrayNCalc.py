@@ -17,7 +17,6 @@ from datetime import timedelta # Adding to date
 def CalculateConfidenceRating(predictedValues, historicalValues):
 	# there will be less data points from predictedValues than historicalValues, so only do top 20 data points
 
-	historicalIndex = len(historicalValues) - 20
 
 	Difference = [20]
 	percentError = [20]
