@@ -62,10 +62,11 @@ coeffcients_Generator(XMatrix,YMatrix)
 	This take two matricies and applies the LSA alogrithim to generate a 10 by 1 matrix of coeffcients for functions
 
 differenceBetweenDataPoints(Pulled_Data,Generated_Data,Current_Data)
-	Input: DataFrame(Pulled_Data),Array(Generated_Data),List(Current_Data)
-	Output: Array(normalized points)
+	Input: DataFrame(Pulled_Data)
+	Output: Array(difference points)
 	Explanation:
-	This takes all the values in the predicted array and calculates the differences and then it adds them to the actual data(Pulled_Data) to normalize the delta so that when plotted it is valid
+	This takes all the values in the predicted array and calculates the differences and returns that array
+
 
 makeOutY(FinalM,xVals,startYear,yVals,currentData)
 	Input: Matrix(FinalM),String(startYear),Array(yVals),List(Current_Data)
@@ -73,6 +74,18 @@ makeOutY(FinalM,xVals,startYear,yVals,currentData)
 	Explanation:
 	This plugs in x values corresponding to the days that are taken from the pulled data as to gather the predicted data. We calcualte these x values by using setAxis to find out how many days there are between are iniatal date and now. This then uses the coeffcients to generate an array of y value which are then
 	sent to differenceBetweenDataPoints() to get normalized data that is ready for plotting
+
+Normalize(differData,baseData)
+	Input: Array(differData),Array/DataFrame(baseData)
+	Output: Array(Normalized)
+	Explanation:
+	This normalizes all the data by adding difference data to the base data provided 
+
+differenceBetweenDataPointsLimit(Pulled_Data, limit)
+	Input: DataFrame(Pulled_Data),int(limit)
+	Output: Array(difference points)
+	Explanation:
+	This takes all the values in the predicted array and calculates the differences and returns that array this time it only allow it to calcuate the diffrence up to a certain value(this takes it from the back i.e. if limit was 20 the last 20 numbers will be put into this function)
 
 setAxis(startYear)
 	Input: String(startYear)
@@ -82,7 +95,7 @@ setAxis(startYear)
 
 getPointY(FinalM,date,prev)
 	Input: Matrix(FinalM),String(startYear),int(PreviousDaysData)
-	Output: int(predicted point)
+	Output: float(predicted point)
 	Explanation:
 	This is a smaller version of makeOutY(). It finds one data point given the date of the predction and the previous data points value (for normalization).
 
@@ -104,7 +117,14 @@ makeXVals_Matrix(percision,startYear,DataSet)
 	Explanation:
 	This cacluate the Xmatrix need to preform the LSA Method note that this creates a matrix as desribed in the documentation in report
 
-CalculateACC()	
-	Input:
-	Output:
+CalculatePercentError(predictionValues,actualValues)	
+	Input: Array/DataFrame(predicitonValues),Array/DataFrame(actualValues)
+	Output:float(Exe)
 	Explanation:
+	Calculates percent error average for the prediction
+
+CalculateRelativeACC(predictionValues,actualValues)	
+	Input: CalculateRelativeACC(predictionValues,actualValues)	
+	Output: float (Exe)
+	Explanation:
+	Calcualtes relative error so we can see the average error per point
