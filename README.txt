@@ -10,7 +10,7 @@
 
 /						// Root
 |
-+-------+> 1_Code				// Code Base
++-------+---> 1_Code				// Code Base
 	|
 	+-------> Fetch_&_Plot			// Data acquisistion & plotting
 	| 
