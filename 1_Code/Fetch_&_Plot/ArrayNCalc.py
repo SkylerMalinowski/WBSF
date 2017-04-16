@@ -4,9 +4,14 @@ import pandas_datareader.data as web #Database reader
 import numpy as np #Numpy
 import pandas as pd #Pandas Data Reader
 import time #Time
+import holidays
+import string
+from datetime import date
 from math import floor #math floor
 from math import pow #math pow
-from datetime import datetime #Date time
+from datetime import datetime # Date
+from datetime import timedelta # Adding to date
+
 
 def CalculatePercentError(predictionValues,actualValues):
 
@@ -131,5 +136,32 @@ def currentDayCount(): #Find the month days
 		pass
 
 	return sum
+def getWorkDates(length):
+	us_holidays = holidays.UnitedStates()
 
-	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
+	a=np.array(datetime.now())
+
+	for x in range(1,length):
+
+		a=np.append(a,datetime.now())
+
+		pass
+
+	x=0
+
+	for y in range(45,0,-1):
+		
+		Date=datetime.now()+timedelta(days=-y)
+
+		if Date.weekday()<=4 and not (Date in us_holidays) :
+			a[x]=Date
+			x+=1
+			pass
+
+		if(x==length):
+			break
+
+		pass
+
+	return a
+	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)C:\\cygwin\bin\Main.py

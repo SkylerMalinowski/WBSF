@@ -27,9 +27,8 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the
 	i=ArrayNCalc.setAxis(startYear)
 
 	Current_Data=float(currentData[0]['LastTradePrice'])
-
 	y=len(yVals)
-
+	print(xVals)
 	x10=float(FinalM.item(10,0))
 	x9=float(FinalM.item(9,0))
 	x8=float(FinalM.item(8,0))
@@ -44,13 +43,13 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the
 
 	Generated_Data=np.array(yVals[y-xVals])
 
-	for x in range(i-xVals,i-3):
+	for x in range(int(i-xVals),int(i)):
 		Generated_Data = np.append(Generated_Data,(float(x10*pow(x,10)+x9*pow(x,9)+x8*pow(x,8)+x7*pow(x,7)+x6*pow(x,6)+x5*pow(x,5)+x4*pow(x,4)+x3*pow(x,3)+x2*pow(x,2)+x1*pow(x,1)+xo*pow(x,0))))
 		pass
 
 	
 	return ArrayNCalc.Normalize(ArrayNCalc.differenceBetweenDataPoints(Generated_Data),yVals)
-	
+	input()
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 
 def getPointY(FinalM,date,prev):
@@ -102,7 +101,7 @@ def makeXVals_Matrix(percision,startYear,DataSet): #Number of elements,percison 
 
 			pass
 
-	for x in range(i-DataSet+1,i):
+	for x in range(int(i-DataSet+1),int(i)):
 
 		matrixx=np.append(matrixx,[1])
 
