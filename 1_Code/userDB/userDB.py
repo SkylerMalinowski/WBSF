@@ -49,7 +49,7 @@ def news():
 	return ret
 
 # original home page
-@app.route('/')
+@app.route('/test/')
 def homePage():
 	return render_template('index.html')
 
@@ -68,14 +68,6 @@ def testout():
 @app.route('/test/dereg.html')
 def testdereg():
 	return render_template('dereg.html')
-
-@app.route('/learning/spotCheck.html')
-def spotCheck():
-	return render_template('../Learning_System/spotCheck.html')
-
-@app.route('/logo.JPG')
-def logo():
-	return send_file('logo.JPG', mimetype='image/jpg')
 
 # creates user database if it does not exist already
 # otherwise, does nothing
