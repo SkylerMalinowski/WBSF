@@ -4,9 +4,10 @@
 
 $ sudo apt-get install python
 $ sudo apt-get install sqlite3
-*Note: if you get an error for the sqlite3 install, then you already have it.
-$ sudo apt install pip
-$ sudo pip -H install flask
+$ sudo apt-get install python-pip
+$ sudo -H pip install --upgrade pip
+$ sudo -H pip install flask
+$ pip install simplejson
 $ pip install yahoo-finance
 $ pip install feedparser
 
@@ -14,13 +15,15 @@ $ pip install feedparser
 3) Run the following commands lines in terminal:
 
 $ sudo su
+*Note: Gain root access
+
 $ export FLASK_APP=userDB.py
 *Note: silent acceptance, no terminal acknowledgement via output after
 
 $ flask run --port 80 --host=0.0.0.0
-*Note: website is now hosted and accessible via given IP.
-*Note: must to connected to the internet to broadcast.
-*Note: clients must have connection to the internet and the given IP.
+*Note: Website is now hosted and accessible via given IP.
+*Note: Must to connected to the internet to broadcast to other compmuters.
+*Note: Clients must have connection to the internet and the given IP.
 
 4) Open a web browser to the given IP (given in terminal) to access the site.
 
