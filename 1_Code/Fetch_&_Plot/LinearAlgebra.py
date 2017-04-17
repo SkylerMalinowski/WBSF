@@ -8,6 +8,7 @@ from math import floor #math floor
 from math import pow #math pow
 from datetime import datetime #Date time
 
+#Function by Vince
 def coeffcients_Generator(XMatrix,YMatrix): # One's Matrix, Value of Generated_Data Matrix Returns the coeffcients for the equation
 	Tran = XMatrix.transpose()
 
@@ -22,7 +23,7 @@ def coeffcients_Generator(XMatrix,YMatrix): # One's Matrix, Value of Generated_D
 	return Final
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 
-
+#Function by Vince
 def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the fucntion x
 	i=ArrayNCalc.setAxis(startYear)
 
@@ -50,7 +51,7 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the
 	return ArrayNCalc.Normalize(ArrayNCalc.differenceBetweenDataPoints(Generated_Data),yVals)
 	input()
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
-
+#Function by Vince
 def getPointY(FinalM,date,prev):
 
 	i=ArrayNCalc.setAxis(date)
@@ -71,7 +72,7 @@ def getPointY(FinalM,date,prev):
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 
-
+#Function by Vince
 def makeY_Matrix(yVals): 
 
 	Y_matrix=np.array(yVals[0])
@@ -85,7 +86,7 @@ def makeY_Matrix(yVals):
 	return np.reshape(Y_matrix,(len(yVals),1))
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
-
+#Function by Vince
 def makeXVals_Matrix(percision,startYear,DataSet): #Number of elements,percison what power of X do we want to go to. Returns One's Matrix
 
 	i=ArrayNCalc.setAxis(startYear)
@@ -115,10 +116,3 @@ def makeXVals_Matrix(percision,startYear,DataSet): #Number of elements,percison 
 	return(np.reshape(matrixx,(DataSet,percision+1)))
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
-
-
-#Take in a value of precitions IE from prediciton model in stuff,take in the acutal data ie Prediciton Data
-# Calculate the difference between Prediction model[x] and prediciton model[x-1] for every value in prediction model
-# do the same for prediction data. You hsould have two arrays by the end of this
-# compare differenceInPredcitionData[x]/DifferenceInPredicitonModel[x] and take the average divide by 30 and thats the confidence value
-# print the value and I will add it to the graph for the user

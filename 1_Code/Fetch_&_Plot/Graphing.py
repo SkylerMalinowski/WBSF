@@ -1,6 +1,6 @@
 # Graphing
 import plotly.plotly as py #Plotly Api
-import plotly.figure_factory as go
+from plotly.tools import FigureFactory as FF
 import plotly.graph_objs as obj
 import time #To get time and date
 import pandas_datareader.data as web #Database Reader
@@ -11,6 +11,7 @@ import ArrayNCalc
 from datetime import datetime
 from datetime import timedelta
 
+#Function by Vince
 def makeLineGraph(stockSymbol,Webster,currentInfo): # Makes Line graph for both historic data (webster), current Stock Info (currentInfo)
 
 	figure=obj.Scatter(y=Webster.High,x=Webster.index) # Line 
@@ -20,16 +21,15 @@ def makeLineGraph(stockSymbol,Webster,currentInfo): # Makes Line graph for both 
 	data=[figure,currentFigure]
 
 	py.plot(data, filename=stockSymbol+'_Line')
-
+#Function by Vince
 def makeCandleStickGraph(stockSymbol,Webster): # Makes a Candle Stick Graph
 
-	fig=go.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index) # Past Data
+	fig=FF.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index) # Past Data
 
 	py.plot(fig,filename=stockSymbol+'_Candle',validate=False)
-
+#Function by Vince
 def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy): #plots all the graphs together
 
-	#fig=go.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index) #Candlestick
 
 	figure=obj.Trace(y=Webster.High,x=Webster.index,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol) #Past Data Line
 
@@ -40,5 +40,4 @@ def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy): #plots all th
 	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #point of prediciton
 
 	data=Data([figure,currentFigure,Predicts,point]) #Data Array of Figures
-
 	py.plot(data, filename=stockSymbol+'_Line') #Plot The Function

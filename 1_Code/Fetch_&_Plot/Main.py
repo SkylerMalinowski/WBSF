@@ -18,7 +18,7 @@ from datetime import timedelta # Adding to date
 from googlefinance import getQuotes # Google Finance Api
 from plotly.graph_objs import * #Plotly Objects
 
-
+	#Function by Raj
 def get_companysymbol(var): # Looks up the current company 
 	name = var
 	wb = load_workbook('companylist.xlsx')		
@@ -36,7 +36,7 @@ def get_companysymbol(var): # Looks up the current company
 		return "null"
 	else:
 		return sheet_ranges['A'+str(num)].value	
-
+	#Function by Vince
 def main():
 	var='' #just want update to repeat not entire thing 
 
@@ -60,15 +60,15 @@ def main():
 			
 			Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
 
+			
 			Coeffcients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.High)) #coeffcients for prediction fucntion a0-a10
 			
 			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
-			ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High) # Jon's prediction code
-			
-			print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+			print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High)) # Vince's Relative Accuracy Rating
+			print(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High)) # Jon's Experimental Accuracy Method
 
 			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
 
