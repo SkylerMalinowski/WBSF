@@ -41,15 +41,15 @@ $ flask run --port 80 --host=0.0.0.0
 2) Install required libraries in command prompt
 
 ```
->pip install sqlite3
->pip install flask
->pip install simplejson
->pip install yahoo-finance
->pip install feedparser
+> pip install sqlite3
+> pip install flask
+> pip install simplejson
+> pip install yahoo-finance
+> pip install feedparser
 ```
 
 2) Open a command prompt and navigate to "~/Downloads/WBSF/1_Code/userDB/"
-3) Rin the following commands in the command prompt:
+3) Run the following commands in the command prompt:
 
 ```
 > set FLASK_APP=userDB.py
