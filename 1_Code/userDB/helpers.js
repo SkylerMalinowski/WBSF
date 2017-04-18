@@ -68,7 +68,7 @@ function price(s) {
 		return req.responseText;
 	}
 	
-	req.open("GET", "/ticker/?s=" + s, false);
+	req.open("GET", "/userDB/ticker/?s=" + s, false);
 	req.send();
 	return req.responseText
 }
@@ -79,7 +79,7 @@ function news(s) {
 		return req.responseText;
 	}
 	
-	req.open("GET", "/news/?s=" + s, false);
+	req.open("GET", "/userDB/news/?s=" + s, false);
 	req.send();
 	
 	return req.responseText;
