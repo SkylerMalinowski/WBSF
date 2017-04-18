@@ -14,6 +14,7 @@
 
 `pip install pandas`
 
+'pip install holidays'
 
 Make a Plotly Account at "www.plot.ly"
 
