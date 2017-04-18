@@ -18,7 +18,7 @@ from datetime import timedelta # Adding to date
 from googlefinance import getQuotes # Google Finance Api
 from plotly.graph_objs import * #Plotly Objects
 
-	#Function by Raj
+#Function by Raj
 def get_companysymbol(var): # Looks up the current company 
 	name = var
 	wb = load_workbook('companylist.xlsx')		
@@ -42,8 +42,6 @@ def main():
 
 	while var!='null':
 
-		Time=datetime.now().strftime('%M') # This gets our current month
-
 		company_name=input("Enter the name of the company you're searching for ") #THis asks for a company name
 
 		var = get_companysymbol(company_name)	#this searchs the company list we have and returns null if not found
@@ -56,7 +54,7 @@ def main():
 
 			googData=Fetching.fetchGoogData(var) # Fetch Todays data from google finance
 			
-			Prediction_Data=Fetching.fetchDataSpec('AAPL',(datetime.now()+timedelta(days=-45))) # Get the data from just the past month for the prediciton part
+			Prediction_Data=Fetching.fetchDataSpec(var,(datetime.now()+timedelta(days=-45))) # Get the data from just the past month for the prediciton part
 			
 			Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
 
@@ -65,15 +63,10 @@ def main():
 			
 			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
+			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,googData[0]['LastTradePrice']) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
-			#print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High)) # Vince's Relative Accuracy Rating
-			#print(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High)) # Jon's Experimental Accuracy Method
-
 			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
 
 	pass
-
-main() 
 
 #C:\\cygwin\bin\Main.py
