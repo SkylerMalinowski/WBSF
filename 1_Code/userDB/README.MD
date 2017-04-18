@@ -33,7 +33,7 @@ $ flask run --port 5000 --host=0.0.0.0
 *Note: Must to connected to the internet to broadcast to other compmuters.
 *Note: Clients must have connection to the internet and the given IP.
 
-4) Navigate to "localhost/userDB/openTable/?p=GSVRJJJ",on the same machine running the code, in a web browser to initiate the database.
+4) Navigate to "localhost:5000/userDB/openTable/?p=GSVRJJJ",on the same machine running the code, in a web browser to initiate the database.
 5) The services are now hosted and can be accessed via XMLHTTPRequest calls.
 
 ## To run on Windows:
@@ -56,5 +56,5 @@ $ flask run --port 5000 --host=0.0.0.0
 > set FLASK_APP=userDB.py
 > flask run --port 5000 --host=0.0.0.0
 ```
-4) Navigate to "localhost/userDB/openTable/?p=GSVRJJJ",on the same machine running the code, in a web browser to initiate the database.
+4) Navigate to "localhost:5000/userDB/openTable/?p=GSVRJJJ",on the same machine running the code, in a web browser to initiate the database.
 5) The services are now hosted and can be accessed via XMLHTTPRequest calls.
