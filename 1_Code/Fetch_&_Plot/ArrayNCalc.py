@@ -36,9 +36,6 @@ def CalculateConfidenceRating(predictedValues, historicalValues):
 	avgPercentError /= numDataPoints
 	avgDifference /= numDataPoints
 
-	#print("Avg Percent Error: %.2f Percent "% avgPercentError)
- 	#print("Avg Dollar Difference: $ %.2f "% avgDifference)
-
 	# return avg percent error
 
 	return avgPercentError
@@ -116,13 +113,13 @@ def Normalize(differData,baseData):
 	differData[l]=baseData[y]+differData[l]
 
 	y-=1
-	for x in range(l-1,0,-1):
-		differData[x]=baseData[y]+differData[x]
+	for x in range(l,0,-1):
+		differData[x]=baseData[y]+(differData[x]/baseData[y])
 		y-=1
 		pass
 		
 	differData[0]=baseData[y]
-	
+	differData[len(differData)-1]=baseData[len(baseData)-1]
 	return differData
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
