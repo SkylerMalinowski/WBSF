@@ -1,4 +1,4 @@
-# TO run on Linux:
+# To run on Linux:
 
 1) Make sure you have Apache installed
 
