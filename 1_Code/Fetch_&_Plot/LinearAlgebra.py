@@ -43,18 +43,18 @@ def makeOutY(FinalM,xVals,startYear,yVals,currentData): #Make a Y array with the
 
 	Generated_Data=np.array(yVals[y-xVals])
 
-	for x in range(int(i-xVals),int(i)):
+	for x in range(0,30):
 		Generated_Data = np.append(Generated_Data,(float(x10*pow(x,10)+x9*pow(x,9)+x8*pow(x,8)+x7*pow(x,7)+x6*pow(x,6)+x5*pow(x,5)+x4*pow(x,4)+x3*pow(x,3)+x2*pow(x,2)+x1*pow(x,1)+xo*pow(x,0))))
 		pass
 
 	
 	return ArrayNCalc.Normalize(ArrayNCalc.differenceBetweenDataPoints(Generated_Data),yVals)
-	input()
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 #Function by Vince
 def getPointY(FinalM,date,prev):
 
-	i=ArrayNCalc.setAxis(date)
+	i=ArrayNCalc.getWorkDates(45)
+	i=len(i)
 
 	x10=float(FinalM.item(10,0))
 	x9=float(FinalM.item(9,0))
@@ -68,7 +68,11 @@ def getPointY(FinalM,date,prev):
 	x1=float(FinalM.item(1,0))
 	xo=float(FinalM.item(0,0))
 
-	return (float(((x10*pow(i+1,10)+x9*pow(i+1,9)+x8*pow(i+1,8)+x7*pow(i+1,7)+x6*pow(i+1,6)+x5*pow(i+1,5)+x4*pow(i+1,4)+x3*pow(i+1,3)+x2*pow(i+1,2)+x1*pow(i+1,1)+xo*pow(i+1,0))-(x10*pow(i+2,10)+x9*pow(i+2,9)+x8*pow(i+2,8)+x7*pow(i+2,7)+x6*pow(i+2,6)+x5*pow(i+2,5)+x4*pow(i+2,4)+x3*pow(i+2,3)+x2*pow(i+2,2)+x1*pow(i+2,1)+xo*pow(i+2,0)))+prev))
+	change=float(((x10*pow(i+1,10)+x9*pow(i+1,9)+x8*pow(i+1,8)+x7*pow(i+1,7)+x6*pow(i+1,6)+x5*pow(i+1,5)+x4*pow(i+1,4)+x3*pow(i+1,3)+x2*pow(i+1,2)+x1*pow(i+1,1)+xo*pow(i+1,0))-(x10*pow(i+0,10)+x9*pow(i+0,9)+x8*pow(i+0,8)+x7*pow(i+0,7)+x6*pow(i+0,6)+x5*pow(i+0,5)+x4*pow(i+0,4)+x3*pow(i+0,3)+x2*pow(i+0,2)+x1*pow(i+0,1)+xo*pow(i+0,0))))
+	if(change>1):
+		change-=1
+		pass
+	return change+float(prev)
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 
@@ -89,8 +93,8 @@ def makeY_Matrix(yVals):
 #Function by Vince
 def makeXVals_Matrix(percision,startYear,DataSet): #Number of elements,percison what power of X do we want to go to. Returns One's Matrix
 
-	i=ArrayNCalc.setAxis(startYear)
-
+	i=ArrayNCalc.getWorkDates(45)
+	i=len(i)
 	matrixx=np.array(i-DataSet)
 
 	matrixx=np.append(matrixx,0)

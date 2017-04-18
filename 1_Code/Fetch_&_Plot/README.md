@@ -17,6 +17,7 @@ $ sudo -H pip install flask
 $ pip install simplejson
 $ pip install yahoo-finance
 $ pip install feedparser
+$ pip install holidays
 ```
 2) Make a Plotly Account at "www.plot.ly"
   https://plot.ly/python/getting-started/
@@ -43,6 +44,7 @@ $ flask run --port 6000 --host=0.0.0.0
 
 5) The services are now hosted and can be accessed via XMLHTTPRequest calls.
 
+
 ## To run on Windows:
 
 1) Install Python from https://www.python.org/downloads/
@@ -60,6 +62,7 @@ $ flask run --port 6000 --host=0.0.0.0
 > pip install simplejson
 > pip install yahoo-finance
 > pip install feedparser
+> pip install holidays
 ```
 3) Make a Plotly Account at "www.plot.ly"
   https://plot.ly/python/getting-started/

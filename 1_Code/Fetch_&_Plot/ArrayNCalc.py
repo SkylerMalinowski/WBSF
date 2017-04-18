@@ -18,7 +18,6 @@ def CalculateConfidenceRating(predictedValues, historicalValues):
 	# there will be less data points from predictedValues than historicalValues  
 	numDataPoints = len(predictedValues)
 	historicalIndex = len(historicalValues) - numDataPoints
-	historicalIndex = len(historicalValues) - numDataPoints
 	Difference = [numDataPoints]
 	percentError = [numDataPoints]
 
@@ -29,17 +28,13 @@ def CalculateConfidenceRating(predictedValues, historicalValues):
 	for i in range(0, numDataPoints - 1):
 		Difference[i] = predictedValues[i] - historicalValues[historicalIndex + i]
 		percentError[i] = 100 * abs(predictedValues[i] - historicalValues[historicalIndex + i]) / historicalValues[historicalIndex + i]
-
 	avgPercentError = 0
 	avgDifference = 0 # compute averages
-
 	for i in range(0, numDataPoints - 1):
 		avgPercentError += percentError[i]
 		avgDifference += Difference[i]
 	avgPercentError /= numDataPoints
 	avgDifference /= numDataPoints
-	#print("Avg Percent Error: %.2f Percent "% avgPercentError)
- 	#print("Avg Dollar Difference: $ %.2f "% avgDifference)
 
 	# return avg percent error
 
@@ -118,13 +113,13 @@ def Normalize(differData,baseData):
 	differData[l]=baseData[y]+differData[l]
 
 	y-=1
-	for x in range(l-1,0,-1):
-		differData[x]=baseData[y]+differData[x]
+	for x in range(l,0,-1):
+		differData[x]=baseData[y]+(differData[x]/baseData[y])
 		y-=1
 		pass
 		
 	differData[0]=baseData[y]
-	
+	differData[len(differData)-1]=baseData[len(baseData)-1]
 	return differData
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
