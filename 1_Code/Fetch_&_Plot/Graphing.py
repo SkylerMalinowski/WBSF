@@ -40,4 +40,4 @@ def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy): #plots all th
 	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #point of prediciton
 
 	data=Data([figure,currentFigure,Predicts,point]) #Data Array of Figures
-	py.plot(data, filename=stockSymbol+'_Line') #Plot The Function
+	py.plot(data, filename=stockSymbol+'_Line',connectGap=True) #Plot The Function

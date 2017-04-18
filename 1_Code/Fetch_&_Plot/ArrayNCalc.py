@@ -18,7 +18,6 @@ def CalculateConfidenceRating(predictedValues, historicalValues):
 	# there will be less data points from predictedValues than historicalValues  
 	numDataPoints = len(predictedValues)
 	historicalIndex = len(historicalValues) - numDataPoints
-	historicalIndex = len(historicalValues) - numDataPoints
 	Difference = [numDataPoints]
 	percentError = [numDataPoints]
 
@@ -29,15 +28,14 @@ def CalculateConfidenceRating(predictedValues, historicalValues):
 	for i in range(0, numDataPoints - 1):
 		Difference[i] = predictedValues[i] - historicalValues[historicalIndex + i]
 		percentError[i] = 100 * abs(predictedValues[i] - historicalValues[historicalIndex + i]) / historicalValues[historicalIndex + i]
-
 	avgPercentError = 0
 	avgDifference = 0 # compute averages
-
 	for i in range(0, numDataPoints - 1):
 		avgPercentError += percentError[i]
 		avgDifference += Difference[i]
 	avgPercentError /= numDataPoints
 	avgDifference /= numDataPoints
+
 	#print("Avg Percent Error: %.2f Percent "% avgPercentError)
  	#print("Avg Dollar Difference: $ %.2f "% avgDifference)
 

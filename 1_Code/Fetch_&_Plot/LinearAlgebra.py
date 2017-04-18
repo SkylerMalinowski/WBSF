@@ -68,7 +68,7 @@ def getPointY(FinalM,date,prev):
 	x1=float(FinalM.item(1,0))
 	xo=float(FinalM.item(0,0))
 
-	return (float(((x10*pow(i+1,10)+x9*pow(i+1,9)+x8*pow(i+1,8)+x7*pow(i+1,7)+x6*pow(i+1,6)+x5*pow(i+1,5)+x4*pow(i+1,4)+x3*pow(i+1,3)+x2*pow(i+1,2)+x1*pow(i+1,1)+xo*pow(i+1,0))-(x10*pow(i+2,10)+x9*pow(i+2,9)+x8*pow(i+2,8)+x7*pow(i+2,7)+x6*pow(i+2,6)+x5*pow(i+2,5)+x4*pow(i+2,4)+x3*pow(i+2,3)+x2*pow(i+2,2)+x1*pow(i+2,1)+xo*pow(i+2,0)))+prev))
+	return (float(((x10*pow(i+1,10)+x9*pow(i+1,9)+x8*pow(i+1,8)+x7*pow(i+1,7)+x6*pow(i+1,6)+x5*pow(i+1,5)+x4*pow(i+1,4)+x3*pow(i+1,3)+x2*pow(i+1,2)+x1*pow(i+1,1)+xo*pow(i+1,0))-(x10*pow(i,10)+x9*pow(i,9)+x8*pow(i,8)+x7*pow(i,7)+x6*pow(i,6)+x5*pow(i,5)+x4*pow(i,4)+x3*pow(i,3)+x2*pow(i,2)+x1*pow(i,1)+xo*pow(i,0)))+prev))
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 

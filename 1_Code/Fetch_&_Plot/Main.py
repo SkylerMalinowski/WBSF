@@ -67,8 +67,8 @@ def main():
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,totalDataCurrent.High[len(totalDataCurrent.High)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
-			print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High)) # Vince's Relative Accuracy Rating
-			print(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High)) # Jon's Experimental Accuracy Method
+			#print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High)) # Vince's Relative Accuracy Rating
+			#print(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High)) # Jon's Experimental Accuracy Method
 
 			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
 
