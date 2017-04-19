@@ -89,10 +89,10 @@ def openTable():
 								modeSwitch INTEGER);""")
 		conn.commit()
 		conn.close()
-		return 'Table opened'
+		return 'true'
 	
 	else:
-		return 'Access Denied'
+		return 'false'
 
 # adds user to database
 # takes username and password as input
@@ -116,15 +116,15 @@ def addUser():
 		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
-		return "User added"
+		return "true"
 	elif temp[0] != username:
 		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
-		return "User added"
+		return "true"
 	else:
 		conn.close()
-		return "User already exists!"
+		return "false"
 
 # deletes user from database
 # takes username and password as input
@@ -157,7 +157,7 @@ def remUser():
 			return "User Deleted"
 		
 		else:
-			return "Access Denied"
+			return "Invalid Password!"
 	
 	else:
 		conn.close()
@@ -189,7 +189,7 @@ def login():
 		return str(sessionID)
 	else:
 		conn.close()
-		return "Access Denied"
+		return "Invalid password!"
 
 @app.route("/logout/")
 def logout():
@@ -204,13 +204,13 @@ def logout():
 	
 	if temp is None:
 		conn.close()
-		return "You are not currently logged in!"
+		return "false"
 	
 	else:
 		cursor.execute("UPDATE user SET session=? WHERE session=?", [(-1), (session)])
 		conn.commit()
 		conn.close()
-		return "Logged out successfully"
+		return "true"
 
 # prints the contents of the user database
 @app.route("/printTable/")
@@ -218,7 +218,7 @@ def printTable():
 	password = request.args.get('p')
 	
 	if password != ADMIN:
-		return "Access Denied"
+		return "false"
 	else:
 		conn = sqlite3.connect("userDB.db")
 		cursor = conn.cursor()
@@ -234,14 +234,14 @@ def delTable():
 	password = request.args.get('p')
 	
 	if password != ADMIN:
-		return "Access Denied"
+		return "false"
 	else:
 		conn = sqlite3.connect("userDB.db")
 		cursor = conn.cursor()
 		cursor.execute("DROP TABLE user")
 		conn.commit()
 		conn.close
-		return "Table Deleted"
+		return "true"
 
 @app.route("/setQuiz/")
 def setQuizTaken():
@@ -257,7 +257,7 @@ def setQuizTaken():
 	
 	if temp is None:
 		conn.close()
-		return "Access Denied"
+		return "false"
 	else:
 		cursor.execute("SELECT quizStates FROM user WHERE session=?", [(session)])
 		conn.commit()
@@ -271,7 +271,7 @@ def setQuizTaken():
 		cursor.execute("UPDATE user SET quizStates=? WHERE session=?", [(trash), (session)])
 		conn.commit()
 		conn.close()
-		return "Quiz State set successfully"
+		return "true"
 
 @app.route("/getQuiz/")
 def getQuizTaken():
@@ -286,7 +286,7 @@ def getQuizTaken():
 	
 	if temp is None:
 		conn.close()
-		return "Access Denied"
+		return "false"
 	
 	else:
 		cursor.execute("SELECT quizStates FROM user WHERE session=?", [(session)])
@@ -310,7 +310,7 @@ def setLesson():
 	
 	if temp is None:
 		conn.close()
-		return "Access Denied"
+		return "false"
 	else:
 		cursor.execute("SELECT lessonStates FROM user WHERE session=?", [(session)])
 		conn.commit()
@@ -324,7 +324,7 @@ def setLesson():
 		cursor.execute("UPDATE user SET lessonStates=? WHERE session=?", [(trash), (session)])
 		conn.commit()
 		conn.close()
-		return "Lesson State set successfully"
+		return "true"
 
 @app.route("/getLesson/")
 def getLesson():
@@ -339,7 +339,7 @@ def getLesson():
 	
 	if temp is None:
 		conn.close()
-		return "Access Denied"
+		return "false"
 	
 	else:
 		cursor.execute("SELECT lessonStates FROM user WHERE session=?", [(session)])
@@ -360,7 +360,7 @@ def getPlacement():
 	conn.close()
 	
 	if temp is None:
-		return "Access Denied"
+		return "false"
 	else:
 		return str(temp[0])
 
@@ -377,12 +377,12 @@ def setPlacement():
 	
 	if temp is None:
 		conn.close()
-		return "Access Denied"
+		return "false"
 	else:
 		cursor.execute("UPDATE user SET placementTaken=? WHERE session=?", [(val), (session)])
 		conn.commit()
 		conn.close()
-		return "Success"
+		return "true"
 
 @app.route("/getMode/")
 def getMode():
@@ -396,7 +396,7 @@ def getMode():
 	
 	if temp is None:
 		conn.close()
-		return "Access Denied"
+		return "false"
 	else:
 		cursor.execute("SELECT modeSwitch FROM user WHERE session=?", [(session)])
 		temp = cursor.fetchall()[0]
@@ -417,9 +417,9 @@ def setMode():
 	
 	if temp is None:
 		conn.close()
-		return "Access Denied"
+		return "false"
 	else:
 		cursor.execute("UPDATE user SET modeSwitch=? WHERE session=?", [(val), (session)])
 		conn.commit()
 		conn.close()
-		return "Success"
+		return "true"
