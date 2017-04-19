@@ -1,6 +1,5 @@
 function dereg(u, p) {
 	var req = new XMLHttpRequest();
-	
 	req.onload = function()
 	{	return req.responseText;	}
 	
@@ -11,7 +10,6 @@ function dereg(u, p) {
 
 function reg(u, p) {
 	var req = new XMLHttpRequest();
-	
 	req.onload = function()
 	{	return req.responseText;	}
 	
@@ -22,7 +20,6 @@ function reg(u, p) {
 
 function print(p) {
 	var req = new XMLHttpRequest();
-	
 	req.onload = function()
 	{	return req.responseText;	}
 	
