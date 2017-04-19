@@ -31,7 +31,7 @@ $ sudo su
 *Note: Gain root access
 
 ```
-$ export FLASK_APP=wrapper.py
+$ export FLASK_APP=API.py
 ```
 *Note: silent acceptance, no terminal acknowledgement via output after
 
@@ -71,7 +71,7 @@ $ flask run --port 6000 --host=0.0.0.0
 5) Run the following commands in the command prompt:
 
 ```
-> set FLASK_APP=wrapper.py
+> set FLASK_APP=API.py
 > flask run --port 6000 --host=0.0.0.0
 ```
 6) The services are now hosted and can be accessed via XMLHTTPRequest calls.
