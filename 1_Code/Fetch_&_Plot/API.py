@@ -24,6 +24,10 @@ app = Flask(__name__)
 if __name__ == '__main__':
 	app.run(host = "127.0.0.1", port = 80, debug = False)
 
+@app.route('/helpers.js')
+def jsLoad():
+	return send_file("helpers.js")
+
 # Api To Get Graph
 @app.route('/graph/')
 def getGraph():
