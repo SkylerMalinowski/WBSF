@@ -53,7 +53,7 @@ def news():
 	return ret
 
 # original home page
-@app.route('/test/')
+@app.route('/index.html')
 def homePage():
 	return render_template('index.html')
 
