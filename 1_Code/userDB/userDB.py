@@ -34,6 +34,10 @@ def getNews(feed, n):
 def jsLoad():
 	return send_file("helpers.js")
 
+@app.route('/logo.jpg')
+def logo():
+	return send_file('logo.JPG', mimetype='image/jpg')
+
 @app.route('/ticker/')
 def ticker():
 	tick = request.args.get('s')
