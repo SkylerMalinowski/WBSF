@@ -67,3 +67,23 @@ function news(s) {
 	req.send();
 	return req.responseText;
 }
+
+function isAdmin(p) {
+	var req = new XMLHttpRequest();
+	req.onload = function()
+	{	return req.responseText;	}
+	
+	req.open("GET", "/userDB/isAdmin/?p=" + p, false);
+	req.send();
+	return req.responseText;
+}
+
+function setAdmin(o, n) {
+	var req = new XMLHttpRequest();
+	req.onload = function()
+	{	return req.responseText;	}
+	
+	req.open("GET", "/userDB/isAdmin/?o=" + o + "&n=" + n, false);
+	req.send();
+	return req.responseText;
+}

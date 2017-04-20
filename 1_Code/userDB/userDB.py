@@ -1,22 +1,24 @@
-# admin password for database management
-ADMIN = "GSVRJJJ"
-
-# used to verify user is logged in
-sessionID = 0
-
 from yahoo_finance import Share
 import feedparser
+import hashlib
 import sqlite3
 from flask import Flask, render_template, request, jsonify, make_response, send_file
 
 app = Flask(__name__)
+
+# admin password for database management
+ADMIN = "GSVRJJJ"
+ADMIN = (hashlib.sha256(ADMIN.encode())).hexdigest()
+
+# used to verify user is logged in
+sessionID = 0
 
 # main function, initialize web app with IP and port
 if __name__ == '__main__':
 	app.run(host = "127.0.0.1", port = 80, debug = False)
 
 # stock ticker and news stuff
-def getCurrentPrice(Sym):    
+def getCurrentPrice(Sym):
 	ticker = Share(Sym)
 	return ticker.get_price()
 
@@ -36,7 +38,7 @@ def jsLoad():
 
 @app.route('/logo.jpg')
 def logo():
-	return send_file('logo.JPG', mimetype='image/jpg')
+	return send_file('logo.jpg', mimetype='image/jpg')
 
 @app.route('/ticker/')
 def ticker():
@@ -73,11 +75,35 @@ def testout():
 def testdereg():
 	return render_template('dereg.html')
 
+@app.route('/isAdmin/')
+def isAdmin():
+	password = request.args.get('p')
+	password = (hashlib.sha256(password.encode())).hexdigest()
+	if password == ADMIN:
+		return "true"
+	else:
+		return "false"
+
+@app.route('/setAdmin/')
+def setAdmin():
+	global ADMIN
+	old = request.args.get('o')
+	old = (hashlib.sha256(old.encode())).hexdigest()
+	new = request.args.get('n')
+	new = (hashlib.sha256(new.encode())).hexdigest()
+	
+	if old == ADMIN:
+		ADMIN = new
+		return "true"
+	else:
+		return "false"
+
 # creates user database if it does not exist already
 # otherwise, does nothing
 @app.route("/openTable/")
 def openTable():
 	password = request.args.get('p')
+	password = (hashlib.sha256(password.encode())).hexdigest()
 	
 	if password == ADMIN:
 		conn = sqlite3.connect("userDB.db")
@@ -106,6 +132,7 @@ def openTable():
 def addUser():
 	username = request.args.get('u')
 	password = request.args.get('p')
+	password = (hashlib.sha256((username+password).encode())).hexdigest()
 	trash = "0,0,0,0,0,0,0,0,0,0"
 	inputs = [str(username), str(password), (-1), (trash), (trash), (0), (0)]
 	
@@ -136,6 +163,7 @@ def addUser():
 def remUser():
 	username = request.args.get('u')
 	password = request.args.get('p')
+	password = (hashlib.sha256((username+password).encode())).hexdigest()
 	
 	conn = sqlite3.connect("userDB.db")
 	cursor = conn.cursor()
@@ -174,6 +202,7 @@ def login():
 	global sessionID
 	username = request.args.get('u')
 	password = request.args.get('p')
+	password = (hashlib.sha256((username+password).encode())).hexdigest()
 	
 	conn = sqlite3.connect("userDB.db")
 	cursor = conn.cursor()
@@ -220,6 +249,7 @@ def logout():
 @app.route("/printTable/")
 def printTable():
 	password = request.args.get('p')
+	password = (hashlib.sha256(password.encode())).hexdigest()
 	
 	if password != ADMIN:
 		return "false"
@@ -236,6 +266,7 @@ def printTable():
 @app.route("/delTable/")
 def delTable():
 	password = request.args.get('p')
+	password = (hashlib.sha256(password.encode())).hexdigest()
 	
 	if password != ADMIN:
 		return "false"
