@@ -37,7 +37,18 @@ def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy): #plots all th
 
 	Predicts=obj.Scatter(y=Predict,x=ArrayNCalc.getWorkDates(len(Predict)),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #Prediction Line
 
-	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #point of prediciton
+	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=pointColorMaker(Pointy,currentInfo)),name="Prediction "+stockSymbol) #point of prediciton
 
 	data=Data([figure,currentFigure,Predicts,point]) #Data Array of Figures
 	return py.plot(data, filename=stockSymbol+'_Line') #Plot The Function
+
+#Function by Vince
+def pointColorMaker(point,currentInfo):
+	currentInfo=float(currentInfo[0]["LastTradePrice"])
+	if(currentInfo>point):
+		return "rgb(255,0,0)"
+	if(currentInfo<point):
+		return "rgb(0,255,0)"
+
+	return "rgb(0,0,0)"
+	

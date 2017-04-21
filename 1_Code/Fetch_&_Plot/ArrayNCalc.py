@@ -114,12 +114,14 @@ def Normalize(differData,baseData):
 
 	y-=1
 	for x in range(l,0,-1):
-		differData[x]=baseData[y]+(differData[x]/baseData[y])
+		Min=.25*baseData[y]-baseData[y]
+		Max=.25*baseData[y]+baseData[y]
+		differData[x]=baseData[y]+(differData[x]/(Max-Min))
 		y-=1
 		pass
 		
-	differData[0]=baseData[y]
-	differData[len(differData)-1]=baseData[len(baseData)-1]
+	differData[0]=differData[1]
+	differData[len(differData)-1]=differData[len(differData)-2]
 	return differData
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
