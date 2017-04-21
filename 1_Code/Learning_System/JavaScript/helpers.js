@@ -9,7 +9,7 @@ function setLesson(index, val) {
 	req.open("GET", "/userDB/setLesson/?s=" + s + "&i=" + index + "&v=" + val, false);
 	req.send();
 	return req.responseText;
-			}
+}
 
 function getLesson(index) {
 	var s = window.name;
@@ -22,7 +22,7 @@ function getLesson(index) {
 	req.open("GET", "/userDB/getLesson/?s=" + s + "&i=" + index, false);
 	req.send();
 	return req.responseText;
-			}
+}
 
 function setQuiz(index, val) {
 	var s = window.name;
@@ -35,7 +35,7 @@ function setQuiz(index, val) {
 	req.open("GET", "/userDB/setQuiz/?s=" + s + "&i=" + i + "&v=" + val, false);
 	req.send();
 	return req.responseText;
-			}
+}
 
 function getQuiz(index) {
 	var s = window.name;
