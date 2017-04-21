@@ -7,26 +7,20 @@
   var konamiBool = false;
   var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
   $(document).keydown(function(e){
-	  kkeys.push(e.keyCode);
-	  if(kkeys.toString().indexOf(konami)>=0){
-         //$(document).unbind('keydown',arguments.callee);
-          $('#question').remove();
-          konamiBool = true;
-          kkeys = [];
-          var scoreElem = displayScore();
-        quiz.append(scoreElem).fadeIn();
-        $('#next').hide();
-        $('#prev').hide();
-        $('#start').show();
-        if( getMode() == 1 ) {
-          $('#mmenu').show();
-          $('#menu').hide();
-        }
-        else {
-          $('#mmenu').hide();
-          $('#menu').show();
-        }
-      }
+    kkeys.push(e.keyCode);
+    if(kkeys.toString().indexOf(konami)>=0){
+      //$(document).unbind('keydown',arguments.callee);
+      $('#question').remove();
+      konamiBool = true;
+      kkeys = [];
+      var scoreElem = displayScore();
+      quiz.append(scoreElem).fadeIn();
+      $('#next').hide();
+      $('#prev').hide();
+      $('#start').show();
+      $('#menu').show();
+      setQuiz(quizNum,1);
+    }
   });
   
   // Display initial question
@@ -75,7 +69,6 @@
     displayNext();
     $('#start').hide();
     $('#menu').hide();
-    $('#mmenu').hide();
   });
 
   // Animates buttons on hover
@@ -151,14 +144,7 @@
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
-        if( getMode() == 1 ) {
-          $('#mmenu').show();
-          $('#menu').hide();
-        }
-        else {
-          $('#mmenu').hide();
-          $('#menu').show();
-        }
+        $('#menu').show();
       }
     });
   }
@@ -168,36 +154,37 @@
     var score = $('<p>', {
       id: 'question'
     });
-	if(konamiBool){
-		konamiBool = false;
-		score.append('This is a debug message, intended to show a sample ending screen without taking the time to complete the quiz.  As a result, no results are able to be displayed.');
-		return score;
-	}
+  if(konamiBool){
+    konamiBool = false;
+    score.append('This is a debug message, intended to show a sample ending screen without taking the time to complete the quiz.  As a result, no results are able to be displayed.');
+    return score;
+  }
     var numCorrect = 0;
     for (var i = 0; i < selections.length; i++) {
       if (selections[i] === questions[i].correctAnswer) {
         numCorrect++;
       }
     }
-	
-	var percentCorrect = numCorrect*100/questions.length;
-	
-	if(percentCorrect>90){
-		score.append('You got a score of '+percentCorrect+'%!  Consider this Lesson cleared!');
-		if( getMode() != 1 )
-			setQuiz(quizNum,2);
-		else
-			setQuiz(quizNum,1);
-		return score;
-	}
-	if(percentCorrect>50){
-		score.append('You got a score of '+percentCorrect+'%.  While you did well enough, you may want to re-do this Lesson to get the concepts down');
-		return score;
-	}
-	score.append('Unfortunately, you got a score of '+percentCorrect+'%.  Please re-do this Lesson.');
+  
+  var percentCorrect = numCorrect*100/questions.length;
+  
+  if(percentCorrect>90){
+    score.append('You got a score of '+percentCorrect+'%!  Consider this Lesson cleared!');
+    if( getMode() == "1" ) {
+      setQuiz(quizNum,2);
+    }
+    else {
+      setQuiz(quizNum,1);
+    }
+    return score;
+  }
+  if(percentCorrect>50){
+    score.append('You got a score of '+percentCorrect+'%.  While you did well enough, you may want to re-do this Lesson to get the concepts down');
+    return score;
+  }
+  score.append('Unfortunately, you got a score of '+percentCorrect+'%.  Please re-do this Lesson.');
     /*score.append('You got ' + numCorrect + ' questions out of ' +
       questions.length + ' right!!!');*/
     return score;
   }
 })();
-
