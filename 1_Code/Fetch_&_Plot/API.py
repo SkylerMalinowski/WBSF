@@ -11,15 +11,25 @@ import LinearAlgebra # Linear Algebra File
 import numpy as np #Numpy for Matrix Handling
 import Fetching #Fetching File
 import Graphing #Graphing File
+from flask import Flask, render_template, request, jsonify, make_response, send_file
+import feedparser
 from yahoo_finance import Share #Yahoo Finance Api
 from datetime import datetime # Date
 from datetime import timedelta # Adding to date
 from plotly.graph_objs import * #Plotly Objects
 
+app = Flask(__name__)
+
+# main function, initialize web app with IP and port
+if __name__ == '__main__':
+	app.run(host = "127.0.0.1", port = 80, debug = False)
+
 # Api To Get Graph
-def getGraph(stockName):
+@app.route('/graph/')
+def getGraph():
+	stockName = request.args.get('s')
 	var=Main.get_companysymbol(stockName)
-	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
+	if var != 'null':					# ONLY PRECEDE IF WE HAVE A COMPANY
 			timeBegin=2010
 			
 			totalDataCurrent=Fetching.fetchDataToday(var,timeBegin) # This gets all the data from the start year to 3 days ago (give or take a work day)
@@ -38,10 +48,12 @@ def getGraph(stockName):
 			
 			url=Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY)
 			
-			print ("<iframe width="+'"'+"900"+'"' + " height="+'"'+"800"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>")
+			return ("<iframe width="+'"'+"900"+'"' + " height="+'"'+"800"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>")
 	pass
 
+@app.route('/acc/')
 def getAcc(stockName):
+	stockName = request.args.get('s')
 	var=Main.get_companysymbol(stockName)
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
@@ -58,11 +70,13 @@ def getAcc(stockName):
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-		print(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
+		return (ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
 	
 	pass
 
+@app.route('/relAcc/')
 def getRelativeAcc(stockName):
+	stockName = request.args.get('s')
 	var=Main.get_companysymbol(stockName)
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
@@ -79,9 +93,5 @@ def getRelativeAcc(stockName):
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-		print(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+		return (ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 	pass
-
-getGraph(input('enter stock '))
-
-#C:\\cygwin\bin\API.py

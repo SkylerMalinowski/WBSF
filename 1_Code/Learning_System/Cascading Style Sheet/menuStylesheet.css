@@ -9,7 +9,7 @@ head, body
 
 #main-background
 {
-	height: 100vh;
+	height: 94.1vh;
 	min-height: 300px;
 	background-color: #263238;
 	background-size: cover;
@@ -22,6 +22,18 @@ head, body
 #main-background > div
 {
 	padding: 30px;
+}
+
+#main
+{
+	height: 88.1vh;
+	min-height: 300px;
+	background-color: #263238;
+	background-size: cover;
+	background-position: center center;
+	background-image: url('../Images/stockmarket.png');
+	color: white;
+	text-shadow: 0 0 30px #000000;
 }
 
 #title
@@ -70,9 +82,7 @@ head, body
 
 .centered-text
 {
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
+	text-align: center;
 }
 
 #colorschemes
@@ -82,3 +92,12 @@ head, body
 	margin-top: 30px;
 }
 
+.fixed
+{
+	position: fixed;
+}
+
+.hide
+{
+	display: none;
+}
