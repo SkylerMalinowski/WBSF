@@ -44,7 +44,7 @@ def getGraph():
 			
 			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,googData[0]['LastTradePrice']) #gets Predictiion Point for the next day independently so I can calculate individual days
+			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,googData[0]['LastTradePrice'],totalDataCurrent.High[len(totalDataCurrent)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
 			url=Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY)
 			
