@@ -4,41 +4,35 @@
 <head>
 	<meta charset="utf-8">
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-	<title>Search Page</title>
+	<title>Main Menu</title>
 	
-	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"></link>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	
-	<script type='text/javascript' src="/userDB/helpers.js"></script>
-	<script type='text/javascript' src="helpers.js"></script>
-	<script type='text/javascript' src='../Learning_System/JavaScript/menu.js'></script>
+	<link type='text/css' rel='stylesheet' href='/Website/CascadingStyleSheet/menuStylesheet.css'></link>
+	<script type='text/javascript' src="JavaScript/userHelpers.js"></script>
+	<script type='text/javascript' src="JavaScript/spotCheck.js"></script>
+	<script type='text/javascript' src='JavaScript/menu.js'></script>
 </head>
 
 <body>
 	<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1"">
 		<!-- Header -->
 		<div data-role="header">
-			<h1>Search Page</h1>
+			<h1>Main Menu</h1>
 			<a href="#nav-panel" data-icon="bars" data-iconpos="left">Links</a>
 			<a href="#log-panel" data-icon="gear" data-iconpos="right">Account</a>
 		</div>
 		<!-- / Header -->
 		
-		<!-- Buffer -->
-		<div data-role="main" class="ui-content"></div>
-		<!-- / Buffer -->
-		
-		<!-- Search Bar -->
-		<form class="form-wrapper">
-			<input type="text" id="search" placeholder="Type Company Ticker or Name" required></input>
-			<input type="submit" value="Search" id="submit"></input>
-		</form>
-		<!-- / Search Bar -->
-		
-		<!-- Buffer -->
-		<div data-role="main" class="ui-content"></div>
-		<!-- / Buffer -->
+		<!-- Title Card -->
+		<div data-role="main" id="main">
+			<div class="center-vertical">
+				<div id="title">What the Stock?!</div>
+			</div>
+		</div>
+		<!-- / Title Card -->
 		
 		<!-- Left Panel -->
 		<div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-theme="b" class="fixed">
@@ -47,10 +41,10 @@
 					<h2>Quick Links</h2>
 				</div>
 				<li data-icon="delete"><a data-rel="close">Close Panel</a></li>
-				<li><a href="../mainMenu.html">Main Menu</a></li>
-				<li><a href="../Learning_System/learningMenu.html">Learning Menu</a></li>
-				<li><a href="search.html">Search Page</a></li>
-				<li><a href="portfolio.html">Porfolio Page</a></li>
+				<li><a href="mainMenu.html">Main Menu</a></li>
+				<li><a href="Learning_System/learningMenu.html">Learning Menu</a></li>
+				<li><a href="Fetch_&_Plot/search.html">Search Page</a></li>
+				<li><a href="Fetch_&_Plot/portfolio.html">Porfolio Page</a></li>
 			</ul>
 		</div>
 		<!-- / Left Panel -->
@@ -67,7 +61,7 @@
 					<input type="password" placeholder="Enter Password ..." name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 					<div class="ui-grid-a">
 						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mLogin();">Login</a></div>
-						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mReg()">Register</a></div>
+						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mReg();">Register</a></div>
 						<div class="ui-block-solo"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" onclick="clear();">Cancel</a></div>
 					</div>
 				</form>

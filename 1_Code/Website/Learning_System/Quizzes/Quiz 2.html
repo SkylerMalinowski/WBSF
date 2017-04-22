@@ -3,7 +3,7 @@
 
 <head>
 	<title>Quiz 2</title>
-	<link type='text/css' rel='stylesheet' href='../Cascading Style Sheet/quizStylesheet.css' />
+	<link type='text/css' rel='stylesheet' href='../../CascadingStyleSheet/quizStylesheet.css' />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
 	
 	<script type="text/javascript">
@@ -27,9 +27,8 @@
 		}];
 	</script>
 	
-	<script type='text/javascript' src="/userDB/helpers.js"></script>
-	<script type='text/javascript' src="../JavaScript/helpers.js"></script>
-	<script type='text/javascript' src='../JavaScript/menu.js'></script>
+	<script type='text/javascript' src="../../JavaScript/userHelpers.js" />
+	<script type='text/javascript' src="../../JavaScript/spotCheck.js" />
 </head>
 
 <body>
@@ -42,7 +41,7 @@
 		<div class='button' id='next'><a href='#'>Next</a></div>
 		<div class='button' id='prev'><a href='#'>Prev</a></div>
 		<div class='button' id='start'><a href='#'>Start Over</a></div>
-		<div class='button' id='menu'><a onclick="window.location.href='/WBSF/1_Code/Learning_System/learningMenu.html',resetQuizzes();">Learning Menu</a></div>
+		<div class='button' id='menu'><a onclick="window.location.href='/WBSF/1_Code/Website/Learning_System/learningMenu.html',resetQuizzes();">Learning Menu</a></div>
 		<!--
 		<button class='' id='next'>Next</a></button>
 		<button class='' id='prev'>Prev</a></button>
@@ -50,10 +49,9 @@
 		-->
 	</div>
 
-	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-	<script type="text/javascript" src='questions.json'></script>
-	<script type='text/javascript' src='../JavaScript/quiz.js'></script>
-	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' />
+	<script type="text/javascript" src='questions.json' />
+	<script type='text/javascript' src='../../JavaScript/quiz.js' />
 </body>
 
 </html>

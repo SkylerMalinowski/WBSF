@@ -234,7 +234,6 @@
   if(percentage == 1){
     score.append('you can skip Lesson 1, ');
     if( getMode() == "1" ) {
-      setLesson(1,1);
       setQuiz(1,1);
     }
   }
@@ -246,7 +245,6 @@
   if(percentage == 1){
     score.append('you can skip Lesson 2, ');
     if( getMode() == "1" ) {
-      setLesson(2,1);
       setQuiz(2,1);
     }
   }
@@ -258,7 +256,6 @@
   if(percentage == 1){
     score.append('you can skip Lesson 3, ');
     if( getMode() == "1" ) {
-      setLesson(3,1);
       setQuiz(3,1);
     }
   }
@@ -270,7 +267,6 @@
   if(percentage == 1){
     score.append('you can skip Lesson 4, ');
     if( getMode() == "1" ) {
-      setLesson(4,1);
       setQuiz(4,1);
     }
   }
@@ -282,7 +278,6 @@
   if(percentage == 1){
     score.append('you can skip Lesson 5, ');
     if( getMode() == "1" ) {
-      setLesson(5,1);
       setQuiz(5,1);
     }
   }
@@ -294,7 +289,6 @@
   if(percentage == 1){
     score.append('and you can skip Lesson 6. ');
     if( getMode() == "1" ) {
-      setLesson(6,1);
       setQuiz(6,1);
     }
   }

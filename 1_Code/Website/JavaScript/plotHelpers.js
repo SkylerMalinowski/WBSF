@@ -27,3 +27,24 @@ function getRelAcc(s) {
 	req.send();
 	return req.responseText;
 }
+
+function news(s) {
+	var req = new XMLHttpRequest();
+	req.onload = function()
+	{	return req.responseText;	}
+	
+	req.open("GET", "/plot/news/?s=" + s, false);
+	req.send();
+	return req.responseText;
+}
+
+function price(s) {
+	var req = new XMLHttpRequest();
+	req.onload = function()
+	{	return req.responseText;	}
+	
+	req.open("GET", "/plot/ticker/?s=" + s, false);
+	req.send();
+	return req.responseText
+}
+

@@ -3,20 +3,18 @@
 
 <head>
 	<meta charset="utf-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<title>Learning Menu</title>
 	
-	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"></link>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" />
 	
-	<script type='text/javascript' src="/userDB/helpers.js"></script>
-	<script type='text/javascript' src="JavaScript/helpers.js"></script>
-	<script type='text/javascript' src='JavaScript/menu.js'></script>
-	
-	<link type='text/css' rel='stylesheet' href='Cascading Style Sheet/menuStylesheet.css'>
+	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
+	<script type='text/javascript' src="../JavaScript/userHelpers.js"></script>
+	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
+	<script type='text/javascript' src='../JavaScript/menu.js'></script>
 </head>
-
-
 
 <body>
 	<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1"">
@@ -192,6 +190,102 @@
 		</div>
 		<!-- / Lesson 6 -->
 		
+		<!-- Lesson 7 -->
+		<div>
+			<div data-role="header">
+				<h1>Lesson 7: ?</h1>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 7.html'">
+					</div>
+					<!--
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+					</div>
+					-->
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(7);">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- / Lesson 7 -->
+		
+		<!-- Lesson 8 -->
+		<div>
+			<div data-role="header">
+				<h1>Lesson 8: ?</h1>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 8.html'">
+					</div>
+					<!--
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+					</div>
+					-->
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(8);">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- / Lesson 8 -->
+		
+		<!-- Lesson 9 -->
+		<div>
+			<div data-role="header">
+				<h1>Lesson 9: ?</h1>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 9.html'">
+					</div>
+					<!--
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+					</div>
+					-->
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(9);">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- / Lesson 9 -->
+		
+		<!-- Lesson 10 -->
+		<div>
+			<div data-role="header">
+				<h1>Lesson 10: ?</h1>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<input TYPE="button" VALUE="Read Lesson" onclick="window.location.href='Lessons/Lesson 10.html'">
+					</div>
+					<!--
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Visual Novel" onclick="window.location.href='#'">
+					</div>
+					-->
+					<div class="ui-block-b">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(10);">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- / Lesson 10 -->
+		
 		<!-- Left Panel -->
 		<div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-theme="b" class="fixed">
 			<ul data-role="listview">
@@ -219,7 +313,7 @@
 					<input type="password" placeholder="Enter Password ..." name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 					<div class="ui-grid-a">
 						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mLogin();">Login</a></div>
-						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mReg()">Register</a></div>
+						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mReg();">Register</a></div>
 						<div class="ui-block-solo"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" onclick="clear();">Cancel</a></div>
 					</div>
 				</form>
