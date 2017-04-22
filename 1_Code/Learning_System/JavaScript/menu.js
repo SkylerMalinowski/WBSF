@@ -3,10 +3,12 @@ window.onload = function () {
 		setMode(0);	// take out of requiz mode
 	var LI = document.getElementById("LoginID");
 	var LO = document.getElementById("LogoutID");
-	if( window.name == '' )
+	if( window.name == '' ) {
 		LO.innerHTML='';
-	else
+	}
+	else {
 		LI.innerHTML='';
+	}
 };
 /*
 // Catch a closing tab or tab reload
@@ -29,7 +31,7 @@ function giveRequiz() {
 	// determine which quizzes are available to be retaken
 	var quizNum;
 	var availableQuiz = [];
-	for( quizNum = 1; quizNum <= 6; quizNum++ ) {
+	for( quizNum = 1; quizNum <= 10; quizNum++ ) {
 		if( getQuiz(quizNum) == "1" )
 			availableQuiz.push( quizNum );
 	}
@@ -46,35 +48,37 @@ function giveRequiz() {
 		quizNum = availableQuiz[quizNum-1];
 		alert( "quizNum = " + quizNum );		//* debug
 		if( quizNum == 1 )
-			window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 1.html";
+			window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 1.html";
 		else if( quizNum == 2 )
-			window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 2.html";
+			window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 2.html";
 		else if( quizNum == 3 )
-			window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 3.html";
+			window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 3.html";
 		else if( quizNum == 4 )
-			window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 4.html";
+			window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 4.html";
 		else if( quizNum == 5 )
-			window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 5.html";
+			window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 5.html";
 		else if( quizNum == 6 )
-			window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 6.html";
+			window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 6.html";
 		}
 }
 
 // checks all completed quizzes and then resets them so they can be retaken
 function resetQuizzes() {
-	var flag = true;
-	for( var i = 1; i <= 6; i++ ) {
+	var flag = "true";
+	for( var i = 1; i <= 10; i++ ) {
 		// check if all passed quizes have been retaken
 		if( getQuiz(i) == "1" ) {
-			flag = false;
+			flag = "false";
 			break;
 		}
 	}
-	if( flag == true ) {
+	if( flag == "true" ) {
 		// reset each retaken quiz to taken state
-		for( i = 1; i <= size; i++ ) {
-			if( getQuiz(i) == "2" )
+		for( var i = 1; i <= 10; i++ ) {
+			if( getQuiz(i) == "2" ) {
+				alert("setQuiz(i,1)");		//* debug
 				setQuiz(i,1);
+			}
 		}
 	}
 }
@@ -82,9 +86,8 @@ function resetQuizzes() {
 // serves a quiz to user
 function spotCheck() {
 	setMode(1);	// put in requiz mode
-	alert( "getPlacement() = " + getPlacement() );
 	if( getPlacement() == "0" ) {
-		window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Placement Quiz.html";
+		window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Placement Quiz.html";
 	}
 	else {
 		giveRequiz();
@@ -131,10 +134,10 @@ function mReg() {
 	var name = document.getElementById('name').value;
 	var pass = document.getElementById('password').value;
 	
-	if( name === "" ) {
+	if( name == "" ) {
 		alert( "Cannot leave username blank." );
 	}
-	else if( pass === "" ) {
+	else if( pass == "" ) {
 		alert( "Cannot leave password blank." );
 	}
 	else {
@@ -154,22 +157,22 @@ function quizLock( quizNum ) {
 	if( getLesson(quizNum) == "1" ) {
 		switch( quizNum ) {
 			case 1:
-				window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 1.html";
+				window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 1.html";
 				break;
 			case 2:
-				window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 2.html";
+				window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 2.html";
 				break;
 			case 3:
-				window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 3.html";
+				window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 3.html";
 				break;
 			case 4:
-				window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 4.html";
+				window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 4.html";
 				break;
 			case 5:
-				window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 5.html";
+				window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 5.html";
 				break;
 			case 6:
-				window.location.href = "/WBSF-master/1_Code/Learning_System/Quizzes/Quiz 6.html";
+				window.location.href = "/WBSF/1_Code/Learning_System/Quizzes/Quiz 6.html";
 				break;
 		}
 	}
@@ -177,3 +180,4 @@ function quizLock( quizNum ) {
 		alert("Please complete the required reading first.");
 	}
 }
+

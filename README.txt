@@ -2,7 +2,19 @@
 ******************************  HOW TO RUN CODE  *******************************
 ********************************************************************************
 
-[Section to be finalized in demo 2]
+1) Download WBSF-master.zip
+2) Extract .zip and rename "WBSF-master" folder to "WBSF"
+
+## If on Linux
+
+3) install ...
+
+## If on Windows
+
+3) install ...
+
+
+[Section to be finalized for Demo 2]
 
 ********************************************************************************
 ******************************  FOLDER STRUCTURE  ******************************
@@ -54,5 +66,5 @@
 	|
 	+-------> Report 3			// Report 3 documents
 
-[Section to be finalized in demo 2]
+[Section to be finalized for Demo 2]
 

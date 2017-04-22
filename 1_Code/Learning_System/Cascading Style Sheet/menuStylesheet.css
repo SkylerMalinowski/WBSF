@@ -83,6 +83,7 @@ head, body
 .centered-text
 {
 	text-align: center;
+	width: auto;
 }
 
 #colorschemes
@@ -96,3 +97,4 @@ head, body
 {
 	position: fixed;
 }
+

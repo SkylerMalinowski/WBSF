@@ -69,6 +69,8 @@ ul {
 
 #prev {
   display: none;
+  width: auto;
+  text-align: center;
 }
 
 #start {

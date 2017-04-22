@@ -9,39 +9,11 @@
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	
-	<script type='text/javascript' src="../userDB/helpers.js"></script>
+	<script type='text/javascript' src="/userDB/helpers.js"></script>
 	<script type='text/javascript' src="JavaScript/helpers.js"></script>
-	<script type='text/javascript' src="JavaScript/spotCheck.js"></script>
 	<script type='text/javascript' src='JavaScript/menu.js'></script>
 	
 	<link type='text/css' rel='stylesheet' href='Cascading Style Sheet/menuStylesheet.css'>
-	
-	<script type='text/javascript'>
-		function quizLock( quizNum ) {
-			if( getLesson(quizNum) == 1 )
-				window.location.href = "Quizzes/Quiz 1.html";
-			else if( getLesson(quizNum) == 2 )
-				window.location.href = "Quizzes/Quiz 2.html";
-			else if( getLesson(quizNum) == 3 )
-				window.location.href = "Quizzes/Quiz 3.html";
-			else if( getLesson(quizNum) == 4 )
-				window.location.href = "Quizzes/Quiz 4.html";
-			else if( getLesson(quizNum) == 5 )
-				window.location.href = "Quizzes/Quiz 5.html";
-			else if( getLesson(quizNum) == 6 )
-				window.location.href = "Quizzes/Quiz 6.html";
-			else if( getLesson(quizNum) == 7 )
-				window.location.href = "Quizzes/Quiz 7.html";
-			else if( getLesson(quizNum) == 8 )
-				window.location.href = "Quizzes/Quiz 8.html";
-			else if( getLesson(quizNum) == 9 )
-				window.location.href = "Quizzes/Quiz 9.html";
-			else if( getLesson(quizNum) == 10 )
-				window.location.href = "Quizzes/Quiz 10.html";
-			else
-				alert("Please complete the required reading first.");
-		}
-	</script>
 </head>
 
 
@@ -50,19 +22,15 @@
 	<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1"">
 		<!-- Header -->
 		<div data-role="header">
-			<h1>What the Stock?!</h1>
-			<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Links</a>
-			<a href="#log-panel" data-icon="gear" data-iconpos="notext">Log</a>
+			<h1>Learning Menu</h1>
+			<a href="#nav-panel" data-icon="bars" data-iconpos="left">Links</a>
+			<a href="#log-panel" data-icon="gear" data-iconpos="right">Account</a>
 		</div>
 		<!-- / Header -->
 		
-		<!-- Main -->
-		<div data-role="main" id="main-background">
-			<div class="center-vertical">
-				<div id="title">Learning Menu</div>
-			</div>
-		</div>
-		<!-- / Main -->
+		<!-- Buffer -->
+		<div data-role="main" class="ui-content"></div>
+		<!-- / Buffer -->
 		
 		<!-- Placement Quiz -->
 		<div>
@@ -97,7 +65,7 @@
 					</div>
 					-->
 					<div class="ui-block-b">
-						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(1)">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(1);">
 					</div>
 				</div>
 			</div>
@@ -121,7 +89,7 @@
 					</div>
 					-->
 					<div class="ui-block-b">
-						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(2)">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(2);">
 					</div>
 				</div>
 			</div>
@@ -145,7 +113,7 @@
 					</div>
 					-->
 					<div class="ui-block-b">
-						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(3)">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(3);">
 					</div>
 				</div>
 			</div>
@@ -169,7 +137,7 @@
 					</div>
 					-->
 					<div class="ui-block-b">
-						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(4)">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(4);">
 					</div>
 				</div>
 			</div>
@@ -193,7 +161,7 @@
 					</div>
 					-->
 					<div class="ui-block-b">
-						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(5)">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(5);">
 					</div>
 				</div>
 			</div>
@@ -217,7 +185,7 @@
 					</div>
 					-->
 					<div class="ui-block-b">
-						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(6)">
+						<input TYPE="button" VALUE="Take Quiz" onclick="quizLock(6);">
 					</div>
 				</div>
 			</div>
@@ -231,7 +199,6 @@
 					<h2>Quick Links</h2>
 				</div>
 				<li data-icon="delete"><a data-rel="close">Close Panel</a></li>
-				<li><a href="../debug.html">Debug Page</a></li>
 				<li><a href="../mainMenu.html">Main Menu</a></li>
 				<li><a href="learningMenu.html">Learning Menu</a></li>
 				<li><a href="../Fetch_&_Plot/search.html">Search Page</a></li>
@@ -272,6 +239,16 @@
 			<!-- / LOGOUT -->
 		</div>
 		<!-- / Right Panel -->
+		
+		<!-- Buffer -->
+		<div data-role="main" class="ui-content"></div>
+		<!-- / Buffer -->
+		
+		<!-- Footer -->
+		<div data-role="footer">
+			<h1>Powered by: jquery; apache2; flask; plotly; Yahoo finance; Google finance; json.</h1>
+		</div>
+		<!-- / Footer -->
 	</div>
 </body>
 
