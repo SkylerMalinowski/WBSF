@@ -185,3 +185,32 @@ function getMode() {
 	return req.responseText;
 }
 
+function addPort(stock) {
+	var req = new XMLHttpRequest();
+	req.onload = function()
+	{	return req.responseText;	}
+	
+	req.open("GET", "/userDB/addPortfolio/?s=" + window.name + "&v=" + stock, false);
+	req.send();
+	return req.responseText;
+}
+
+function remPort(stock) {
+	var req = new XMLHttpRequest();
+	req.onload = function()
+	{	return req.responseText;	}
+	
+	req.open("GET", "/userDB/remPortfolio/?s=" + window.name + "&v=" + stock, false);
+	req.send();
+	return req.responseText;
+}
+
+function getPort(index) {
+	var req = new XMLHttpRequest();
+	req.onload = function()
+	{	return req.responseText;	}
+	
+	req.open("GET", "/userDB/getPortfolio/?s=" + window.name + "&i=" + index, false);
+	req.send();
+	return req.responseText;
+}
