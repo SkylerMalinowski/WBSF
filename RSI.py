@@ -10,59 +10,49 @@ from datetime import datetime #Date time
 # Function by Jon
 # RSI = Relative Strength Index
 def PredictRSI(prices):
-    # RSI is calculated using a period of 14 days
-    period = 14
-    # Range is one period less than the amount of prices input
-    data_range = len(prices) - period
-    # If there are less than 14 prices, the RSI cannot be calculated, and the system exits
-    if data_range < 0:
-        raise SystemExit
+	
+	period = 14 # RSI is calculated using a period of 14 days
+	data_range = len(prices) - period # Range is one period less than the amount of prices input
 
-    # Calculates the daily price change
-    price_change = prices[1:] - prices[:-1]
-    # An array of zeros the length of data_range is created
-    rsi = np.zeros(data_range)
+	# If there are less than 14 prices, the RSI cannot be calculated, and the system exits
+	if data_range < 0:
+		raise SystemExit
 
-    # Creates an array with the price changes
-    gains = np.array(price_change)
-    # Only the positive values will be kept in the gains array
-    negative_gains = gains < 0
-    gains[negative_gains] = 0
+	price_change = []
+	for i in range(1, len(prices) - 1):
+		price_change.append(prices[i] - prices[i-1]) # Calculates the daily price change
 
-    # Creates an array of losses where only the negative values are kept, and then multiplied by -1 for the next step
-    losses = np.array(price_change)
-    positive_gains = gains > 0
-    losses[positive_gains] = 0
-    losses *=-1
+	rsi = np.zeros(data_range) # An array of zeros, size = data_range
+	
+	gains = np.array(price_change)
+	negative_gains = gains < 0 # Only the positive values will be kept in the gains array
+	gains[negative_gains] = 0
 
-    # Calculate the mean of the up days and the down days
-    avg_up = np.mean(gains[:period])
-    avg_down = np.mean(losses[:period])
+	losses = np.array(price_change)
+	positive_gains = gains > 0 # Only the negative values are kept
+	losses[positive_gains] = 0
+	losses *= -1 # make the losses into positive values
+	
+	avg_up = np.mean(gains[:period])
+	avg_down = np.mean(losses[:period]) # Calculate the mean of the up days and the down days
 
-    if avg_down == 0:
-        rsi[0] = 100
-    else:
-        RS = avg_up/avg_down
-        rsi[0] = 100 - (100/(1+RS))
+	if avg_down == 0:
+		rsi[0] = 100 # for first element
+	else:
+		RS = avg_up/avg_down
+		rsi[0] = 100 - (100/(1+RS)) # this is RSI formula
 
-    for i in range(1,data_range):
-        avg_up = (avg_up * (period-1) + gains[i + (period - 1)])/ \
-                period
-        avg_down = (avg_down * (period-1) + losses[i + (period - 1)])/ \
-                period
+	# for other elements
+	for i in range(1, data_range - 1):
+		avg_up = (avg_up * (period-1) + gains[i + (period - 1)])/period
+		avg_down = (avg_down * (period-1) + losses[i + (period - 1)])/period # ???
 
-        if avg_down == 0:
-            rsi[i] = 100
-        else:
-            RS = avg_up/avg_down
-            rsi[i] = 100 - (100/(1+RS))
+		if avg_down == 0:
+			rsi[i] = 100
+		else:
+			RS = avg_up/avg_down
+			rsi[i] = 100 - (100/(1+RS))
 
-    return rsi
-
-#main:
-
-# Grab the closing prices for the specified range
-prices = table[start:end].Close
-
-# Convert prices to an array for input into the RSI function
-price_array = np.array(prices)
+	rsi = rsi[:len(rsi)-1] # cut off the last element (which equals 0)
+	
+	return rsi
