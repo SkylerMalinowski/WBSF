@@ -16,7 +16,7 @@
 	<script type='text/javascript' src='../JavaScript/menu.js'></script>
 	<script type='text/javascript' src='../JavaScript/plotHelpers.js'></script>
 
-	<script>
+	<script type='text/javascript'>
 		function checkPort()
 		{
 			if( getPort(1) != "NULL") 
@@ -46,30 +46,30 @@
 		}
 		
 		var options = {
-    			url: "companies.json",
+				url: "companies.json",
 
-    			getValue: "ticker",
+				getValue: "ticker",
 
-    			template: 
+				template: 
 			{
-      				type: "description",
-        			fields: 
+					type: "description",
+					fields: 
 				{	description: "name"
-        				}
-    				},
+					}
+					},
 
-			    list: {
+				list: {
 				match: {
-				    enabled: true
+					enabled: true
 				}
-			    },
+				},
 
-    				theme: "plate-dark"
+					theme: "plate-dark"
 		};
 
 		$("#ticker").easyAutocomplete(options);
-		
 	</script>
+</head>
 
 <body>
 	<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1"">
@@ -89,8 +89,8 @@
 		
 		<!-- SEARCH BAR-->
 		<div class="ui-widget">
-  			<label for="ticker">Company: </label>
-  			<input id="ticker">
+			<label for="ticker">Company: </label>
+			<input id="ticker" placeholder="Type Compnay Name or Ticker Symbol" required>
 		</div>
 		<!-- / SEARCH BAR-->
 					
