@@ -7,6 +7,8 @@ from math import floor #math floor
 from math import pow #math pow
 from datetime import datetime #Date time
 
+# NOTES: taken from previous years group. This function is a stock indicator that the stock is over bought/sold and cannot be used for predictions
+
 # Function by Jon
 # RSI = Relative Strength Index
 def PredictRSI(prices):
@@ -44,8 +46,8 @@ def PredictRSI(prices):
 
 	# for other elements
 	for i in range(1, data_range - 1):
-		avg_up = (avg_up * (period-1) + gains[i + (period - 1)])/period
-		avg_down = (avg_down * (period-1) + losses[i + (period - 1)])/period # ???
+		avg_up = (avg_up * (period-1) + gains[i + (period - 1)]) / period
+		avg_down = (avg_down * (period-1) + losses[i + (period - 1)]) / period
 
 		if avg_down == 0:
 			rsi[i] = 100
