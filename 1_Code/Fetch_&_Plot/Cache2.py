@@ -147,6 +147,15 @@ def check_date(Symbol):
 	else:
 		return 1
 
+def return_cache_symbols()												# LITERALLY returns the symbols of tickers in the cache
+	conn=sqlite3.connect("base.db")
+	cursor=conn.cursor()
+	cursor.execute("SELECT Symbol FROM Prediction")
+	list = cursor.fetchall()
+	return list		
+		
+		
+		
 def Cache_Predictions(Symbol,Matrix):									# var1 = Company Symbol, and List is the matrix that you pass in co-efficients
 
 	
