@@ -114,7 +114,7 @@ def Normalize(differData,baseData):
 
 	y-=1
 	for x in range(l,0,-1):
-		Min=.25*baseData[y]-baseData[y]
+		Min=baseData[y]-.25*baseData[y]
 		Max=.25*baseData[y]+baseData[y]
 		differData[x]=baseData[y]+(differData[x]/(Max-Min))
 		y-=1
@@ -169,7 +169,7 @@ def getWorkDates(length):
 
 	for y in range(45,0,-1):
 		
-		Date=datetime.now()+timedelta(days=-y-1)
+		Date=datetime.now()+timedelta(days=-y)
 
 		if Date.weekday()<=4 and not (Date in us_holidays) :
 			a[x]=Date
@@ -180,6 +180,6 @@ def getWorkDates(length):
 			break
 
 		pass
-
+		print(a)
 	return a
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)C:\\cygwin\bin\Main.py
