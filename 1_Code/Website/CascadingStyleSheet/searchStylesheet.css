@@ -1,0 +1,34 @@
+#search-box {
+	;
+}
+
+#ticker-box {
+	text-align: center;
+	width: 80%;
+	min-width: 300px;
+	margin-top: 10px;
+	border: 1px solid black;
+	background-color: lightblue;
+}
+
+#news-box {
+	text-align: center;
+	width: 80%;
+	min-width: 300px;
+	margin-bottom: 10px;
+	border: 1px solid black;
+	background-color: lightblue;
+}
+
+#graph-box {
+	;
+}
+
+#acc-box {
+	;
+}
+
+#realAcc-box {
+	;
+}
+

@@ -6,18 +6,19 @@
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<title>Search Page</title>
 	
-	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"></link>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel='stylesheet' href='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css'></link>
+	<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
+	<script src='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js'></script>
 	
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
-	<script type='text/javascript' src="../JavaScript/userHelpers.js"></script>
-	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
+	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/searchStylesheet.css'></link>
+	<script type='text/javascript' src='../JavaScript/userHelpers.js'></script>
+	<script type='text/javascript' src='../JavaScript/spotCheck.js'></script>
 	<script type='text/javascript' src='../JavaScript/menu.js'></script>
 </head>
 
 <body>
-	<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1"">
+	<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1">
 		<!-- Header -->
 		<div data-role="header">
 			<h1>Search Page</h1>
@@ -33,7 +34,7 @@
 		<!-- Search Bar -->
 		<form id="search-box">
 			<input type="text" id="search" placeholder="Type Company Ticker or Name" required></input>
-			<input type="submit" value="Search" id="submit"></input>
+			<input type="submit" value="Search" id="submit" onclick="Search();"></input>
 		</form>
 		<!-- / Search Bar -->
 		
@@ -43,11 +44,29 @@
 		</div>
 		<!-- / Stock Ticker -->
 		
+		<!-- News -->
+		<div id="news-box">
+			
+		</div>
+		<!-- / News -->
+		
 		<!-- Graph -->
 		<div id="graph-box">
 			
 		</div>
 		<!-- / Graph -->
+		
+		<!-- Accuracy -->
+		<div id="acc-box">
+			
+		</div>
+		<!-- / Accuracy -->
+		
+		<!-- Real Accuracy -->
+		<div id="realAcc-box">
+			
+		</div>
+		<!-- / Real Accuracy -->
 		
 		<!-- Buffer -->
 		<div data-role="main" class="ui-content"></div>
@@ -79,8 +98,8 @@
 					<label for="password">Password:</label>
 					<input type="password" placeholder="Enter Password ..." name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 					<div class="ui-grid-a">
-						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mLogin();">Login</a></div>
-						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mReg();">Register</a></div>
+						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="myLogin();">Login</a></div>
+						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="myReg();">Register</a></div>
 						<div class="ui-block-solo"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" onclick="clear();">Cancel</a></div>
 					</div>
 				</form>
@@ -92,7 +111,7 @@
 				<form class="userform">
 					<h2 class="centered-text">Logout</h2>
 					<div class="ui-grid-a">
-						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mLogout();">Logout</a></div>
+						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="myLogout();">Logout</a></div>
 						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" onclick="">Cancel</a></div>
 					</div>
 				</form>
