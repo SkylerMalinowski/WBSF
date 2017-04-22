@@ -17,42 +17,9 @@ sessionID = 0
 if __name__ == '__main__':
 	app.run(host = "127.0.0.1", port = 80, debug = False)
 
-# stock ticker and news stuff
-def getCurrentPrice(Sym):
-	ticker = Share(Sym)
-	return ticker.get_price()
-
-def getPercentChange(Sym):
-	ticker = Share(Sym)
-	return ticker.get_percent_change()
-
-def getNewsTitle(feed):
-	return feed['feed']['title']
-
-def getNews(feed, n):
-	return feed['entries'][n]['title']
-
-@app.route('/helpers.js')
-def jsLoad():
-	return send_file("helpers.js")
-
 @app.route('/logo.jpg')
 def logo():
 	return send_file('logo.jpg', mimetype='image/jpg')
-
-@app.route('/ticker/')
-def ticker():
-	tick = request.args.get('s')
-	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
-	ret = "The current price of " + tick + " is $" + getCurrentPrice(tick) + ". This is a " + getPercentChange(tick) + " change."
-	return ret
-
-@app.route('/news/')
-def news():
-	tick = request.args.get('s')
-	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
-	ret = "The top headline for " + tick + " from " + getNewsTitle(feed) + " is: <br><br>" + getNews(feed, 0)
-	return ret
 
 # original home page
 @app.route('/index.html')
@@ -115,6 +82,7 @@ def openTable():
 								session INTEGER,
 								lessonStates TEXT, 
 								quizStates TEXT,
+								portfolio TEXT,
 								placementTaken INTEGER,
 								modeSwitch INTEGER);""")
 		conn.commit()
@@ -134,7 +102,8 @@ def addUser():
 	password = request.args.get('p')
 	password = (hashlib.sha256((username+password).encode())).hexdigest()
 	trash = "0,0,0,0,0,0,0,0,0,0"
-	inputs = [str(username), str(password), (-1), (trash), (trash), (0), (0)]
+	trash2 = "NULL,NULL,NULL,NULL,NULL"
+	inputs = [str(username), str(password), (-1), (trash), (trash), (trash2), (0), (0)]
 	
 	conn = sqlite3.connect("userDB.db")
 	cursor = conn.cursor()
@@ -144,12 +113,12 @@ def addUser():
 	conn.commit()
 	
 	if temp is None:
-		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?)", inputs)
+		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
 		return "true"
 	elif temp[0] != username:
-		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?)", inputs)
+		cursor.execute("INSERT INTO user VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)", inputs)
 		conn.commit()
 		conn.close()
 		return "true"
@@ -458,3 +427,129 @@ def setMode():
 		conn.commit()
 		conn.close()
 		return "true"
+
+@app.route("/getPortfolio/")
+def getPortfolio():
+	session = request.args.get('s')
+	index = int(request.args.get('i'))
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "false"
+	else:
+		cursor.execute("SELECT portfolio FROM user WHERE session=?", [(session)])
+		temp = cursor.fetchone()[0]
+		conn.commit()
+		conn.close()
+		return str((temp.split(',')[index-1]))
+
+@app.route("/setPortfolio/")
+def setPortfolio():
+	session = request.args.get('s')
+	index = int(request.args.get('i'))
+	val = request.args.get('v')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "false"
+	else:
+		cursor.execute("SELECT portfolio FROM user WHERE session=?", [(session)])
+		conn.commit()
+		
+		temp = cursor.fetchone()[0]
+		temp = temp.split(',')
+		temp[index-1] = val
+		
+		trash = ","
+		trash = trash.join(temp)
+		cursor.execute("UPDATE user SET portfolio=? WHERE session=?", [(trash), (session)])
+		conn.commit()
+		conn.close()
+		return "true"
+
+@app.route("/addPortfolio/")
+def addPortfolio():
+	session = request.args.get('s')
+	val = request.args.get('v')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "false"
+	else:
+		cursor.execute("SELECT portfolio FROM user WHERE session=?", [(session)])
+		conn.commit()
+		
+		temp = cursor.fetchone()[0]
+		temp = temp.split(',')
+		
+		flag = "false"
+		
+		for i in range(1, 6):
+			if temp[i-1] == "NULL":
+				flag = "true"
+				temp[i-1] = val
+				break
+		
+		trash = ","
+		trash = trash.join(temp)
+		cursor.execute("UPDATE user SET portfolio=? WHERE session=?", [(trash), (session)])
+		conn.commit()
+		conn.close()
+		return flag
+
+@app.route("/remPortfolio/")
+def remPortfolio():
+	session = request.args.get('s')
+	val = request.args.get('v')
+	
+	conn = sqlite3.connect("userDB.db")
+	cursor = conn.cursor()
+
+	cursor.execute("SELECT username FROM user WHERE session=?", [(session)])
+	temp = cursor.fetchone()
+	conn.commit()
+	
+	if temp is None:
+		conn.close()
+		return "false"
+	else:
+		cursor.execute("SELECT portfolio FROM user WHERE session=?", [(session)])
+		conn.commit()
+		
+		temp = cursor.fetchone()[0]
+		temp = temp.split(',')
+		
+		flag = "false"
+		
+		for i in range(1, 6):
+			if temp[i-1] == val:
+				flag = "true"
+				temp[i-1] = "NULL"
+				break
+		
+		trash = ","
+		trash = trash.join(temp)
+		cursor.execute("UPDATE user SET portfolio=? WHERE session=?", [(trash), (session)])
+		conn.commit()
+		conn.close()
+		return flag
