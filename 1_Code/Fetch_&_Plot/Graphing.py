@@ -11,6 +11,26 @@ import ArrayNCalc
 from datetime import datetime
 from datetime import timedelta
 
+#Function by Jon
+def rsiPlot(stockSymbol,Webster,Predict, startYear): #plots all the graphs together
+
+	figure=obj.Scatter(y=Webster.High,x=Webster.index,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol) #Past Data Line
+
+	Predicts=obj.Scatter(y=Predict,x=ArrayNCalc.getWorkDates(len(Predict)),line=dict(color=('rgb(255,165,0)')),name="RSI for "+stockSymbol) #Prediction Line
+
+	fig = tools.make_subplots(rows=2, cols=1)
+	
+	fig.append_trace(figure, 1, 1) # subplot positions
+	fig.append_trace(Predicts, 2, 1)
+	
+	fig['layout']['xaxis2'].update(range=[datetime(int(startYear),1,1), datetime.now()])
+
+	fig['layout']['yaxis1'].update(title='Dollars ($)') # format the axes
+	fig['layout']['yaxis2'].update(title='RSI percentage (%)', range=[0, 100])
+	
+	return py.plot(fig, filename=stockSymbol+'_Line')
+
+
 #Function by Vince
 def makeLineGraph(stockSymbol,Webster,currentInfo): # Makes Line graph for both historic data (webster), current Stock Info (currentInfo)
 
