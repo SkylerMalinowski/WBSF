@@ -2,6 +2,7 @@
 import plotly.plotly as py #Plotly Api
 from plotly.tools import FigureFactory as FF
 import plotly.graph_objs as obj
+from plotly import tools
 import time #To get time and date
 import pandas_datareader.data as web #Database Reader
 import json # JavaScript Object Notation
@@ -47,8 +48,9 @@ def makeCandleStickGraph(stockSymbol,Webster): # Makes a Candle Stick Graph
 	fig=FF.create_candlestick(Webster.Open,Webster.High,Webster.Low,Webster.Close,dates=Webster.index) # Past Data
 
 	py.plot(fig,filename=stockSymbol+'_Candle',validate=False)
+
 #Function by Vince
-def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy): #plots all the graphs together
+def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy,Rsi): #plots all the graphs together
 
 
 	figure=obj.Trace(y=Webster.High,x=Webster.index,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol) #Past Data Line
@@ -59,8 +61,24 @@ def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy): #plots all th
 
 	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=pointColorMaker(Pointy,currentInfo)),name="Prediction "+stockSymbol) #point of prediciton
 
+	RSI=obj.Scatter(y=Rsi,x=ArrayNCalc.getWorkDates(len(Rsi)),line=dict(color=('rgb(0,0,0)')),name="RSI for "+stockSymbol) #Prediction Line
+
+	fig=tools.make_subplots(rows=2,cols=1)
+
 	data=Data([figure,currentFigure,Predicts,point]) #Data Array of Figures
-	return py.plot(data, filename=stockSymbol+'_Line') #Plot The Function
+
+	fig.append_trace(data[0],1,1)
+	fig.append_trace(data[1],1,1)
+	fig.append_trace(data[2],1,1)
+	fig.append_trace(data[3],1,1)
+
+	fig.append_trace(RSI,2,1)
+
+
+	fig['layout']['yaxis1'].update(title='Dollars ($)',domain=[0,0.7])
+	fig['layout']['yaxis2'].update(title='RSI percentage (%)', range=[0, 100],domain=[0.8,1])
+
+	return py.plot(fig, filename=stockSymbol+'_Line') #Plot The Function
 
 #Function by Vince
 def pointColorMaker(point,currentInfo):
