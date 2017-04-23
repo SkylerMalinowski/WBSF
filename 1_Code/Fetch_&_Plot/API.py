@@ -129,6 +129,7 @@ def getRelativeAcc(stockName):
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 		return (ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+
 	pass
 
 @app.route('/stockNames')

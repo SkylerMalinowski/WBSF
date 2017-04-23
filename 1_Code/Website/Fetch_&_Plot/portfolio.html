@@ -13,7 +13,63 @@
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
 	<script type='text/javascript' src="../JavaScript/userHelpers.js"></script>
 	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
-	<script type='text/javascript' src='../JavaScript/menu.js'></script
+	<script type='text/javascript' src='../JavaScript/menu.js'></script>
+	<script type='text/javascript' src='../JavaScript/plotHelpers.js'></script>
+
+	<script type='text/javascript'>
+		function checkPort()
+		{
+			if( getPort(1) != "NULL") 
+				document.getElementByID("1").innerHTML = getGraph(getPort(1));
+			if( getPort(2) != "NULL") 
+				document.getElementByID("2").innerHTML = getGraph(getPort(2));
+			if( getPort(3) != "NULL") 
+				document.getElementByID("3").innerHTML = getGraph(getPort(3));
+			if( getPort(4) != "NULL") 
+				document.getElementByID("4").innerHTML = getGraph(getPort(4));
+			if( getPort(5) != "NULL") 
+				document.getElementByID("5").innerHTML = getGraph(getPort(5));
+		}
+		
+		function add()
+		{
+			var str = document.getElementById("ticker").textContent;
+			addPort(stock);
+			location.reload();
+		}
+		
+		function rem()
+		{
+			var str = document.getElementById("ticker").textContent;
+			remPort(stock);
+			location.reload();
+		}
+		
+		var options = {
+				url: "companies.json",
+
+				getValue: "ticker",
+
+				template: 
+			{
+					type: "description",
+					fields: 
+				{	description: "name"
+					}
+					},
+
+				list: {
+				match: {
+					enabled: true
+				}
+				},
+
+					theme: "plate-dark"
+		};
+
+		$("#ticker").easyAutocomplete(options);
+	</script>
+</head>
 
 <body>
 	<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1"">
@@ -29,7 +85,29 @@
 		<div data-role="main" class="ui-content"></div>
 		<!-- / Buffer -->
 		
+		body onload="checkPort()">
 		
+		<!-- SEARCH BAR-->
+		<div class="ui-widget">
+			<label for="ticker">Company: </label>
+			<input id="ticker" placeholder="Type Compnay Name or Ticker Symbol" required>
+		</div>
+		<!-- / SEARCH BAR-->
+					
+		<!-- PORTFOLIO BUTTONS-->
+		<div id="buttons">
+			<div class="ui-grid-a">
+				<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="add();">Add</a></div>
+				<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="rem();">Remove</a></div>
+			</div>
+		</div>
+		<!-- / PORTFOLIO BUTTONS-->
+								       
+		<p id=1> </p> <br> 
+		<p id=2> </p> <br>
+		<p id=3> </p> <br>
+		<p id=4> </p> <br>
+		<p id=5> </p> <br>
 		
 		<!-- Buffer -->
 		<div data-role="main" class="ui-content"></div>
@@ -61,8 +139,8 @@
 					<label for="password">Password:</label>
 					<input type="password" placeholder="Enter Password ..." name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 					<div class="ui-grid-a">
-						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mLogin();">Login</a></div>
-						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mReg();">Register</a></div>
+						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="myLogin();">Login</a></div>
+						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="myReg();">Register</a></div>
 						<div class="ui-block-solo"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" onclick="clear();">Cancel</a></div>
 					</div>
 				</form>
@@ -74,7 +152,7 @@
 				<form class="userform">
 					<h2 class="centered-text">Logout</h2>
 					<div class="ui-grid-a">
-						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="mLogout();">Logout</a></div>
+						<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="myLogout();">Logout</a></div>
 						<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" onclick="">Cancel</a></div>
 					</div>
 				</form>

@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
 	if( getMode() == "1" ) {
 		setMode(0);	// take out of requiz mode
 	}
@@ -10,7 +10,7 @@ window.onload = function () {
 	else {
 		LO.innerHTML='';
 	}
-};
+}
 
 /*
 // Catch a closing tab or tab reload
@@ -28,7 +28,7 @@ function clear() {
 }
 
 // login user
-function mLogin() {
+function myLogin() {
 	var name = document.getElementById('name').value;
 	var pass = document.getElementById('password').value;
 	var ret = login(name,pass);
@@ -46,7 +46,7 @@ function mLogin() {
 }
 
 // logout user
-function mLogout() {
+function myLogout() {
 	if( logout() == "true" ) {
 		window.name = "";
 		location.reload();
@@ -58,7 +58,7 @@ function mLogout() {
 }
 
 // register user
-function mReg() {
+function myReg() {
 	var name = document.getElementById('name').value;
 	var pass = document.getElementById('password').value;
 	
@@ -72,7 +72,7 @@ function mReg() {
 		// Check user Database
 		if ( reg( name, pass ) == "true"  ) {
 			alert( "Registration Successful" );
-			mLogin();
+			myLogin();
 		}
 		else {
 			alert( "Username Already Exists" );

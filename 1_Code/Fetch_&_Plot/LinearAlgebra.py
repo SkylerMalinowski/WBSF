@@ -73,7 +73,7 @@ def getPointY(FinalM,date,prev,yahoorecent):
 		change+=yahoorecent
 	else:
 		change=yahoorecent-change	
-	return((prev+(change)/(Max-Min)))
+	return prev+(change/(Max-Min))
 
 	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
 

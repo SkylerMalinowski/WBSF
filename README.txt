@@ -25,20 +25,6 @@
 +-------+---> 1_Code				// Code Base
 	|
 	+-------> Fetch_&_Plot			// Data acquisistion & plotting
-	| 
-	+-------+---> Learning_System		// Learning System root
-		|
-		+-------> Cascading Style Sheet	// CSS resource files
-		|
-		+-------> Images		// Picture type resource files
-		|
-		+-------> JavaScript		// JS resource files
-		|
-		+-------> Lessons		// Reading material
-		|
-		+-------> Quizzes		// Reading comprehension quizzes
-		|
-		+-------> VN Lessons		// Visual Novel format lessons
 	|
 	+-------+---> userDB			// User account database
 		|
@@ -47,6 +33,24 @@
 		+-------> static		// Picture file resources
 		|
 		+-------> templates		// HTML files
+	|
+	+-------+---> Website			// Apachie Hosted folder
+		|
+		+-------> Cascading Style Sheet	// CSS resource files
+		|
+		+-------> Fetch_&_Plot		// HTML pages with graphs
+		|
+		+-------> Images		// Picture type resource files
+		|
+		+-------> JavaScript		// JS resource files
+		|
+		+-------+---> Learning_System	// Learning System root
+			|
+			+-------> Lessons	// Reading material
+			|
+			+-------> Quizzes	// Reading comprehension quizzes
+			|
+			+-------> VN Lessons	// Visual Novel format lessons
 |
 +-------> 2_Unit_Testing			// Unit Tests
 |
@@ -60,11 +64,7 @@
 	|
 	+-------> Demo 2			// Demonstration 2 documents
 	|
-	+-------> Report 1			// Report 1 documents
-	|
-	+-------> Report 2			// Report 2 documents
-	|
-	+-------> Report 3			// Report 3 documents
+	+-------> Final Report			// Report 3 documents
 
 [Section to be finalized for Demo 2]
 
