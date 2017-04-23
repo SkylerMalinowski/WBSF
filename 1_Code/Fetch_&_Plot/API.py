@@ -17,6 +17,7 @@ from yahoo_finance import Share #Yahoo Finance Api
 from datetime import datetime # Date
 from datetime import timedelta # Adding to date
 from plotly.graph_objs import * #Plotly Objects
+from openpyxl import load_workbook
 
 app = Flask(__name__)
 
@@ -128,4 +129,25 @@ def getRelativeAcc(stockName):
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 		return (ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+
 	pass
+
+@app.route('/stockNames')
+def build_string():										
+	num = 0																	
+	wb = load_workbook('companylist.xlsx')									
+	sheet_ranges = wb['Worksheet']
+	name = ""
+	
+	Big_String = ""
+	for num in range (1,3194):
+		name = sheet_ranges['B'+str(num)].value							# return the name of the company 
+		symbol = sheet_ranges['A'+str(num)].value						# return the symbol of the company 
+		Big_String = Big_String +symbol+": "+name+"/"
+		#print(Big_String)
+									# FOR THE LAST one don't have a "/" so just handle it seperately
+									
+	name = sheet_ranges['B'+str(num+1)].value
+	symbol = sheet_ranges['A'+str(num+1)].value
+	Big_String = Big_String +symbol+": "+name
+	return Big_String
