@@ -10,6 +10,10 @@
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
 	<script type='text/javascript' src="../JavaScript/userHelpers.js"></script>
 	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
@@ -33,42 +37,37 @@
 		
 		function add()
 		{
-			var str = document.getElementById("ticker").textContent;
+			var stock = document.getElementById("ticker").value.split(":")[0]
 			addPort(stock);
 			location.reload();
 		}
 		
 		function rem()
 		{
-			var str = document.getElementById("ticker").textContent;
+			var stock = document.getElementById("ticker").value.split(":")[0];
 			remPort(stock);
 			location.reload();
 		}
 		
-		var options = {
-				url: "companies.json",
+		</script>
+		
+		<script>
+         $(function() {
+            var stocks = getStocks().split("/");
+            $( "#ticker" ).autocomplete({
+               source: stocks
+            });
+         });
+         
+         function getStocks()
+		{
+			return "AAPL: test/MSFT: microsoft/AMD: advanced micro devices"
+		
+		
+		}
+      </script>
 
-				getValue: "ticker",
 
-				template: 
-			{
-					type: "description",
-					fields: 
-				{	description: "name"
-					}
-					},
-
-				list: {
-				match: {
-					enabled: true
-				}
-				},
-
-					theme: "plate-dark"
-		};
-
-		$("#ticker").easyAutocomplete(options);
-	</script>
 </head>
 
 <body>
@@ -85,12 +84,10 @@
 		<div data-role="main" class="ui-content"></div>
 		<!-- / Buffer -->
 		
-		body onload="checkPort()">
-		
 		<!-- SEARCH BAR-->
 		<div class="ui-widget">
 			<label for="ticker">Company: </label>
-			<input id="ticker" placeholder="Type Compnay Name or Ticker Symbol" required>
+			<input id="ticker" placeholder="Type Company Name or Ticker Symbol" required>
 		</div>
 		<!-- / SEARCH BAR-->
 					
