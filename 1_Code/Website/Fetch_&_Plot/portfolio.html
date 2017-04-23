@@ -6,6 +6,8 @@
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<title>Portfolio Page</title>
 	
+	<link rel="icon" type="image/png" href="../Images/favicon.png" />
+	
 	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"></link>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -49,23 +51,15 @@
 			location.reload();
 		}
 		
-		</script>
+	</script>
 		
-		<script>
-         $(function() {
-            var stocks = getStocks().split("/");
-            $( "#ticker" ).autocomplete({
-               source: stocks
-            });
-         });
-         
-         function getStocks()
+	<script>
+		$(function() 
 		{
-			return "AAPL: test/MSFT: microsoft/AMD: advanced micro devices"
-		
-		
-		}
-      </script>
+			var stocks = getStocks().split("/");
+			$( "#ticker" ).autocomplete({ source: stocks });
+		});
+	</script>
 
 
 </head>
@@ -86,7 +80,7 @@
 		
 		<!-- SEARCH BAR-->
 		<div class="ui-widget">
-			<label for="ticker">Company: </label>
+			<label for="ticker"> </label>
 			<input id="ticker" placeholder="Type Company Name or Ticker Symbol" required>
 		</div>
 		<!-- / SEARCH BAR-->
@@ -159,8 +153,8 @@
 		<!-- / Right Panel -->
 		
 		<!-- Footer -->
-		<div data-role="footer">
-			<h1>Powered by: jquery; apache2; flask; plotly; Yahoo finance; Google finance; json.</h1>
+		<div data-role="footer" style="position: fixed; left: 0px; bottom: 0px; height: 35px; width: 100%; background: #66cdd1">
+			<h1>Powered by: jquery; apache2; flask; plotly; Yahoo finance; Google finance; json; Investopedia</h1>
 		</div>
 		<!-- / Footer -->
 	</div>
