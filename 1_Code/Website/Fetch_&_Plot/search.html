@@ -10,11 +10,32 @@
 	<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 	<script src='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js'></script>
 	
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/searchStylesheet.css'></link>
 	<script type='text/javascript' src='../JavaScript/userHelpers.js'></script>
 	<script type='text/javascript' src='../JavaScript/spotCheck.js'></script>
 	<script type='text/javascript' src='../JavaScript/menu.js'></script>
+	
+			<script>
+         $(function() {
+            var stocks = getStocks().split("/");
+            $( "#ticker" ).autocomplete({
+               source: stocks
+            });
+         });
+         
+         function getStocks()
+		{
+			return "AAPL: test/MSFT: microsoft/AMD: advanced micro devices"
+		
+		
+		}
+      </script>
+
 </head>
 
 <body>
@@ -31,12 +52,21 @@
 		<div data-role="main" class="ui-content"></div>
 		<!-- / Buffer -->
 		
-		<!-- Search Bar -->
-		<form id="search-box">
-			<input type="text" id="search" placeholder="Type Compnay Name or Ticker Symbol" required></input>
-			<input type="submit" value="Search" id="submit" onclick="Search();"></input>
-		</form>
-		<!-- / Search Bar -->
+		<!-- SEARCH BAR-->
+		<div class="ui-widget">
+			<label for="ticker">Company: </label>
+			<input id="ticker" placeholder="Type Company Name or Ticker Symbol" required>
+		</div>
+		<!-- / SEARCH BAR-->
+		
+		<!-- SEARCH BUTTON-->
+		<div id="buttons">
+			<div class="ui-grid-a">
+				<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="add();">Add</a></div>
+				<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="rem();">Remove</a></div>
+			</div>
+		</div>
+		<!-- SEARCH BUTTON-->
 		
 		<!-- Stock Ticker -->
 		<div id="ticker-box">
