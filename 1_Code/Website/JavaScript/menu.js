@@ -38,9 +38,7 @@ function myLogin() {
 	if( ret != "User does not exist!" && ret != "Invalid password!" ) {
 		alert( "Login Successful" );
 		window.name = ret;
-		alert("spotCheck()");
 		spotCheck();
-		location.reload();
 	}
 	else {
 		alert( ret );
@@ -89,22 +87,25 @@ function quizLock( quizNum ) {
 		if( getLesson(quizNum) == "1" ) {
 			switch( quizNum ) {
 				case 1:
-					window.location.href = "/Website/Learning_System/Quizzes/Quiz 1.html";
+					window.location.href = "/Website/Learning_System/Quizzes/Quiz1.html";
 					break;
 				case 2:
-					window.location.href = "/Website/Learning_System/Quizzes/Quiz 2.html";
+					window.location.href = "/Website/Learning_System/Quizzes/Quiz2.html";
 					break;
 				case 3:
-					window.location.href = "/Website/Learning_System/Quizzes/Quiz 3.html";
+					window.location.href = "/Website/Learning_System/Quizzes/Quiz3.html";
 					break;
 				case 4:
-					window.location.href = "/Website/Learning_System/Quizzes/Quiz 4.html";
+					window.location.href = "/Website/Learning_System/Quizzes/Quiz4.html";
 					break;
 				case 5:
-					window.location.href = "/Website/Learning_System/Quizzes/Quiz 5.html";
+					window.location.href = "/Website/Learning_System/Quizzes/Quiz5.html";
 					break;
 				case 6:
-					window.location.href = "/Website/Learning_System/Quizzes/Quiz 6.html";
+					window.location.href = "/Website/Learning_System/Quizzes/Quiz6.html";
+					break;
+				case 7:
+					window.location.href = "/Website/Learning_System/Quizzes/Quiz7.html";
 					break;
 			}
 		}

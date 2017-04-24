@@ -84,3 +84,10 @@ ul {
   width: auto;
   text-align: center;
 }
+
+#back {
+  display: none;
+  width: auto;
+  text-align: center;
+}
+

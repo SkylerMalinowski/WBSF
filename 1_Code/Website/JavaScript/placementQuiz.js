@@ -18,8 +18,8 @@
       $('#next').hide();
       $('#prev').hide();
       $('#start').show();
+      $('#exit').hide();
       $('#menu').show();
-      setPlacement(1);
     }
   });
   
@@ -67,7 +67,8 @@
     selections = [];
     displayNext();
     $('#start').hide();
-    $('#menu').hide();
+    $('#exit').hide();
+    $('#menu').show();
   });
 
   // Animates buttons on hover
@@ -132,10 +133,13 @@
         // Controls display of 'prev' button
         if (questionCounter === 1) {
           $('#prev').show();
+          $('#exit').show();
         } else if (questionCounter === 0) {
 
           $('#prev').hide();
           $('#next').show();
+          $('#exit').show();
+          $('#menu').hide();
         }
       } else {
         var scoreElem = displayScore();
@@ -143,6 +147,7 @@
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
+        $('#exit').hide();
         $('#menu').show();
       }
     });
@@ -233,8 +238,10 @@
   percentage = numCorrectFirst/totalFirst;
   if(percentage == 1){
     score.append('you can skip Lesson 1, ');
-    if( getMode() == "1" ) {
-      setQuiz(1,1);
+    if( window.name != '' ) {
+      if( getMode() == "1" ) {
+        setQuiz(1,1);
+      }
     }
   }
   else{
@@ -244,8 +251,10 @@
   percentage = numCorrectSecond/totalSecond;
   if(percentage == 1){
     score.append('you can skip Lesson 2, ');
-    if( getMode() == "1" ) {
-      setQuiz(2,1);
+    if( window.name != '' ) {
+      if( getMode() == "1" ) {
+        setQuiz(2,1);
+      }
     }
   }
   else{
@@ -255,8 +264,10 @@
   percentage = numCorrectThird/totalThird;
   if(percentage == 1){
     score.append('you can skip Lesson 3, ');
-    if( getMode() == "1" ) {
-      setQuiz(3,1);
+    if( window.name != '' ) {
+      if( getMode() == "1" ) {
+        setQuiz(3,1);
+      }
     }
   }
   else {
@@ -266,8 +277,10 @@
   percentage = numCorrectFourth/totalFourth;
   if(percentage == 1){
     score.append('you can skip Lesson 4, ');
-    if( getMode() == "1" ) {
-      setQuiz(4,1);
+    if( window.name != '' ) {
+      if( getMode() == "1" ) {
+        setQuiz(4,1);
+      }
     }
   }
   else {
@@ -277,8 +290,10 @@
   percentage = numCorrectFifth/totalFifth;
   if(percentage == 1){
     score.append('you can skip Lesson 5, ');
-    if( getMode() == "1" ) {
-      setQuiz(5,1);
+    if( window.name != '' ) {
+      if( getMode() == "1" ) {
+        setQuiz(5,1);
+      }
     }
   }
   else {
@@ -288,16 +303,23 @@
   percentage = numCorrectSixth/totalSixth;
   if(percentage == 1){
     score.append('and you can skip Lesson 6. ');
-    if( getMode() == "1" ) {
-      setQuiz(6,1);
+    if( window.name != '' ) {
+      if( getMode() == "1" ) {
+        setQuiz(6,1);
+      }
     }
   }
   else {
     score.append('and you should look at Lesson 6. ');
   }
-  if( getPlacement() == "0" ) {
-    setPlacement(1);
-  }
   return score;
   }
 })();
+
+function mySetPlacement() {
+  if( window.name != '' ) {
+    if( getPlacement() == "0" ) {
+      setPlacement(1);
+    }
+  }
+}

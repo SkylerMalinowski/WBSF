@@ -18,6 +18,7 @@
       $('#next').hide();
       $('#prev').hide();
       $('#start').show();
+      $('#exit').hide();
       $('#menu').show();
       setQuiz(quizNum,1);
     }
@@ -68,6 +69,7 @@
     selections = [];
     displayNext();
     $('#start').hide();
+    $('#exit').hide();
     $('#menu').show();
   });
 
@@ -133,11 +135,13 @@
         // Controls display of 'prev' button
         if (questionCounter === 1) {
           $('#prev').show();
+          $('#exit').show();
         } else if (questionCounter === 0) {
 
           $('#prev').hide();
           $('#next').show();
-          $('#menu').show();
+          $('#exit').show();
+          $('#menu').hide();
         }
       } else {
         var scoreElem = displayScore();
@@ -145,6 +149,7 @@
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
+        $('#exit').hide();
         $('#menu').show();
       }
     });

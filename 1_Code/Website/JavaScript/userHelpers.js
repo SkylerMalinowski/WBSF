@@ -99,18 +99,15 @@ function getLesson(index) {
 }
 
 function setQuiz(index, val) {
-	alert( "setQuiz() 1" );		//* debug
 	var s = window.name;
 	
 	var req = new XMLHttpRequest();
 	req.onload = function() {
 		return req.responseText;
 	}
-	alert( "setQuiz() 2" );		//* debug
-	req.open("GET", "/userDB/setQuiz/?s=" + s + "&i=" + i + "&v=" + val, false);
-	alert( "setQuiz() 3" );		//* debug
+	
+	req.open("GET", "/userDB/setQuiz/?s=" + s + "&i=" + index + "&v=" + val, false);
 	req.send();
-	alert( "setQuiz() 4" );		//* debug
 	return req.responseText;
 }
 
@@ -127,7 +124,6 @@ function getQuiz(index) {
 	
 	return req.responseText;
 }
-
 
 function setPlacement(val) {
 	var s = window.name;

@@ -10,7 +10,6 @@ function getRandomInt( min, max )
 // that have not been retaken already
 function giveRequiz()
 {
-	alert( "giveRequiz()" );		//* debug
 	// determine which quizzes are available to be retaken
 	var quizNum;
 	var availableQuiz = [];
@@ -23,7 +22,6 @@ function giveRequiz()
 		}
 	};
 	
-	alert( "availableQuiz.length = " + availableQuiz.length );
 	// no available quizzes to retake
 	if( availableQuiz.length == 0 )
 	{
@@ -32,32 +30,36 @@ function giveRequiz()
 	else {
 		// give a requiz
 		quizNum = getRandomInt(1,availableQuiz.length);
-		alert( "Random Num = " + quizNum );		//* debug
 		quizNum = availableQuiz[quizNum-1];
-		alert( "quizNum = " + quizNum );		//* debug
-		
-		if( quizNum == 1 ) {
-			window.location.href="/Website/Learning_System/Quizzes/Quiz 1.html";
-		}
-		else if( quizNum == 2 )
-		{
-			window.location.href="/Website/Learning_System/Quizzes/Quiz 2.html";
-		}
-		else if( quizNum == 3 )
-		{
-			window.location.href="/Website/Learning_System/Quizzes/Quiz 3.html";
-		}
-		else if( quizNum == 4 )
-		{
-			window.location.href="/Website/Learning_System/Quizzes/Quiz 4.html";
-		}
-		else if( quizNum == 5 )
-		{
-			window.location.href="/Website/Learning_System/Quizzes/Quiz 5.html";
-		}
-		else if( quizNum == 6 )
-		{
-			window.location.href="/Website/Learning_System/Quizzes/Quiz 6.html";
+		switch( quizNum ) {
+			case 1:
+				window.location="/Website/Learning_System/Quizzes/Quiz1.html";
+				window.reload();
+				break;
+			case 2:
+				window.location="/Website/Learning_System/Quizzes/Quiz2.html";
+				window.reload();
+				break;
+			case 3:
+				window.location="/Website/Learning_System/Quizzes/Quiz3.html";
+				window.reload();
+				break;
+			case 4:
+				window.location="/Website/Learning_System/Quizzes/Quiz4.html";
+				window.reload();
+				break;
+			case 5:
+				window.location="/Website/Learning_System/Quizzes/Quiz5.html";
+				window.reload();
+				break;
+			case 6:
+				window.location="/Website/Learning_System/Quizzes/Quiz6.html";
+				window.reload();
+				break;
+			case 7:
+				window.location="/Website/Learning_System/Quizzes/Quiz7.html";
+				window.reload();
+				break;
 		}
 	}
 }
@@ -65,7 +67,6 @@ function giveRequiz()
 // checks all completed quizzes and then resets them so they can be retaken
 function resetQuizzes()
 {
-	alert( "resetQuizzes()" );		//* debug
 	var flag = "true";
 	
 	for( var i = 1; i <= 7; i++ )
@@ -84,7 +85,6 @@ function resetQuizzes()
 		{
 			if( getQuiz(i) == "2" )
 			{
-				alert("setQuiz(i,1)");		//* debug
 				setQuiz(i,1);
 			}
 		};
@@ -94,12 +94,11 @@ function resetQuizzes()
 // serves a quiz to user
 function spotCheck()
 {
-	alert( "spotCheck() in .js" );		//* debug
 	setMode(1);	// put in requiz mode
 	if( getPlacement() == "0" )
 	{
-		alert("Placement Quiz");
-		window.location="/Website/Learning_System/Quizzes/Placement Quiz.html";
+		window.location="/Website/Learning_System/Quizzes/PlacementQuiz.html";
+		window.reload();
 	}
 	else {
 		giveRequiz();
