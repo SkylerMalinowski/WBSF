@@ -3,6 +3,7 @@ import plotly.plotly as py #Plotly Api
 import plotly.figure_factory as go
 import ArrayNCalc
 import Main
+import RSI
 import plotly.graph_objs as obj
 import time #To get time and date
 import pandas_datareader.data as web #Database Reader
@@ -23,8 +24,8 @@ app = Flask(__name__)
 
 # main function, initialize web app with IP and port
 if __name__ == '__main__':
-	app.run(host = "127.0.0.1", port = 80, debug = False)
-	
+	app.run(host = "127.0.0.1", port = 4000, debug = False)
+
 # stock ticker and news stuff
 def getCurrentPrice(Sym):
 	ticker = Share(Sym)
@@ -51,14 +52,14 @@ def ticker():
 def news():
 	tick = request.args.get('s')
 	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
-	ret = "The top headline for " + tick + " from " + getNewsTitle(feed) + " is: <br><br>" + getNews(feed, 0)
+	ret = "The top headline for " + tick + " from " + getNewsTitle(feed) + " is: <br>" + getNews(feed, 0)
 	return ret
 
 # Api To Get Graph
 @app.route('/graph/')
 def getGraph():
 	stockName = request.args.get('s')
-	var=Main.get_companysymbol(stockName)
+	var=stockName
 	if var != 'null':					# ONLY PRECEDE IF WE HAVE A COMPANY
 			timeBegin=2010
 			
@@ -83,13 +84,15 @@ def getGraph():
 			
 			url=Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY,R) #Print Final Graph with everything together
 			
-			return ("<iframe width="+'"'+"900"+'"' + " height="+'"'+"800"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>")
-	pass
+			url = url + ".embed?width=640&height=480"
+			return "<iframe width="+'"'+"640"+'"' + " height="+'"'+"480"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>"
+	else:
+		return "false"
 
 @app.route('/acc/')
-def getAcc(stockName):
+def getAcc():
 	stockName = request.args.get('s')
-	var=Main.get_companysymbol(stockName)
+	var=stockName
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
 			
@@ -105,14 +108,15 @@ def getAcc(stockName):
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-		return (ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
-	
-	pass
+		ret = str(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
+		return "The total price accuracy is: " + ret
+	else:
+		return ""
 
 @app.route('/relAcc/')
-def getRelativeAcc(stockName):
+def getRelativeAcc():
 	stockName = request.args.get('s')
-	var=Main.get_companysymbol(stockName)
+	var=stockName
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
 			
@@ -128,26 +132,7 @@ def getRelativeAcc(stockName):
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-		return (ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
-
-	pass
-
-@app.route('/stockNames')
-def build_string():										
-	num = 0																	
-	wb = load_workbook('companylist.xlsx')									
-	sheet_ranges = wb['Worksheet']
-	name = ""
-	
-	Big_String = ""
-	for num in range (1,3194):
-		name = sheet_ranges['B'+str(num)].value							# return the name of the company 
-		symbol = sheet_ranges['A'+str(num)].value						# return the symbol of the company 
-		Big_String = Big_String +symbol+": "+name+"/"
-		#print(Big_String)
-									# FOR THE LAST one don't have a "/" so just handle it seperately
-									
-	name = sheet_ranges['B'+str(num+1)].value
-	symbol = sheet_ranges['A'+str(num+1)].value
-	Big_String = Big_String +symbol+": "+name
-	return Big_String
+		ret = str(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+		return "The relative accuracy is: " + ret
+	else:
+		return ""
