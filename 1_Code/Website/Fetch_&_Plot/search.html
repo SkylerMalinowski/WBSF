@@ -19,7 +19,7 @@
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/searchStylesheet.css'></link>
 	
-	<!-- <script type='text/javascript' src='/Website/JavaScript/plotHelpers.js'></script> -->
+	<!-- <script type='text/javascript' src='../JavaScript/plotHelpers.js'></script> -->
 	<script type='text/javascript' src='../JavaScript/userHelpers.js'></script>
 	<script type='text/javascript' src='../JavaScript/spotCheck.js'></script>
 	<script type='text/javascript' src='../JavaScript/menu.js'></script>
@@ -163,34 +163,54 @@
 		<!-- SEARCH BUTTON-->
 		
 		<!-- Stock Ticker -->
-		<div id="ticker-box">
-			
+		<div class="centered-text">
+			<h3>Stock Ticker</h3>
+			<div id="ticker-box" class="centered-text">
+				<p>Nothing to display yet.</p>
+			</div>
 		</div>
 		<!-- / Stock Ticker -->
 		
 		<!-- News -->
-		<div id="news-box">
-			
+		<div class="centered-text">
+			<h3>News</h3>
+			<div id="news-box" class="centered-text">
+				<p>Nothing to display yet.</p>
+			</div>
 		</div>
 		<!-- / News -->
 		
 		<!-- Graph -->
-		<div id="graph-box">
-			
+		<div class="centered-text">
+			<h3>Graph</h3>
+			<div id="graph-box"></div>
 		</div>
 		<!-- / Graph -->
 		
-		<!-- Accuracy -->
-		<div id="acc-box">
-			
+		<!-- Accuracy Ratings -->
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<div class="centered-text">
+					<!-- Real Accuracy -->
+					<h3>Real Accuracy</h3>
+					<div id="realAcc-box">
+						<p>Nothing to display yet.</p>
+					</div>
+					<!-- / Real Accuracy -->
+				</div>
+			</div>
+			<div class="ui-block-b">
+				<div class="centered-text">
+					<!-- Accuracy -->
+					<h3>Accuracy</h3>
+					<div id="acc-box" class="centered-text">
+						<p>Nothing to display yet.</p>
+					</div>
+					<!-- / Accuracy -->
+				</div>
+			</div>
 		</div>
-		<!-- / Accuracy -->
-		
-		<!-- Real Accuracy -->
-		<div id="realAcc-box">
-			
-		</div>
-		<!-- / Real Accuracy -->
+		<!-- / Accuracy Ratings -->
 		
 		<!-- Buffer -->
 		<div data-role="main" class="ui-content"></div>
@@ -245,7 +265,7 @@
 		<!-- / Right Panel -->
 		
 		<!-- Footer -->
-		<div data-role="footer" style="position: fixed; left: 0px; bottom: 0px; height: 35px; width: 100%; background: #66cdd1">
+		<div data-role="footer" class="footer">
 			<h1>Powered by: jquery; apache2; flask; plotly; Yahoo finance; Google finance; json; Investopedia</h1>
 		</div>
 		<!-- / Footer -->
