@@ -11,6 +11,7 @@ import os.path
 import numpy as np #Numpy for Matrix Handling
 import Fetching #Fetching File
 import Graphing #Graphing File
+import RSI
 from yahoo_finance import Share #Yahoo Finance Api
 from openpyxl import load_workbook # openpyxl is used for xlsx files, a.k.a excel files from 2010+, old excel files used xls
 from datetime import datetime # Date
@@ -42,10 +43,11 @@ def main():
 
 	while var!='null':
 
-		company_name=input("Enter the name of the company you're searching for ") #THis asks for a company name
+		company_name = raw_input("Enter the name of the company you're searching for ") #THis asks for a company name
 
 		var = get_companysymbol(company_name)	#this searchs the company list we have and returns null if not found
-
+		var = company_name
+		
 		if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 
 			timeBegin=int(input('Enter Start year ')) - 2 #Gets the start date and pushes it back 2 years to show enough data to fit the screen nicely 
@@ -64,9 +66,10 @@ def main():
 			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,googData[0]['LastTradePrice'],totalDataCurrent.High[len(totalDataCurrent)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
-			
-			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY) #Print Final Graph with everything together
+			R=RSI.PredictRSI(totalDataCurrent.Close)
+			Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY, R) #Print Final Graph with everything together
 
 	pass
+
 
 #C:\\cygwin\bin\Main.py

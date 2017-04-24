@@ -86,6 +86,7 @@ def getGraph():
 			
 			url = url + ".embed?width=640&height=480"
 			return "<iframe width="+'"'+"640"+'"' + " height="+'"'+"480"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>"
+
 	else:
 		return "false"
 
@@ -109,7 +110,9 @@ def getAcc():
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 		ret = str(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
+
 		return "The total price accuracy is: " + ret
+
 	else:
 		return ""
 
@@ -133,6 +136,7 @@ def getRelativeAcc():
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 		ret = str(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+
 		return "The relative accuracy is: " + ret
 	else:
 		return ""

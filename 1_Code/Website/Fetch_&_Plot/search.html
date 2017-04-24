@@ -18,6 +18,8 @@
 	
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/searchStylesheet.css'></link>
+	
+	<!-- <script type='text/javascript' src='/Website/JavaScript/plotHelpers.js'></script> -->
 	<script type='text/javascript' src='../JavaScript/userHelpers.js'></script>
 	<script type='text/javascript' src='../JavaScript/spotCheck.js'></script>
 	<script type='text/javascript' src='../JavaScript/menu.js'></script>
@@ -58,9 +60,76 @@
 			document.getElementById("news-box").innerHTML = news(stock);
 			document.getElementById("acc-box").innerHTML = getAcc(stock);
 			document.getElementById("realAcc-box").innerHTML = getRelAcc(stock);
-			document.getElementById("graph-box").innerHTML = getGraph(stock);
+			//document.getElementById("graph-box").innerHTML = getGraph(stock);
 		}
 	</script>
+	
+	<!-- PLOT HELPERS -->
+	<script>
+		/* Ticker */
+		function price(s) {
+			var req = new XMLHttpRequest();
+			req.onload = function()
+			{	return req.responseText;	}
+	
+			req.open("GET", "/plot/ticker/?s=" + s, false);
+
+			req.send();
+			return req.responseText
+		}
+
+		/* News */
+		function news(s) {
+			var req = new XMLHttpRequest();
+			req.onload = function()
+			{	return req.responseText;	}
+	
+			req.open("GET", "/plot/news/?s=" + s, false);
+
+			req.send();
+			return req.responseText
+		}
+
+		/* Plotly Graph */
+		function getGraph(s) {
+
+			var req = new XMLHttpRequest();
+			req.onload = function()
+			{	return req.responseText;	}
+	
+			req.open("GET", "/plot/graph/?s=" + s, false);
+
+			req.send();
+			return req.responseText;
+		}
+
+		/* Prediction */
+		function getAcc(s) {
+
+			var req = new XMLHttpRequest();
+			req.onload = function()
+			{	return req.responseText;	}
+
+			req.open("GET", "/plot/acc/?s=" + s, false);
+
+			req.send();
+			return req.responseText;
+		}
+
+		/* Slope Matching */
+		function getRelAcc(s) {
+
+			var req = new XMLHttpRequest();
+			req.onload = function()
+			{	return req.responseText;	}
+
+			req.open("GET", "/plot/relAcc/?s=" + s, false);
+
+			req.send();
+			return req.responseText;
+		}
+	</script>
+	<!-- / PLOT HELPERS -->
 
 </head>
 
@@ -134,10 +203,10 @@
 					<h2>Quick Links</h2>
 				</div>
 				<li data-icon="delete"><a data-rel="close">Close Panel</a></li>
-				<li><a href="../mainMenu.html">Main Menu</a></li>
-				<li><a href="../Learning_System/learningMenu.html">Learning Menu</a></li>
-				<li><a href="search.html">Search Page</a></li>
-				<li><a href="portfolio.html">Porfolio Page</a></li>
+				<li><a href="/Website/mainMenu.html">Main Menu</a></li>
+				<li><a href="/Website/Learning_System/learningMenu.html">Learning Menu</a></li>
+				<li><a href="/Website/Fetch_&_Plot/search.html">Search Page</a></li>
+				<li><a href="/Website/Fetch_&_Plot/portfolio.html">Porfolio Page</a></li>
 			</ul>
 		</div>
 		<!-- / Left Panel -->
