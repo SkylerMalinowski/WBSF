@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Lesson 6</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600" rel="stylesheet" type="text/css">
+	<link type='text/css' rel='stylesheet' href='../../CascadingStyleSheet/lessonStylesheet.css'>
+</head>
+
+<body>
+	<div id="main-background">
+		<div class="center-vertical">
+			<div id="title">What Stocks Are Valuable?</div>
+		</div>
+	</div>
+	
+	<div class="content-space">
+		<div class="h1">Worth</div>
+		<div class="left-text">
+			<p>Stock prices change often (sometimes many times a minute) as the result of market forces. By this we mean that share prices change because of fluctuations in their supply and demand. If more people want to buy a stock at a given moment (demand) than sell it (supply), then the price moves up. In our previous example of buying Apple Inc. (AAPL) stock with a market order, the purchase caused the price to increase to $140.05. Conversely, if more people are motivated to sell a stock than buy it, there would be greater supply than demand, and the price would fall. Of course, for any trade to actually happen there needs to be exactly one buyer and one seller – so the number of buyers and sellers is technically the same. What we mean here is the number of motivated buyers or sellers, i.e. those that are willing to buy for higher or sell for lower.</p>
+			<p>The price of a stock represents the “value” of the corporation. At its most basic level, this value is computed by dividing the dollar value of the company, known as the market capitalization (or “market cap”) by the number of shares outstanding. For example, if XYZ Corp. is valued at $1,000,000 and it has 100,000 shares outstanding, the price of each share is $10.00. Working backwards, one can determine the market value of a company thus by multiplying the share price by the number of shares. The question then becomes what causes fluctuations in the value of the corporation?</p>
+			<p>But what does a company’s value represent? A company has stuff and it sells stuff. The stuff it has – buildings, machinery, patents, money in the bank, etc. – constitute its book value, or the amount of money a company would get if they sold all that stuff at once. But companies are primarily in business of trying to make a profit, and in doing so they earn cash by selling products or services, so the total value of a company has to do with the stuff it owns now and the cash flows it will receive in the future. The value of the stuff it owns now is fairly easy to determine, but the value of all the future cash flow streams is a bit trickier to nail down – and it is this piece that is responsible for market gyrations.</p>
+		</div>
+	</div>
+	
+	<div class="content-space">
+		<div class="h1">Time Is Money</div>
+		<div class="left-text">
+			<p>Because of the time value of money, profits to be earned in the future must be discounted back to represent today’s dollars – just as a dollar put into a bank account today will be worth more in the future after it has earned some interest, but in reverse. How much to discount these future cash flows depends on a lot of things including the cost of capital (which is the cost to borrow or find investment, and this depends on interest rates), the riskiness of the business (in the stock market this is often estimated using beta), and the foregone cost of doing nothing and keeping your money in the bank (the opportunity cost or risk-free rate).</p>
+			<p>Once an appropriate discount rate has been estimated, the hard part is to figure out what future cash flows will be – a month from now, a year from now, five years from now. Sentiment and expectations are a big component of these predictions, and financial analysts try to figure these amounts out in a number of ways accounting for both company-specific factors and macro factors such as overall economic health. Fortunately, the stock market reflects the expectation of future cash flows in an easy to compute ratio of price-to-earnings, also known as the P/E ratio. A P/E ratio of 10x means that a company is being valued today at 10x its current earnings. A P/E ratio of 20x for the same company would mean that given the same amount of earnings, the market is giving it twice as much value, indicating that those future cash flows are going to be larger. Of course, there are a number of sophisticated pricing models that analysts can use in addition, or instead of, the P/E ratio such as using dividend discount models or free cash flow models.</p>
+			<p>Because the future is unknown today, various peoples’ estimates will be different from one another, giving some a higher expected stock price and some a lower stock price. If the current price is lower than their expected price, people will buy it. If it is higher, people will sell it. When an economy is growing, people are spending and profits are rising. Companies invest in projects, expand their businesses and hire more people. Investors are optimistic and expectations of future cash flows rise, and stocks enter a bull market. Simply put, stock markets can fall when expectations of future cash flows decrease, making the prices of companies seem too high, therefore causing people to sell shares. If many more people come to this decision than there are people to buy those shares, the price will fall until it reaches a level where people will begin to believe that they are fairly valued.</p>
+		</div>
+	</div>
+	
+	<div class="content-space">
+		<div class="h1">Key Notes</div>
+		<div class="left-text">
+			<p>At the most fundamental level, supply and demand in the market determines stock price in any given moment.</p>
+			<p>Price times the number of shares outstanding (market capitalization) is the value of a company. Comparing just the share price of two companies is meaningless.</p>
+			<p>Theoretically, earnings are what affect investors' valuation of a company, but there are other indicators that investors use to predict stock price. It is investors' sentiments, attitudes and expectations that ultimately affect stock prices.</p>
+			<p>There are many competing theories that try to explain the way stock prices move the way they do. Unfortunately, there is no one theory that can explain everything.</p>
+		</div>
+	</div>
+	
+	<!-- Reading Progress -->
+	<div>
+		<div data-role="header">
+			<h1>Reading Progress</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Not Done Yet" onclick="window.location.href='../learningMenu.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Finished Reading" onclick="window.location.href='../learningMenu.html',setLesson(6,1);">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Ready for the Quiz" onclick="window.location.href='../Quizzes/Quiz 6.html'setLesson(6,1);">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+</body>
+
+<footer>
+	<div class="footer-box">
+		<p align="center"><strong>Source: </strong><a href="http://www.investopedia.com/">http://www.investopedia.com/</a></p>
+	</div>
+</footer>
+
+</html>
