@@ -68,7 +68,7 @@
     selections = [];
     displayNext();
     $('#start').hide();
-    $('#menu').hide();
+    $('#menu').show();
   });
 
   // Animates buttons on hover
@@ -137,6 +137,7 @@
 
           $('#prev').hide();
           $('#next').show();
+          $('#menu').show();
         }
       } else {
         var scoreElem = displayScore();

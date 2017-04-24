@@ -11,6 +11,7 @@ import numpy as np #Numpy for Matrix Handling
 import ArrayNCalc
 from datetime import datetime
 from datetime import timedelta
+import pytz
 
 #Function by Jon
 def rsiPlot(stockSymbol,Webster,Predict, startYear): #plots all the graphs together
@@ -52,21 +53,24 @@ def makeCandleStickGraph(stockSymbol,Webster): # Makes a Candle Stick Graph
 #Function by Vince
 def totalTogether(stockSymbol,Webster,currentInfo,Predict,Pointy,Rsi): #plots all the graphs together
 
-
-	figure=obj.Trace(y=Webster.High,x=Webster.index,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol) #Past Data Line
+	# Does not work in linux!!!
+	temp = Webster.index
+	temp = temp.tz_localize("UTC")
+	
+	figure=obj.Scatter(y=Webster.High,x=temp,line=dict(color=('rgb(0,50,100)')),name="Past Data for "+stockSymbol) #Past Data Line
 
 	currentFigure=obj.Trace(y=currentInfo[0]['LastTradePrice'],x=currentInfo[0]['LastTradeDateTime'],line=dict(color=('rgb(0,0,0)')),name='Current Data for '+stockSymbol) #Current Point
 
 	Predicts=obj.Scatter(y=Predict,x=ArrayNCalc.getWorkDates(len(Predict)),line=dict(color=('rgb(255,165,0)')),name="Prediction "+stockSymbol) #Prediction Line
 
-	point=obj.Trace(y=Pointy,x=datetime.now() + timedelta(days=1),line=dict(color=pointColorMaker(Pointy,currentInfo)),name="Prediction "+stockSymbol) #point of prediciton
+	point=obj.Trace(y=Pointy,x=datetime.now(pytz.utc) + timedelta(days=1),line=dict(color=pointColorMaker(Pointy,currentInfo)),name="Prediction "+stockSymbol) #point of prediciton
 
 	RSI=obj.Scatter(y=Rsi,x=ArrayNCalc.getWorkDates(len(Rsi)),line=dict(color=('rgb(0,0,0)')),name="RSI for "+stockSymbol) #Prediction Line
 
 	fig=tools.make_subplots(rows=2,cols=1)
 
-	data=Data([figure,currentFigure,Predicts,point]) #Data Array of Figures
-
+	#data=Data([figure,currentFigure,Predicts, point]) #Data Array of Figures
+	data=Data([Predicts, point,currentFigure,figure])
 	fig.append_trace(data[0],1,1)
 	fig.append_trace(data[1],1,1)
 	fig.append_trace(data[2],1,1)

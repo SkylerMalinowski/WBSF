@@ -10,8 +10,13 @@
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600" rel="stylesheet" type="text/css">
-	<link type='text/css' rel='stylesheet' href='../../CascadingStyleSheet/lessonStylesheet.css'>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600" rel="stylesheet" type="text/css" />
+	<link type='text/css' rel='stylesheet' href='../../CascadingStyleSheet/lessonStylesheet.css' />
+	
+	<script type='text/javascript' src='../../JavaScript/lesson.js'> </script>
+	<script type='text/javascript'>
+		var lessonNum = 1;
+	</script>
 </head>
 
 <body>
@@ -61,11 +66,11 @@
 				</div>
 				
 				<div class="ui-block-b">
-					<input TYPE="button" VALUE="Finished Reading" onclick="window.location.href='../learningMenu.html',setLesson(1,1);">
+					<input TYPE="button" VALUE="Finished Reading" onclick="window.location.href='../learningMenu.html',mySetLesson();">
 				</div>
 				
 				<div class="ui-block-c">
-					<input TYPE="button" VALUE="Ready for the Quiz" onclick="window.location.href='../Quizzes/Quiz 1.html',setLesson(1,1);">
+					<input TYPE="button" VALUE="Ready for the Quiz" onclick="window.location.href='../Quizzes/Quiz 1.html',mySetLesson();">
 				</div>
 			</div>
 		</div>

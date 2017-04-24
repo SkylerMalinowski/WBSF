@@ -8,35 +8,49 @@
 	
 	<link rel="icon" type="image/png" href="../Images/favicon.png" />
 	
-	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"></link>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel='stylesheet' href='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css' />
+	<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
+	<script src='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js'></script>
 	
-	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-	<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<link href='https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css' rel='stylesheet' />
+	<script src='https://code.jquery.com/jquery-1.10.2.js'></script>
+	<script src='https://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
 	
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
-	<script type='text/javascript' src="../JavaScript/userHelpers.js"></script>
-	<script type='text/javascript' src="../JavaScript/spotCheck.js"></script>
+	
+	<!-- <script type='text/javascript' src='../JavaScript/plotHelpers.js'></script> -->
+	<script type='text/javascript' src='../JavaScript/userHelpers.js'></script>
+	<script type='text/javascript' src='../JavaScript/spotCheck.js'></script>
 	<script type='text/javascript' src='../JavaScript/menu.js'></script>
-	<script type='text/javascript' src='../JavaScript/plotHelpers.js'></script>
 
 	
 	
 	<script type='text/javascript'>
-		function checkPort()
+	
+		function getGraph(s)
 		{
+			var req = new XMLHttpRequest();
+			req.onload = function()
+			{	return req.responseText;	}
+
+			req.open("GET", "/plot/graph/?s=" + s, false);
+
+			req.send();
+			return req.responseText;
+		}
+		
+		window.onload = function checkPort()
+		{	
 			if( getPort(1) != "NULL") 
-				document.getElementByID("1").innerHTML = getGraph(getPort(1));
+				document.getElementById("1").innerHTML = getGraph(getPort(1));
 			if( getPort(2) != "NULL") 
-				document.getElementByID("2").innerHTML = getGraph(getPort(2));
+				document.getElementById("2").innerHTML = getGraph(getPort(2));
 			if( getPort(3) != "NULL") 
-				document.getElementByID("3").innerHTML = getGraph(getPort(3));
+				document.getElementById("3").innerHTML = getGraph(getPort(3));
 			if( getPort(4) != "NULL") 
-				document.getElementByID("4").innerHTML = getGraph(getPort(4));
+				document.getElementById("4").innerHTML = getGraph(getPort(4));
 			if( getPort(5) != "NULL") 
-				document.getElementByID("5").innerHTML = getGraph(getPort(5));
+				document.getElementById("5").innerHTML = getGraph(getPort(5));
 		}
 		
 		function add()

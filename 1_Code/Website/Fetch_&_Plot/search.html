@@ -8,16 +8,15 @@
 	
 	<link rel="icon" type="image/png" href="../Images/favicon.png" />
 	
-	<link rel='stylesheet' href='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css'></link>
+	<link rel='stylesheet' href='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css' />
 	<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 	<script src='https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js'></script>
 	
-	<link href='https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+	<link href='https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css' rel='stylesheet' />
 	<script src='https://code.jquery.com/jquery-1.10.2.js'></script>
 	<script src='https://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
 	
 	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/menuStylesheet.css'></link>
-	<link type='text/css' rel='stylesheet' href='../CascadingStyleSheet/searchStylesheet.css'></link>
 	
 	<!-- <script type='text/javascript' src='../JavaScript/plotHelpers.js'></script> -->
 	<script type='text/javascript' src='../JavaScript/userHelpers.js'></script>
@@ -96,7 +95,7 @@
 			var req = new XMLHttpRequest();
 			req.onload = function()
 			{	return req.responseText;	}
-	
+
 			req.open("GET", "/plot/graph/?s=" + s, false);
 
 			req.send();
