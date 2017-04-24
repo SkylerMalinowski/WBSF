@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 # main function, initialize web app with IP and port
 if __name__ == '__main__':
-	app.run(host = "127.0.0.1", port = 80, debug = False)
+	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
 # stock ticker and news stuff
 def getCurrentPrice(Sym):
