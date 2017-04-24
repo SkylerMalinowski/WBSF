@@ -83,11 +83,10 @@ def getGraph():
 			
 			url=Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY,R) #Print Final Graph with everything together
 			
-			return ("<iframe width="+'"'+"900"+'"' + " height="+'"'+"800"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>")
-	pass
+			return "<iframe width="+'"'+"900"+'"' + " height="+'"'+"800"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>"
 
 @app.route('/acc/')
-def getAcc(stockName):
+def getAcc():
 	stockName = request.args.get('s')
 	var=Main.get_companysymbol(stockName)
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
@@ -105,12 +104,11 @@ def getAcc(stockName):
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-		return (ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
-	
-	pass
+		ret = str(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
+		return ret
 
 @app.route('/relAcc/')
-def getRelativeAcc(stockName):
+def getRelativeAcc():
 	stockName = request.args.get('s')
 	var=Main.get_companysymbol(stockName)
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
@@ -128,9 +126,8 @@ def getRelativeAcc(stockName):
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
-		return (ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
-
-	pass
+		ret = str(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+		return ret
 
 @app.route('/stockNames')
 def build_string():										
@@ -144,9 +141,7 @@ def build_string():
 		name = sheet_ranges['B'+str(num)].value							# return the name of the company 
 		symbol = sheet_ranges['A'+str(num)].value						# return the symbol of the company 
 		Big_String = Big_String +symbol+": "+name+"/"
-		#print(Big_String)
-									# FOR THE LAST one don't have a "/" so just handle it seperately
-									
+
 	name = sheet_ranges['B'+str(num+1)].value
 	symbol = sheet_ranges['A'+str(num+1)].value
 	Big_String = Big_String +symbol+": "+name
