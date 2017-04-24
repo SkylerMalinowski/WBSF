@@ -3,6 +3,7 @@ import plotly.plotly as py #Plotly Api
 import plotly.figure_factory as go
 import ArrayNCalc
 import Main
+import RSI
 import plotly.graph_objs as obj
 import time #To get time and date
 import pandas_datareader.data as web #Database Reader
@@ -84,11 +85,13 @@ def getGraph():
 			url=Graphing.totalTogether(var,totalDataCurrent,googData,Prediction_Model,pointY,R) #Print Final Graph with everything together
 			
 			return "<iframe width="+'"'+"900"+'"' + " height="+'"'+"800"+'"'+ " frameborder="+'"'+"0"+'"'+ " scrolling="+'"'+"no"+'"'+" src=<"+url+"></iframe>"
+	else:
+		return "false"
 
 @app.route('/acc/')
 def getAcc():
 	stockName = request.args.get('s')
-	var=Main.get_companysymbol(stockName)
+	var=stockName
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
 			
@@ -106,11 +109,13 @@ def getAcc():
 			
 		ret = str(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
 		return ret
+	else:
+		return ""
 
 @app.route('/relAcc/')
 def getRelativeAcc():
 	stockName = request.args.get('s')
-	var=Main.get_companysymbol(stockName)
+	var=stockName
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
 			
@@ -128,6 +133,8 @@ def getRelativeAcc():
 			
 		ret = str(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 		return ret
+	else:
+		return ""
 
 @app.route('/stockNames')
 def build_string():										
