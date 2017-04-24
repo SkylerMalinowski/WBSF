@@ -18,7 +18,6 @@
       $('#next').hide();
       $('#prev').hide();
       $('#start').show();
-      $('#exit').hide();
       $('#menu').show();
       setQuiz(quizNum,1);
     }
@@ -69,8 +68,7 @@
     selections = [];
     displayNext();
     $('#start').hide();
-    $('#exit').hide();
-    $('#menu').show();
+    $('#menu').hide();
   });
 
   // Animates buttons on hover
@@ -135,13 +133,10 @@
         // Controls display of 'prev' button
         if (questionCounter === 1) {
           $('#prev').show();
-          $('#exit').show();
         } else if (questionCounter === 0) {
 
           $('#prev').hide();
           $('#next').show();
-          $('#exit').show();
-          $('#menu').hide();
         }
       } else {
         var scoreElem = displayScore();
@@ -149,7 +144,6 @@
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
-        $('#exit').hide();
         $('#menu').show();
       }
     });
@@ -185,10 +179,60 @@
     return score;
   }
   if(percentCorrect>50){
-    score.append('You got a score of '+percentCorrect+'%.  While you did well enough, you may want to re-do this Lesson to get the concepts down');
+    score.append('You got a score of '+percentCorrect+'%.  While you did well enough, you may want to re-do this Lesson to get the concepts down.  ');
+	switch(quizNum){
+		case 1:
+			score.append('When re-reading this section, try to think about what benefits a company has to selling parts of itself to investors, and what benefits an investor has for giving his money to a company.');
+			break;
+		case 2:
+			score.append('When re-reading this section, pay more attention to the differences between Common Stock and Preferred Stock.');
+			break;
+		case 3:
+			score.append('When re-reading this section, think about the history of Stock Markets, and how stock markets compare to marketplaces in general.');
+			break;
+		case 4:
+			score.append('Here is a helpful hint for you: Bull Markets and Bear markets got their names from how a Bull swipes upwards to attack, and how a Bear swipes downwards to attack.  Think about what these actions could be a metaphor for in context to the Stock Market');
+			break;
+		case 5:
+			score.append('Be sure to pay closer attention to the example Stock Table while reading what each number represents.');
+			break;
+		case 6:
+			score.append('Keep in mind that stocks, just like any other item that is bought and sold, adhere to the Law of Supply and Demand.');
+			break;
+		case 7:
+			score.append('When re-reading this section, keep in mind that a portfolio is built with both Time Horizon and Risk Tolerance in mind, and portfolios differ from investor to investor based on what they hope to accomplish.');
+			break;
+		default:
+			score.append('');
+	}
     return score;
   }
   score.append('Unfortunately, you got a score of '+percentCorrect+'%.  Please re-do this Lesson.');
+  switch(quizNum){
+		case 1:
+			score.append('When re-reading this section, try to think about what benefits a company has to selling parts of itself to investors, and what benefits an investor has for giving his money to a company.');
+			break;
+		case 2:
+			score.append('When re-reading this section, pay more attention to the differences between Common Stock and Preferred Stock.');
+			break;
+		case 3:
+			score.append('When re-reading this section, think about the history of Stock Markets, and how stock markets compare to marketplaces in general.');
+			break;
+		case 4:
+			score.append('Here is a helpful hint for you: Bull Markets and Bear markets got their names from how a Bull swipes upwards to attack, and how a Bear swipes downwards to attack.  Think about what these actions could be a metaphor for in context to the Stock Market');
+			break;
+		case 5:
+			score.append('Be sure to pay closer attention to the example Stock Table while reading what each number represents.');
+			break;
+		case 6:
+			score.append('Keep in mind that stocks, just like any other item that is bought and sold, adhere to the Law of Supply and Demand.');
+			break;
+		case 7:
+			score.append('When re-reading this section, keep in mind that a portfolio is built with both Time Horizon and Risk Tolerance in mind, and portfolios differ from investor to investor based on what they hope to accomplish.');
+			break;
+		default:
+			score.append('');
+	}
     /*score.append('You got ' + numCorrect + ' questions out of ' +
       questions.length + ' right!!!');*/
     return score;
