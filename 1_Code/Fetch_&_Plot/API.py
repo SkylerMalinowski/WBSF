@@ -34,24 +34,34 @@ if __name__ == '__main__':
 	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
 # Function by Jake, gets the current price of any stock (using yahoo finance API)
+# receives a stock symbol in the form of a string. The Share(Sym) function takes this string and turns it into a special type in the yahoo finance library, which contains stock share information.
+# The get_price() function returns a string that contains the current price of the given company's stock.
 def getCurrentPrice(Sym):
 	ticker = Share(Sym)
 	return ticker.get_price()
 
 #Function by  Jake, gets tht percent change in price of the stock (using yahoo finance API)
+# receives a stock symbol in the form of a string. The Share(Sym) function takes this string and turns it into a special type in the yahoo finance library, which contains stock share information.
+# The get_percent_change function returns a string that contains the percent change of the given company's stock.
 def getPercentChange(Sym):
 	ticker = Share(Sym)
 	return ticker.get_percent_change()
 
-#Function by Jake, gets the top news headline for the given stock (from yahoo finance RSS feed, deciphered using a feedparser)
+#Function by Jake, returns the name of the source of the RSS feed, "Yahoo! Finance: News"(from yahoo finance RSS feed, deciphered using a feedparser)
+# this function is sent a feed of a special type defined in the feedparser library, which contains information from the RSS feed of the given company.
+# the indexes 'feed' and 'title' return the title from the feed variable
 def getNewsTitle(feed):
 	return feed['feed']['title']
 
 # Function by Jake, gets the top n news headlines for the given stock (from yahoo finance RSS feed, deciphered using a feedparser)
+# this function is sent a feed of a special type defined in the feedparser library, which contains information from the RSS feed of the given company.
+# the indexes 'entries', 'n' and 'title' returns the titles for the 'n' most recent entries on the feed
 def getNews(feed, n):
 	return feed['entries'][n]['title']
 
 # Function by Jake, gets link for the top n newsheadlines for the given stock (from yahoo finance RSS feed, deciphered using a feedparser) 
+# the indexes 'feed' and 'title' return the title from the feed variable
+# the indexes 'entries', 'n' and 'link' returns the links for the 'n' most recent entries on the feed
 def getLink(feed, n):
 	return feed['entries'][n]['link']
 
