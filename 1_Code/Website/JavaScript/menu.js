@@ -4,12 +4,10 @@ window.onload = function() {
 	}
 	var LI = document.getElementById("LoginID");
 	var LO = document.getElementById("LogoutID");
-	if( window.name != '' )
-	{
+	if( window.name != '' ) {
 		LI.innerHTML='';
 	}
-	else
-	{
+	else {
 		LO.innerHTML='';
 	}
 }
