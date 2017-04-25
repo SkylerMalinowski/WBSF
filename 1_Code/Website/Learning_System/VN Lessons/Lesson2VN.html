@@ -2,8 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html;
-       charset=utf-8" />
+    charset=utf-8" />
 <title>Visual Novel Example</title>
+
+<script type='text/javascript' src='../../JavaScript/lesson.js'> </script>
+<script type='text/javascript' src='../../JavaScript/userHelpers.js'> </script>
+<script type='text/javascript'>
+	var lessonNum = 2;
+</script>
+
 <style type="text/css">
 body {
     text-align: center;
@@ -73,15 +80,25 @@ div.menuItem:hover {
     </div>
 </div>
 
+<!-- Reading Progress -->
+<h3>Reading Progress</h3>
+
 <p style="text-align:center">
-    <input type="button" value="Restart the Novel"
-        onclick="initNovel(800, 600)"/>
-</p>
-<p style="text-align:center">
-    <input type="button" value="Main Menu"
-        onclick="window.location.href='../learningMenu.html'"/>
+	<input type="button" value="Restart the Novel" onclick="initNovel(800, 600)"/>
 </p>
 
+<p style="text-align:center">
+	<input type="button" value="Not Done Yet" onclick="window.location.href='../learningMenu.html'"/>
+</p>
+
+<p style="text-align:center">
+	<input type="button" value="Finished Reading" onclick="window.location.href='../learningMenu.html',mySetLesson();"/>
+</p>
+
+<p style="text-align:center">
+	<input type="button" value="Ready for the Quiz" onclick="window.location.href='../Quizzes/Quiz2.html',mySetLesson();"/>
+</p>
+<!-- / Reading Progress -->
 
 </body>
 </html>
