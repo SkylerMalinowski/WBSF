@@ -8,23 +8,24 @@ from datetime import timedelta
 import time
 
 def MakeTable():
-	conn = sqlite3.connect("base.db")									# Make a table whenever they call for stock information
+	conn = sqlite3.connect("base.db")									# Make a table whenever they call for stock information 
+									
 	cursor = conn.cursor()
-	cursor.execute("DROP TABLE IF EXISTS Prediction")				
+	cursor.execute("DROP TABLE IF EXISTS Prediction")					# if there's already a table initialized from the last session, drop it
 	conn.commit()																	
-	cursor.execute("CREATE TABLE IF NOT EXISTS Prediction(Symbol TEXT, Priority INTEGER);")	
+	cursor.execute("CREATE TABLE IF NOT EXISTS Prediction(Symbol TEXT, Priority INTEGER);")		# The table stores the symbol and the priority/ most recently accessed entry as an integer
 	conn.commit()
 	AddColumns()
 	return
 	
-def AddColumns():
+def AddColumns():											
 	conn =sqlite3.connect("base.db")
 	cursor = conn.cursor()
-	command = "ALTER TABLE Prediction ADD Value"						# Initialization of the table to have 11 entries in it
+	command = "ALTER TABLE Prediction ADD Value"						# Initialization of the table to have 11 Prediction values that are calculated using the Algorithm
 	for	x in range(0,11):
-		cursor.execute(command+str(x)+" FLOAT")						# Column1 = Company symbol and Columns 2 to 12 are for the 11 Predicted Values 
+		cursor.execute(command+str(x)+" FLOAT")						# Column1 = Company symbol and Columns 3 to 13 are for the 11 Predicted Values 
 		conn.commit()	
-	cursor.execute("ALTER TABLE Prediction ADD Date TEXT")
+	cursor.execute("ALTER TABLE Prediction ADD Date TEXT")			# Columns 14 is for the holding the Date
 	conn.close()
 	return 
 		
@@ -32,19 +33,19 @@ def AddColumns():
 def PrintTable():
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
-	cursor.execute("SELECT * FROM Prediction ORDER BY Priority")
+	cursor.execute("SELECT * FROM Prediction ORDER BY Priority")	# This retrieves every entry in the Table for checking purposes
 	print(cursor.fetchall())
 	conn.commit()
 	conn.close()
 	return
 
 def check_cache_size():
-	conn=sqlite3.connect("base.db")
-	cursor=conn.cursor()
+	conn=sqlite3.connect("base.db")									# Check the amount of entries in the Cache that are stored currently that match the 
+	cursor=conn.cursor()											# This is important to ensure that 
 	cursor.execute("SELECT COUNT(*) FROM Prediction")
 	size = cursor.fetchone()
 	conn.close()
-	if size[0] == 4:
+	if size[0] == 100:
 		return 1
 	else:
 		return 0
