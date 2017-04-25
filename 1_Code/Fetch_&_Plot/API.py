@@ -28,8 +28,8 @@ app = Flask(__name__)
 
 # main function, initialize web app with IP and port
 if __name__ == '__main__':
-	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
+	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
 	
 # stock ticker and news stuff
@@ -59,6 +59,7 @@ def news():
 	tick = request.args.get('s')
 	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
 	ret = "The top headline for " + tick + " from " + getNewsTitle(feed) + " is: <br>" + getNews(feed, 0)
+
 	return ret
 
 # Api To Get Graph
@@ -81,6 +82,7 @@ def getGraph():
 			Prediction_Data=Fetching.fetchDataSpec(var,(datetime.now()+timedelta(days=-45))) # Get the data from just the past month for the prediciton part
 			
 			Prediction_Data_Length=len(Prediction_Data.Close) # Lenght of the predictin Data to save the recalc of it
+
 			
 			if Cache2.Search(var) ==0:
 			
@@ -91,8 +93,6 @@ def getGraph():
 			else:
 				Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 					
-			
-			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.Low,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,googData[0]['LastTradePrice'],totalDataCurrent.High[len(totalDataCurrent)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
@@ -167,6 +167,7 @@ def getRelativeAcc():
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
+
 		ret = str(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 		return "The relative accuracy is: " + ret
 	else:
@@ -176,3 +177,4 @@ def getRelativeAcc():
 #Cache2.PrintTable()													# Prints the Table											
 #Cache2.return_cache_symbols("Symbol")										# pass the symbol of the company in the cache as a list
 #Cache2.Search("Symbol")												# returns 1 ( true) or 0 (false) on whether the specified ticker is in cache
+
