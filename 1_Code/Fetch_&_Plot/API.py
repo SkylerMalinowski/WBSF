@@ -2,7 +2,6 @@
 import plotly.plotly as py #Plotly Api
 import plotly.figure_factory as go
 import ArrayNCalc
-import Main
 import RSI
 import plotly.graph_objs as obj
 import time #To get time and date
@@ -19,7 +18,6 @@ from datetime import datetime # Date
 from datetime import timedelta # Adding to date
 from plotly.graph_objs import * #Plotly Objects
 import numpy
-import Cache2
 import os
 import sys
 
