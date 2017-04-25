@@ -12,6 +12,7 @@ $ pip install plotly
 $ pip install googlefinance
 $ sudo -H pip install openpyxl
 $ pip install numpy
+$ pip install numpy --upgrade
 $ pip install pandas_datareader
 $ sudo -H pip install flask
 $ pip install simplejson

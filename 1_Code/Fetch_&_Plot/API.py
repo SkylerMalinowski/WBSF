@@ -31,7 +31,6 @@ if __name__ == '__main__':
 
 	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
-	
 # stock ticker and news stuff
 def getCurrentPrice(Sym):
 	ticker = Share(Sym)
@@ -111,7 +110,9 @@ def getGraph():
 @app.route('/acc/')
 def getAcc():
 	stockName = request.args.get('s')
+
 	var="AAPL"
+
 	var=stockName
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
@@ -172,9 +173,7 @@ def getRelativeAcc():
 		return "The relative accuracy is: " + ret
 	else:
 		return ""
-
 													
 #Cache2.PrintTable()													# Prints the Table											
 #Cache2.return_cache_symbols("Symbol")										# pass the symbol of the company in the cache as a list
 #Cache2.Search("Symbol")												# returns 1 ( true) or 0 (false) on whether the specified ticker is in cache
-
