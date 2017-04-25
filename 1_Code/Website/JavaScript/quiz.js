@@ -1,3 +1,13 @@
+/* ************************************************************************** */
+// Written by: 		Skyler Malinowski, Jack Aquino
+// Tested by: 		Skyler Malinowski, Jack Aquino
+// Debugged by: 	Skyler Malinowski, Jack Aquino
+// Integrated by: 	Skyler Malinowski
+/* ************************************************************************** */
+
+// Description: handles question and answers served to the user.
+// Input: none (type: void)
+// Output: none (type: void)
 (function() {
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices

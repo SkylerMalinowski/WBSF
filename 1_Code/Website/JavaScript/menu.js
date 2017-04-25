@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+// Written by: 		Skyler Malinowski
+// Tested by: 		Skyler Malinowski
+// Debugged by: 	Skyler Malinowski
+// Integrated by: 	Skyler Malinowski
+/* ************************************************************************** */
+
+// Description: resets Mode status in userDB and removes either
+//   login or logout divs by tag depending on session id.
+// Input: none (type: void)
+// Output: none (type: void)
 window.onload = function() {
+	// checks user database for mode bit then sets it
 	if( getMode() == "1" ) {
 		setMode(0);	// take out of requiz mode
 	}
+	// get element data by id
 	var LI = document.getElementById("LoginID");
 	var LO = document.getElementById("LogoutID");
+	// checks session id and sets div by id to blank
 	if( window.name != '' ) {
 		LI.innerHTML='';
 	}
@@ -12,23 +26,19 @@ window.onload = function() {
 	}
 }
 
-/*
-// Catch a closing tab or tab reload
-window.addEventListener("beforeunload", function (e) {
-	var confirmationMessage = "\o/";
-	(e || window.event).returnValue = confirmationMessage;	//Gecko + IE
-	return confirmationMessage;	//Webkit, Safari, Chrome
-});
-*/
-
-// removes stored strings in input cells
+// Description: resets the usrename and password input boxes to blank strings
+// Input: none (type: void)
+// Output: none (type: void)
 function clear() {
 	document.getElementById('name').value = '';
 	document.getElementById('password').value = '';
 }
 
-// login user
+// Description: user login to user database with error handling.
+// Input: none (type: void)
+// Output: none (type: void)
 function myLogin() {
+	// gets data from input fields by id
 	var uName = document.getElementById('name').value;
 	var pass = document.getElementById('password').value;
 	var ret = login(uName,pass);
@@ -44,7 +54,9 @@ function myLogin() {
 	}
 }
 
-// logout user
+// Description: user logouts from user database with error handling.
+// Input: none (type: void)
+// Output: none (type: void)
 function myLogout() {
 	if( logout() == "true" ) {
 		window.name = "";
@@ -56,7 +68,10 @@ function myLogout() {
 	}
 }
 
-// register user
+// Description: user registers an account to the user database then logs-in
+//   on success, with error handling
+// Input: none (type: void)
+// Output: none (type: void)
 function myReg() {
 	var name = document.getElementById('name').value;
 	var pass = document.getElementById('password').value;
@@ -80,6 +95,10 @@ function myReg() {
 	clear();
 }
 
+// Description: moderates user access to a given quiz via checking
+//   user database for certain flags, with error handling
+// Input: none (type: void)
+// Output: none (type: void)
 function quizLock( quizNum ) {
 	if( window.name != '' ) {
 		if( getLesson(quizNum) == "1" ) {
