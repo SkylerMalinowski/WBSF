@@ -11,6 +11,10 @@ import numpy as np #Numpy
 # Takes in a numpy array of price data and outputs a numpy array of floats on the range 0-100. 
 # The RSI formula/algorithm used in this function was discussed in report 3. 
 # This function is a stock indicator that the stock is over bought/sold. 
+
+# input: 
+# output: 
+# explanation: 
 def PredictRSI(prices):
 	
 	period = 14 # RSI is calculated using a period of 14 days
