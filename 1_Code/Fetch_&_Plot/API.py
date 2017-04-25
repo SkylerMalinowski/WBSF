@@ -20,6 +20,7 @@ from plotly.graph_objs import * #Plotly Objects
 import numpy
 import os
 import sys
+import Cache2
 
 
 Cache2.MakeTable()								# MAKE THE TABLE FIRST PLZ	
@@ -97,13 +98,13 @@ def getGraph():
 			
 			if Cache2.Search(var) ==0:
 			
-			Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+				Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
 				
-			Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
+				Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
 				
 			else:
 			
-			Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
+				Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 			
 			
 			Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
