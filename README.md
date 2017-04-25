@@ -61,47 +61,47 @@ on the network.
 ******************************  FOLDER STRUCTURE  ******************************
 ********************************************************************************
 
-/						// Root  
+/                                               // Root  
 |  
-+-------+---> 1_Code				// Code Base  
-	|  
-	+-------> Fetch_&_Plot			// Data acquisistion & plotting  
-	|  
-	+-------+---> userDB			// User account database  
-		|  
-		+-------> static		// Picture file resources  
-		|  
-		+-------> templates		// HTML files  
-	|  
-	+-------+---> Website			// Apache Hosted folder  
-		|  
-		+-------> CascadingStyleSheet	// CSS resource files  
-		|  
-		+-------> Fetch_&_Plot		// HTML pages with graphs  
-		|  
-		+-------> Images		// Picture type resource files  
-		|  
-		+-------> JavaScript		// JS resource files  
-		|  
-		+-------+---> Learning_System	// Learning System root  
-			|  
-			+-------> Lessons	// Reading material  
-			|  
-			+-------> Quizzes	// Reading comprehension quizzes  
-			|  
-			+-------> VN Lessons	// Visual Novel format lessons  
++-------+---> 1_Code                            // Code Base  
+        |  
+        +-------> Fetch_&_Plot                  // Data acquisistion & plotting  
+        |  
+        +-------+---> userDB                    // User account database  
+                |  
+                +-------> static                // Picture file resources  
+                |  
+                +-------> templates             // HTML files  
+        |  
+        +-------+---> Website                   // Apache Hosted folder  
+                |  
+                +-------> CascadingStyleSheet   // CSS resource files  
+                |  
+                +-------> Fetch_&_Plot          // HTML pages with graphs  
+                |  
+                +-------> Images                // Picture type resource files  
+                |  
+                +-------> JavaScript            // JS resource files  
+                |  
+                +-------+---> Learning_System   // Learning System root  
+                        |  
+                        +-------> Lessons       // Reading material  
+                        |  
+                        +-------> Quizzes       // Reading comprehension quizzes  
+                        |  
+                        +-------> VN Lessons    // Visual Novel format lessons  
 |  
-+-------> 2_Unit_Testing			// Unit Tests  
++-------> 2_Unit_Testing                        // Unit Tests  
 |  
-+-------> 3_Integration_Testing			// Integration Tests   
++-------> 3_Integration_Testing	                // Integration Tests   
 |  
-+-------> 4_Data_Collection			// Data Collection  
++-------> 4_Data_Collection                     // Data Collection  
 |  
-+-------+---> 5_Documentation			// Physical deliverables  
-	|  
-	+-------> Demo 1			// Demonstration 1 documents  
-	|  
-	+-------> Demo 2			// Demonstration 2 documents  
-	|  
-	+-------> Final Report			// Report 3 documents  
++-------+---> 5_Documentation                   // Physical deliverables  
+        |  
+        +-------> Demo 1                        // Demonstration 1 documents  
+        |  
+        +-------> Demo 2                        // Demonstration 2 documents  
+        |  
+        +-------> Final Report                  // Report 3 documents  
 	
