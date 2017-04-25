@@ -31,7 +31,6 @@ if __name__ == '__main__':
 
 	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
-	
 # stock ticker and news stuff
 def getCurrentPrice(Sym):
 	ticker = Share(Sym)
@@ -92,7 +91,8 @@ def getGraph():
 				
 			else:
 				Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
-					
+			
+			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
 			pointY=LinearAlgebra.getPointY(Coeffcients,timeBegin,googData[0]['LastTradePrice'],totalDataCurrent.High[len(totalDataCurrent)-1]) #gets Predictiion Point for the next day independently so I can calculate individual days
 			
@@ -111,7 +111,9 @@ def getGraph():
 @app.route('/acc/')
 def getAcc():
 	stockName = request.args.get('s')
+
 	var="AAPL"
+
 	var=stockName
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
@@ -172,9 +174,7 @@ def getRelativeAcc():
 		return "The relative accuracy is: " + ret
 	else:
 		return ""
-
 													
 #Cache2.PrintTable()													# Prints the Table											
 #Cache2.return_cache_symbols("Symbol")										# pass the symbol of the company in the cache as a list
 #Cache2.Search("Symbol")												# returns 1 ( true) or 0 (false) on whether the specified ticker is in cache
-
