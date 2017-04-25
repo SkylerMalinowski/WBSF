@@ -97,3 +97,7 @@ head, body
 	background: #66cdd1;
 }
 
+.header {
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+}

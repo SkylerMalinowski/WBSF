@@ -2,6 +2,7 @@
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices
   var quiz = $('#quiz'); //Quiz div object
+  var mode = getMode();
   
   //konami
   var konamiBool = false;
@@ -18,7 +19,8 @@
       $('#next').hide();
       $('#prev').hide();
       $('#start').show();
-      $('#exit').hide();
+      if(mode == "1")
+        $('#exit').hide();
       $('#menu').show();
     }
   });
@@ -133,12 +135,17 @@
         // Controls display of 'prev' button
         if (questionCounter === 1) {
           $('#prev').show();
-          $('#exit').show();
+          if(mode == "1")
+            $('#exit').hide();
+          else
+            $('#exit').show();
         } else if (questionCounter === 0) {
-
           $('#prev').hide();
           $('#next').show();
-          $('#exit').show();
+          if(mode == "1")
+            $('#exit').hide();
+          else
+            $('#exit').show();
           $('#menu').hide();
         }
       } else {
@@ -160,7 +167,7 @@
     });
   if(konamiBool){
     konamiBool = false;
-    score.append('This is a debug message, intended to show a sample ending screen without taking the time to complete the quiz.  As a result, no results are able to be displayed.');
+    score.append('This is a debug message, intended to show a sample ending screen without taking the time to complete the quiz. Ergo, no results are able to be displayed but the account will reflect this quiz as passed.');
     return score;
   }
   var numCorrectFirst = 0;
@@ -239,7 +246,7 @@
   if(percentage == 1){
     score.append('you can skip Lesson 1, ');
     if( window.name != '' ) {
-      if( getMode() == "1" ) {
+      if( mode == "1" ) {
         setQuiz(1,1);
       }
     }
@@ -252,7 +259,7 @@
   if(percentage == 1){
     score.append('you can skip Lesson 2, ');
     if( window.name != '' ) {
-      if( getMode() == "1" ) {
+      if( mode == "1" ) {
         setQuiz(2,1);
       }
     }
@@ -265,7 +272,7 @@
   if(percentage == 1){
     score.append('you can skip Lesson 3, ');
     if( window.name != '' ) {
-      if( getMode() == "1" ) {
+      if( mode == "1" ) {
         setQuiz(3,1);
       }
     }
@@ -278,7 +285,7 @@
   if(percentage == 1){
     score.append('you can skip Lesson 4, ');
     if( window.name != '' ) {
-      if( getMode() == "1" ) {
+      if( mode == "1" ) {
         setQuiz(4,1);
       }
     }
@@ -291,7 +298,7 @@
   if(percentage == 1){
     score.append('you can skip Lesson 5, ');
     if( window.name != '' ) {
-      if( getMode() == "1" ) {
+      if( mode == "1" ) {
         setQuiz(5,1);
       }
     }
@@ -304,7 +311,7 @@
   if(percentage == 1){
     score.append('and you can skip Lesson 6. ');
     if( window.name != '' ) {
-      if( getMode() == "1" ) {
+      if( mode == "1" ) {
         setQuiz(6,1);
       }
     }
