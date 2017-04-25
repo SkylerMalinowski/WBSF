@@ -20,6 +20,8 @@ from datetime import timedelta # Adding to date
 from plotly.graph_objs import * #Plotly Objects
 import numpy
 import Cache2
+import os
+import sys
 
 
 Cache2.MakeTable()								# MAKE THE TABLE FIRST PLZ	
@@ -46,6 +48,9 @@ def getNewsTitle(feed):
 def getNews(feed, n):
 	return feed['entries'][n]['title']
 
+def getLink(feed, n):
+	return feed['entries'][n]['link']
+
 @app.route('/ticker/')
 def ticker():
 	tick = request.args.get('s')
@@ -57,16 +62,19 @@ def ticker():
 def news():
 	tick = request.args.get('s')
 	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
-	ret = "The top headline for " + tick + " from " + getNewsTitle(feed) + " is: <br>" + getNews(feed, 0)
-
-	return ret
+	
+	a = "<a href='" + getLink(feed, 0) + "'>" + getNews(feed, 0) + " </a> <br>"
+	b = "<a href='" + getLink(feed, 1) + "'>" + getNews(feed, 1) + " </a> <br>"
+	c = "<a href='" + getLink(feed, 2) + "'>" + getNews(feed, 2) + " </a> <br>"
+	return a + b + c
 
 # Api To Get Graph
 @app.route('/graph/')
 def getGraph():
 	stockName = request.args.get('s')
 	var=stockName
-
+	old_stdout = sys.stdout
+	sys.stdout = open(os.devnull, "w")
 	if var != 'null':					# ONLY PRECEDE IF WE HAVE A COMPANY
 	
 			
@@ -91,6 +99,7 @@ def getGraph():
 				
 			else:
 				Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
+					
 			
 			Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 			
@@ -104,14 +113,19 @@ def getGraph():
 			
 			url = url + ".embed?width=640&height=480"
 			ret = "<iframe width='640' height='480' frameborder='0' scrolling='no' src='" + url + "'> </iframe>"
+			sys.stdout.close()
+			sys.stdout = old_stdout
 			return ret
 	else:
+		sys.stdout.close()
+		sys.stdout = old_stdout
 		return "false"
 
 @app.route('/acc/')
 def getAcc():
 	stockName = request.args.get('s')
-
+	old_stdout = sys.stdout
+	sys.stdout = open(os.devnull, "w")
 	var="AAPL"
 
 	var=stockName
@@ -136,43 +150,46 @@ def getAcc():
 			Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
-			
+		
 		ret = str(ArrayNCalc.CalculateConfidenceRating(Prediction_Model,totalDataCurrent.High))
-
-		return "The total price accuracy is: " + ret
+		sys.stdout.close()
+		sys.stdout = old_stdout
+		return "The total price accuracy is: " + ret + " %"
 	else:
+		sys.stdout.close()
+		sys.stdout = old_stdout
 		return ""
 
 @app.route('/relAcc/')
 def getRelativeAcc():
 	stockName = request.args.get('s')
 	var=stockName
+	old_stdout = sys.stdout
+	sys.stdout = open(os.devnull, "w")
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
 			
 		totalDataCurrent=Fetching.fetchDataToday(var,timeBegin) # This gets all the data from the start year to 3 days ago (give or take a work day)
-
+		
 		googData=Fetching.fetchGoogData(var) # Fetch Todays data from google finance
 			
 		Prediction_Data=Fetching.fetchDataSpec(var,(datetime.now()+timedelta(days=-45))) # Get the data from just the past month for the prediciton part
 			
 		Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
-
-		if Cache2.Search(var) ==0:
-			
-			Coeffcients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
-				
-			Cache2.Cache_Predictions(var,Coeffcients)		# after calculating store the data in cache
-				
-		else:
-			Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
-			
-		Prediction_Model=LinearAlgebra.makeOutY(Coeffcients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
-			
-
+		
+		
+		Coefficients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+		
+		Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
+		
+		
 		ret = str(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
+		sys.stdout.close()
+		sys.stdout = old_stdout
 		return "The relative accuracy is: " + ret
 	else:
+		sys.stdout.close()
+		sys.stdout = old_stdout
 		return ""
 													
 #Cache2.PrintTable()													# Prints the Table											
