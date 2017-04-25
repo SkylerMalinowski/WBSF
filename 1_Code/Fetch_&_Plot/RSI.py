@@ -1,12 +1,16 @@
+"""
+Created/Debugged by Jonatan Yanovsky - 4/21/2017
+Code adapted from previous year's group. 
+"""
+
+
 # RSI FILE
 import time # Time
 import numpy as np #Numpy
 
-# NOTES: code adapted from previous year's group. 
-# This function is a stock indicator that the stock is over bought/sold.
-
-# Function by Jon
-# RSI = Relative Strength Index
+# Takes in a numpy array of price data and outputs a numpy array of floats on the range 0-100. 
+# The RSI formula/algorithm used in this function was discussed in report 3. 
+# This function is a stock indicator that the stock is over bought/sold. 
 def PredictRSI(prices):
 	
 	period = 14 # RSI is calculated using a period of 14 days
