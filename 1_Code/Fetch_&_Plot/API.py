@@ -20,6 +20,7 @@ from plotly.graph_objs import * #Plotly Objects
 import numpy
 import os
 import sys
+import Cache2
 
 
 Cache2.MakeTable()								# MAKE THE TABLE FIRST PLZ	
@@ -95,9 +96,15 @@ def getGraph():
 			Prediction_Data_Length=len(Prediction_Data.Close) # Lenght of the predictin Data to save the recalc of it
 
 			
-			Coefficients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+			if Cache2.Search(var) ==0:
 			
+				Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+				
+				Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
+				
+			else:
 			
+				Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 			
 			
 			Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
@@ -139,10 +146,14 @@ def getAcc():
 			
 		Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
 
-		
-		Coefficients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
-		
-		
+		if Cache2.Search(var) ==0:
+			
+			Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+				
+			Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
+				
+		else:
+			Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 		
 		Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 		
@@ -173,8 +184,15 @@ def getRelativeAcc():
 		Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
 		
 		
-		Coefficients=LinearAlgebra.coeffcients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
-		
+		if Cache2.Search(var) ==0:
+			
+			Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+				
+			Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
+				
+		else:
+			Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
+			
 		Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 		
 		
@@ -186,7 +204,3 @@ def getRelativeAcc():
 		sys.stdout.close()
 		sys.stdout = old_stdout
 		return ""
-													
-#Cache2.PrintTable()													# Prints the Table											
-#Cache2.return_cache_symbols("Symbol")										# pass the symbol of the company in the cache as a list
-#Cache2.Search("Symbol")												# returns 1 ( true) or 0 (false) on whether the specified ticker is in cache
