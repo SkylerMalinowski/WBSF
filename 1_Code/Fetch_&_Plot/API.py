@@ -181,7 +181,7 @@ def getRelativeAcc():
 		ret = str(ArrayNCalc.CalculateRelativeACC(Prediction_Model,Prediction_Data.High))
 		sys.stdout.close()
 		sys.stdout = old_stdout
-		return "The relative accuracy is: " + ret + "%"
+		return "The relative error is: " + ret + "%"
 	else:
 		sys.stdout.close()
 		sys.stdout = old_stdout
