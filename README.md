@@ -32,28 +32,30 @@
 7) Copy "WBSF\1_Code\Website" into "Apache\htdocs\"  
 8) Copy "WBSF\1_Code\index.html" into "Apache\htdocs\"  
 9) Copy "WBSF\1_Code\httd.portable.conf" into "Apache\conf\"  
+10) Copy "WBSF\1_Code\modules.conf" into "Apache\conf\
 
-10) Make a Plotly Account at "www.plot.ly"
-   https://plot.ly/python/getting-started/
+11) Make a Plotly Account at "www.plot.ly"  
+    https://plot.ly/python/getting-started/  
+    and add the api key to your python
 
-11) Open a command prompt and navigate to "WBSF\1_Code\Fetch_&_Plot\"  
-12) Run the following commands in the command prompt:  
+12) Open a command prompt and navigate to "WBSF\1_Code\Fetch_&_Plot\"  
+13) Run the following commands in the command prompt:  
 
 ```
 > set FLASK_APP=API.py
 > flask run --port 4000 --host=0.0.0.0 
 ```
 
-13) Open a command prompt and navigate to "WBSF\1_Code\userDB\"  
-14) Run the following commands in the command prompt:  
+14) Open a command prompt and navigate to "WBSF\1_Code\userDB\"  
+15) Run the following commands in the command prompt:  
 
 ```
 > set FLASK_APP=userDB.py
 > flask run --port 5000 --host=0.0.0.0 
 ```
 
-15) Double click to execute "Apache\start.bat"  
-16) The website is now hosted and ready to access via localhost, and is  
+16) Double click to execute "Apache\start.bat"  
+17) The website is now hosted and ready to access via localhost, and is  
 also accessible via the IP address of the hosting machine to other machines
 on the network.
 
