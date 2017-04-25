@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script src="/userDB/helpers.js"> </script>
+		<script>
+			function webLogout() {
+				document.getElementById("response").innerHTML = logout();
+			}
+		</script>
+	</head>
+
+	<body>
+		
+		<a href="/userDB/print.html">Print user DB</a><br>
+		<a href="/userDB/reg.html">Want to Register?</a><br>
+		<a href="/userDB/dereg.html">Deregister</a><br>
+		<a href="/userDB/index.html">login</a><br>
+		
+		<img src="/userDB/logo.jpg" alt="logo">
+		
+		<p>Press button to logout:</p>
+		
+		<form action="javascript:webLogout()">
+			<input name="submit" type="submit" value="log out" />
+		</form>
+		
+		<p id=response> </p>
+	
+	</body>
+
+</html>
