@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Lesson 2</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600" rel="stylesheet" type="text/css">
+	<link type='text/css' rel='stylesheet' href='../../CascadingStyleSheet/lessonStylesheet.css'>
+	
+	<script type='text/javascript' src='../../JavaScript/lesson.js'> </script>
+	<script type='text/javascript' src='../../JavaScript/userHelpers.js'> </script>
+	<script type='text/javascript'>
+		var lessonNum = 2;
+	</script>
+</head>
+
+<body>
+	<div id="main-background">
+		<div class="center-vertical">
+			<div id="title">What Kinds of Stocks?</div>
+		</div>
+	</div>
+	
+	<div class="content-space">
+		<div class="h1">Types</div>
+		<div class="left-text">
+			<p>When a company is first founded, the only shareholders are the co-founders and early investors. For example, if a startup has two founders and one investor, each may own one-third of the company’s shares. As the company grows and needs more capital to expand, it may issue more of its shares to other investors, so that the original founders may end up with a substantially lower percentage of shares than they started with. During this stage, the company and its shares are considered private. In most cases, private shares are not easily exchanged, and the number of shareholders is typically small.</p>
+			<p>As the company continues to grow, however, there often comes a point where early investors become eager to sell their shares and monetize the profits of their early investments. At the same time, the company itself may need more investment than the small number of private investors can offer. At this point, the company considers an initial public offering, or IPO, transforming it from a private to a public company.</p>
+			<p>Aside from the private/public distinction, there are two types of stock that companies can issue: common stock and preferred shares. Although common and preferred are the two main forms of stock, it's also possible for companies to customize different classes of stock to fit the needs of their investors. The most common reason for creating share classes is for the company to keep voting power concentrated with a certain group. Therefore, different classes of shares are given different voting rights. For example, one class of shares would be held by a select group who are given perhaps ten votes per share while a second class would be issued to the majority of investors who are given just one vote per share. When there is more than one class of stock, the classes are traditionally designated as Class A and Class B, etc.. For example, billionaire Warren Buffett’s company Berkshire Hathaway has two classes of stock, represented by placing the letter behind the ticker symbol in a form like this: "BRKa, BRKb" or "BRK.A, BRK.B".</p>
+		</div>
+	</div>
+	
+	<div class="content-space">
+		<div class="h1">Common Stock</div>
+		<div class="left-text">
+			<p>When people talk about stocks they are usually referring to common stock. In fact, the great majority of stock is issued is in this form. Common shares represent a claim on profits (dividends) and confer voting rights. Investors most often get one vote per share-owned to elect board members who oversee the major decisions made by management.</p>
+			<p>Over the long term, common stock, by means of capital growth, has tended to yield higher returns than corporate bonds. This higher return comes at a cost, however, since common stocks entail the most risk including the potential to lose the entire amount invested if a company goes out of business. If a company goes bankrupt and liquidates, the common shareholders will not receive money until the creditors, bondholders and preferred shareholders are paid.</p>
+		</div>
+	</div>
+	
+	<div class="content-space">
+		<div class="h1">Preferred Stock</div>
+		<div class="left-text">
+			<p>Preferred stock functions similarly to bonds, and usually doesn't come with the same voting rights (this may vary depending on the company, but in many cases preferred shareholders do not have any voting rights). With preferred shares, investors are usually guaranteed a fixed dividend in perpetuity. This is different than common stock, which has variable dividends that are declared by the board of directors and never guaranteed. In fact, many companies do not pay out dividends to common stock at all.</p>
+			<p>Another advantage is that in the event of liquidation, preferred shareholders are paid off before the common shareholder (but still after debt holders and other creditors). Preferred stock may also be “callable,” meaning that the company has the option to re-purchase the shares from preferred shareholders at any time for any reason (usually for a premium). An intuitive way to think of these kinds of shares is to see them as being somewhat in between bonds and common shares.</p>
+		</div>
+	</div>
+	
+	<!-- Reading Progress -->
+	<div>
+		<div data-role="header">
+			<h1>Reading Progress</h1>
+		</div>
+		
+		<div data-role="main" class="ui-content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<input TYPE="button" VALUE="Not Done Yet" onclick="window.location.href='../learningMenu.html'">
+				</div>
+				
+				<div class="ui-block-b">
+					<input TYPE="button" VALUE="Finished Reading" onclick="window.location.href='../learningMenu.html',mySetLesson();">
+				</div>
+				
+				<div class="ui-block-c">
+					<input TYPE="button" VALUE="Ready for the Quiz" onclick="window.location.href='../Quizzes/Quiz2.html',mySetLesson();">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------- -->
+</body>
+
+<footer>
+	<div class="footer-box">
+		<p align="center"><strong>Source: </strong><a href="http://www.investopedia.com/">http://www.investopedia.com/</a></p>
+	</div>
+</footer>
+
+</html>
