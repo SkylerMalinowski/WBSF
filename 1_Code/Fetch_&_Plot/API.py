@@ -43,17 +43,19 @@ def getPercentChange(Sym):
 	ticker = Share(Sym)
 	return ticker.get_percent_change()
 
-#Function by Jake, gets the top news headline for the given stock (from yahoo RSS feed, deciphered using a feedparser)
+#Function by Jake, gets the top news headline for the given stock (from yahoo finance RSS feed, deciphered using a feedparser)
 def getNewsTitle(feed):
 	return feed['feed']['title']
 
-# Function by Jake, gets the top n news headlines for the given stock (from yahoo RSS feed, deciphered using a feedparser)
+# Function by Jake, gets the top n news headlines for the given stock (from yahoo finance RSS feed, deciphered using a feedparser)
 def getNews(feed, n):
 	return feed['entries'][n]['title']
 
+# Function by Jake, gets link for the top n newsheadlines for the given stock (from yahoo finance RSS feed, deciphered using a feedparser) 
 def getLink(feed, n):
 	return feed['entries'][n]['link']
 
+# Used for displaying the current price and percent change of the given stock
 @app.route('/ticker/')
 def ticker():
 	tick = request.args.get('s')
@@ -61,6 +63,7 @@ def ticker():
 	ret = "The current price of " + tick + " is $" + getCurrentPrice(tick) + ". This is a " + getPercentChange(tick) + " change."
 	return ret
 
+# Used for displaying the top news headlines for the given stock (using yahoo finance RSS feed and feed parser)
 @app.route('/news/')
 def news():
 	tick = request.args.get('s')
