@@ -5,7 +5,7 @@
 ## Windows
 
 0) If Python 3 is not installed, download and install Python 3 from  "https://www.python.org/downloads/"  
-0.1) Download and install the following Python libraries:  
+0) Download and install the following Python libraries:  
 
 ```
 > pip install sqlite3
