@@ -12,33 +12,29 @@ from math import pow #math pow
 from datetime import datetime # Date
 from datetime import timedelta # Adding to date
 
- # Function by Jon
-  # assume that we are not storing confidence data in a dB, so we cannot calculate prediction over time
+# Function by Jon
+# assume that we are not storing confidence data in a dB, so we cannot calculate prediction over time
 def CalculateConfidenceRating(predictedValues, historicalValues):
-	# there will be less data points from predictedValues than historicalValues  
+	# there will be more data points from historicalValues than predictedValues so
+	# cut off part of historicalIndex, to make the two "list-indexes" the same length
 	numDataPoints = len(predictedValues)
 	historicalIndex = len(historicalValues) - numDataPoints
-	Difference = [numDataPoints]
-	percentError = [numDataPoints]
+	
+	percentError = [numDataPoints] # declare an array of size numDataPoints
 
-	for i in range(0, numDataPoints - 1):
-  		Difference.append(0) # dollar difference
+	for i in range(0, numDataPoints - 1): # initialize array with all zeros
   		percentError.append(0)
-	# only compare last(most recent) numDataPoints data points for accuracy.
+		
+	# perform percent error formula with each array elements from predictedValues and historicalValues
 	for i in range(0, numDataPoints - 1):
-		Difference[i] = predictedValues[i] - historicalValues[historicalIndex + i]
 		percentError[i] = 100 * abs(predictedValues[i] - historicalValues[historicalIndex + i]) / historicalValues[historicalIndex + i]
+	
 	avgPercentError = 0
-	avgDifference = 0 # compute averages
-	for i in range(0, numDataPoints - 1):
+	for i in range(0, numDataPoints - 1):  # sum elements from percentError
 		avgPercentError += percentError[i]
-		avgDifference += Difference[i]
-	avgPercentError /= numDataPoints
-	avgDifference /= numDataPoints
+	avgPercentError /= numDataPoints # find the average
 
-	# return avg percent error
-
-	return avgPercentError
+	return avgPercentError # return avg percent error
 
 	#Function by Vince
 def CalculateRelativeACC(predictionValues,actualValues):
