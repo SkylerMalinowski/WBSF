@@ -24,7 +24,7 @@ from datetime import datetime #Date time
 #	Output: Matrix(Final)
 #	Explanation:
 #	This take two matricies and applies the LSA alogrithim to generate a 10 by 1 matrix of coeffcients for functions
-def coeffcients_Generator(XMatrix,YMatrix): # One's Matrix, Value of Generated_Data Matrix Returns the coeffcients for the equation
+def coefficients_Generator(XMatrix,YMatrix): # One's Matrix, Value of Generated_Data Matrix Returns the coeffcients for the equation
 	Tran = XMatrix.transpose() # Transpose
 	Fp = np.matmul(Tran,XMatrix) # Matrix Multiplication
 	Inv = np.linalg.inv(Fp) # inverse
