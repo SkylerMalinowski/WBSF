@@ -12,7 +12,7 @@ def MakeTable():
 	cursor = conn.cursor()
 	cursor.execute("DROP TABLE IF EXISTS Prediction")				
 	conn.commit()																	
-	cursor.execute("CREATE TABLE IF NOT EXISTS Prediction(Symbol TEXT, Priority INTEGER);")		
+	cursor.execute("CREATE TABLE IF NOT EXISTS Prediction(Symbol TEXT, Priority INTEGER);")	
 	conn.commit()
 	AddColumns()
 	return
@@ -21,10 +21,9 @@ def AddColumns():
 	conn =sqlite3.connect("base.db")
 	cursor = conn.cursor()
 	command = "ALTER TABLE Prediction ADD Value"						# Initialization of the table to have 11 entries in it
-	for	x in range(0,12):
+	for	x in range(0,11):
 		cursor.execute(command+str(x)+" FLOAT")						# Column1 = Company symbol and Columns 2 to 12 are for the 11 Predicted Values 
-		conn.commit()
-		
+		conn.commit()	
 	cursor.execute("ALTER TABLE Prediction ADD Date TEXT")
 	conn.close()
 	return 
@@ -59,10 +58,10 @@ def modify_cache(Symbol,List):
 	conn.commit()
 	cursor.execute("UPDATE Prediction SET Priority = Priority+1")
 	conn.commit()
-	command = "INSERT INTO Prediction VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+	command = "INSERT INTO Prediction VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 	date = datetime.now()
 	date = date.strftime("%d-%m-%y-%H-%M")
-	cursor.execute(command,( (Symbol),("1"),(List[0]),(List[1]),(List[2]),(List[3]),(List[4]),(List[5]),(List[6]),(List[7]),(List[8]),(List[9]),(List[10]),(List[11]),(date) ))
+	cursor.execute(command,( (Symbol),("1"),(List[0]),(List[1]),(List[2]),(List[3]),(List[4]),(List[5]),(List[6]),(List[7]),(List[8]),(List[9]),(List[10]),(date) ))
 	conn.commit()
 	conn.close()
 
@@ -91,12 +90,13 @@ def update_priority(Symbol):											# This function just sets the entry of th
 	conn.close()
 
 def Parse(Matrix):
-	List = np.array(Matrix[0,0])
-	for x in range(0,11):
-		List=np.append(List,Matrix[x,0])
+
+	List = []
+	for x in range (0,11):
+		List.append(Matrix[x,0])
 	return List
 
-def search(Symbol):
+def Search(Symbol):
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
 	cursor.execute("SELECT COUNT(*) FROM Prediction WHERE Symbol=?", [(Symbol)])
@@ -112,7 +112,7 @@ def Fetch_Cache(Symbol):
 	cursor=conn.cursor()
 	command = "SELECT "
 	command2 = "Value"
-	for x in range(0,11):
+	for x in range(0,10):
 		command =command +command2 +str(x)+ ", "
 	command = command +command2 +str(x+1)+" "
 	command = command+"FROM Prediction"									#
@@ -121,7 +121,6 @@ def Fetch_Cache(Symbol):
 
 	cursor.execute(command)
 	values = cursor.fetchall()
-	print(values)
 	cursor.execute("SELECT Symbol FROM Prediction")
 	return values
 
@@ -130,24 +129,19 @@ def check_date(Symbol):
 	cursor=conn.cursor()
 	cursor.execute("SELECT Date FROM Prediction WHERE Symbol=?", [(Symbol)])
 	string = cursor.fetchone()
-	#print(string)
 	date1 = string[0]													# has the current date that is stored in the database for the selected entry
-	date1 = datetime.strptime(date1,"%d-%m-%y-%H-%M-")
+	date1 = datetime.strptime(date1,"%d-%m-%y-%H-%M")
 	current_time =datetime.now()
 	temp = current_time.strftime("%d-%m-%y-%H-%M")
 	current_time=datetime.strptime(temp,"%d-%m-%y-%H-%M")
-	#print(current_time)
 	difference = current_time-date1 
-	#print(difference)
 	max_difference = timedelta(3)
-	print(difference)
-	if max_difference > difference:
-	
+	if difference > max_difference:
 		return 0
 	else:
 		return 1
 
-def return_cache_symbols()												# LITERALLY returns the symbols of tickers in the cache
+def return_cache_symbols():												# LITERALLY returns the symbols of tickers in the cache
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
 	cursor.execute("SELECT Symbol FROM Prediction")
@@ -169,8 +163,8 @@ def Cache_Predictions(Symbol,Matrix):									# var1 = Company Symbol, and List 
 			cursor=conn.cursor()
 			date = datetime.now()
 			date = date.strftime("%d-%m-%y-%H-%M")
-			command = "INSERT INTO Prediction VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"		
-			cursor.execute(command,( (Symbol),("0"),(List[0]),(List[1]),(List[2]),(List[3]),(List[4]),(List[5]),(List[6]),(List[7]),(List[8]),(List[9]),(List[10]),(List[11]),(date) ))
+			command = "INSERT INTO Prediction VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"		
+			cursor.execute(command,( (Symbol),("0"),(List[0]),(List[1]),(List[2]),(List[3]),(List[4]),(List[5]),(List[6]),(List[7]),(List[8]),(List[9]),(List[10]),(date) ))
 			conn.commit()												# gonna need an extra value for each entry that determines its priority on when it should get replaced
 			cursor.execute("UPDATE Prediction SET Priority = Priority +1")
 			conn.commit()
@@ -180,5 +174,4 @@ def Cache_Predictions(Symbol,Matrix):									# var1 = Company Symbol, and List 
 		update_priority(Symbol)
 	return
 
-	
 
