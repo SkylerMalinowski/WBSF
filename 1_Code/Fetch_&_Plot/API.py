@@ -33,18 +33,21 @@ if __name__ == '__main__':
 
 	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
-# stock ticker and news stuff
+# Function by Jake, gets the current price of any stock (using yahoo finance API)
 def getCurrentPrice(Sym):
 	ticker = Share(Sym)
 	return ticker.get_price()
 
+#Function by  Jake, gets tht percent change in price of the stock (using yahoo finance API)
 def getPercentChange(Sym):
 	ticker = Share(Sym)
 	return ticker.get_percent_change()
 
+#Function by Jake, gets the top news headline for the given stock (from yahoo RSS feed, deciphered using a feedparser)
 def getNewsTitle(feed):
 	return feed['feed']['title']
 
+# Function by Jake, gets the top n news headlines for the given stock (from yahoo RSS feed, deciphered using a feedparser)
 def getNews(feed, n):
 	return feed['entries'][n]['title']
 
