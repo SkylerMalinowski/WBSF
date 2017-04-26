@@ -1,3 +1,8 @@
+# Written by: Greg
+# Tested by: Greg
+# Debugged by: Greg, Skyler
+# Integrated by: Greg, Skyler
+
 from yahoo_finance import Share
 import feedparser
 import hashlib
