@@ -105,7 +105,7 @@ def getGraph():
 	if var != 'null':					# ONLY PRECEDE IF WE HAVE A COMPANY
 	
 			
-			Coefficients = numpy.zeros((11,1))
+			Coefficients = numpy.zeros(shape =(11,1))
 			
 			timeBegin=2010
 			
@@ -159,6 +159,8 @@ def getAcc():
 	var=stockName
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
+		
+		Coefficients = numpy.zeros(shape =(11,1))
 			
 		totalDataCurrent=Fetching.fetchDataToday(var,timeBegin) # This gets all the data from the start year to 3 days ago (give or take a work day)
 
@@ -196,6 +198,8 @@ def getRelativeAcc():
 	sys.stdout = open(os.devnull, "w")
 	if var != 'null':					# ONLY PRECED IF WE HAVE A COMPANY
 		timeBegin=2010
+		
+		Coefficients = numpy.zeros(shape =(11,1))
 			
 		totalDataCurrent=Fetching.fetchDataToday(var,timeBegin) # This gets all the data from the start year to 3 days ago (give or take a work day)
 		
