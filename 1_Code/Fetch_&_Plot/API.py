@@ -79,7 +79,7 @@ def news():
 	tick = request.args.get('s') #used to assign company name to a variable
 	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)  #parses the RSS feed of the company with symbol saved in "tick"
 	
-	a = "<a href='" + getLink(feed, 0) + "'>" + getNews(feed, 0) + " </a> <br>"
+	a = "<a href='" + getLink(feed, 0) + "'>" + getNews(feed, 0) + " </a> <br>"  #prints the appropriate link
 	b = "<a href='" + getLink(feed, 1) + "'>" + getNews(feed, 1) + " </a> <br>"
 	c = "<a href='" + getLink(feed, 2) + "'>" + getNews(feed, 2) + " </a> <br>"
 	return a + b + c
