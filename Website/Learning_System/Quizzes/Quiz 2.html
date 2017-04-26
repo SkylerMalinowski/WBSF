@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Quiz 2</title>
+	<link type='text/css' rel='stylesheet' href='../../CascadingStyleSheet/quizStylesheet.css' />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
+	
+	<script type="text/javascript">
+		var quizNum = 2;
+		var questions = [{
+			question: "What does it mean for a company to be private?",
+			choices: ["A Private company is new, and still deciding what to do for their business.","A Private company has no shares.","A Private company's shares are privately owned by a select few shareholders.","There is no such thing as a private company. Any company doing business is public"],
+			correctAnswer: 2	// index in choices[]
+		}, {
+			question: "What is an IPO?  What does it stand for, and what is it?",
+			choices: ["Individual Partial Ownership.  Refers to how much of a company's shares one owns","Initial Public Offering: refers to the first time a company sells its stock to the general public","Individual Private Ownership: refers to when one person owns the whole company"],
+			correctAnswer: 1
+		}, {
+			question: "What has a higher risk: Common Stock or Preferred Stock?",
+			choices: ["Preferred Stock.  It's preferred to have due to the higher risk and higher rewards","They're both equally risky","Common Stock.  If the company goes out of business, the investor could lose the entire invested amount"],
+			correctAnswer: 2
+		}, {
+			question: "What makes a Preferred Stock different from a Common Stock?",
+			choices: ["In the event of liquidation, preferred shareholders are paid off before common shareholders.","Common Stock has voting rights in shareholder meetings, while Preffered Stocks do not have the same voting rights","Investors with Preferred Stocks are guaranteed a fixed dividend, while investors with common stocks are not","All of the above"],
+			correctAnswer: 3
+		}];
+	</script>
+	
+	<script type='text/javascript' src="../../JavaScript/userHelpers.js" />
+	<script type='text/javascript' src="../../JavaScript/spotCheck.js" />
+</head>
+
+<body>
+	<div id='container'>
+		<div id='title'>
+			<h1>What Kinds of Stock?</h1>
+		</div>
+		
+		<div id='quiz'></div>
+		<div class='button' id='next'><a href='#'>Next</a></div>
+		<div class='button' id='prev'><a href='#'>Prev</a></div>
+		<div class='button' id='start'><a href='#'>Start Over</a></div>
+		<div class='button' id='menu'><a onclick="window.location.href='/WBSF/1_Code/Website/Learning_System/learningMenu.html',resetQuizzes();">Learning Menu</a></div>
+		<!--
+		<button class='' id='next'>Next</a></button>
+		<button class='' id='prev'>Prev</a></button>
+		<button class='' id='start'> Start Over</a></button>
+		-->
+	</div>
+
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' />
+	<script type="text/javascript" src='questions.json' />
+	<script type='text/javascript' src='../../JavaScript/quiz.js' />
+</body>
+
+</html>

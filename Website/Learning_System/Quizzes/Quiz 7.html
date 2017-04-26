@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Quiz 7</title>
+	<link type='text/css' rel='stylesheet' href='../../CascadingStyleSheet/quizStylesheet.css' />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans" />
+	
+	<script type="text/javascript">
+		var quizNum = 7;
+		var questions = [{
+			question: "What does it mean for an investor to have a high Risk Tolerance?",
+			choices: ["The investor wants to play as safe as possible with her investments","The investor is willing to make high-risk, high-return investments","The investor will only consider stocks that have changed in price by a considerable amount","An investor hast lost all his money in the market, yet wishes to take out loans in order to keep investing" ],
+			correctAnswer: 1	// index in choices[]
+		}, {
+			question: "In terms of investing, what is a Time Horizon?",
+			choices: ["A measure of how long an investor has been holding onto a particular stock","The ratio of how long someone has been investing in stocks and that person's age","A measure of how much time an individual has to meet his investing goals","How much time it takes for a stock's price to double"],
+			correctAnswer: 2
+		}, {
+			question: "True or False: Risk Tolerance and Time Horizon varies between different investors.",
+			choices: ["True","False"],
+			correctAnswer: 0
+		}, {
+			question: "Which of these individuals will have the highest Risk Tolerance?",
+			choices: ["A loving man, who wishes to invest for his family's future","A greedy man, who wishes to make as much money as quickly as possible","A merciful man, who wishes to donate as much money as possible to nonprofit charities","An ambitious man, who wishes to obtain fame and prestige through good investments","It is impossible to measure one's Risk Tolerance without observing how a man actually invests"],
+			correctAnswer: 4
+		}];
+	</script>
+	
+	<script type='text/javascript' src="../../JavaScript/userHelpers.js" />
+	<script type='text/javascript' src="../../JavaScript/spotCheck.js" />
+</head>
+
+<body>
+	<div id='container'>
+		<div id='title'>
+			<h1>How do we build a portfolio?</h1>
+		</div>
+		
+		<div id='quiz'></div>
+		<div class='button' id='next'><a href='#'>Next</a></div>
+		<div class='button' id='prev'><a href='#'>Prev</a></div>
+		<div class='button' id='start'><a href='#'>Start Over</a></div>
+		<div class='button' id='menu'><a onclick="window.location.href='/Website/Learning_System/learningMenu.html',resetQuizzes();">Learning Menu</a></div>
+		<!--
+		<button class='' id='next'>Next</a></button>
+		<button class='' id='prev'>Prev</a></button>
+		<button class='' id='start'> Start Over</a></button>
+		-->
+	</div>
+
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' />
+	<script type="text/javascript" src='questions.json' />
+	<script type='text/javascript' src='../../JavaScript/quiz.js' />
+</body>
+
+</html>
