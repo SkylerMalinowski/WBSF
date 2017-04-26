@@ -1,3 +1,12 @@
+# /***************************************************/
+# Made By Raj
+# Tested by Raj
+# Debugged by Raj
+# Integrated by Vince/Raj/Gregx
+# /***************************************************/
+
+
+
 import sqlite3
 import numpy as np
 import LinearAlgebra
@@ -7,6 +16,9 @@ from datetime import timedelta
 
 import time
 
+# Input:	None ( Makes the table, called at the start of the Main Function)
+# Output:	None  
+# Connects Python to an SQL Database through Sqlite3. cursor.execute is used to execute SQL queries by passing a string to the function 
 def MakeTable():
 	conn = sqlite3.connect("base.db")									# Make a table whenever they call for stock information 
 									
@@ -18,6 +30,9 @@ def MakeTable():
 	AddColumns()
 	return
 	
+# Input:	None ( Adds columns to the table)
+# Output:	None 	
+# This function is called in MakeTable, and is here for simplicity and clean up of code. Builds a string that is then executed as a query 
 def AddColumns():											
 	conn =sqlite3.connect("base.db")
 	cursor = conn.cursor()
@@ -29,7 +44,9 @@ def AddColumns():
 	conn.close()
 	return 
 		
-		
+# Input:	None (Can be called at any time)
+# Output:	None (Prints table on screen)		
+# Prints the SQL table that has the prediction value 
 def PrintTable():
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
@@ -39,23 +56,28 @@ def PrintTable():
 	conn.close()
 	return
 
+	
+# Input:	None (Can be called at any time
+# Output:	Boolean (Checks whether Cache overflows)	
 def check_cache_size():
 	conn=sqlite3.connect("base.db")									# Check the amount of entries in the Cache that are stored currently that match the 
-	cursor=conn.cursor()											# This is important to ensure that 
-	cursor.execute("SELECT COUNT(*) FROM Prediction")
+	cursor=conn.cursor()											# This is important to ensure that we don't keep adding entries 
+	cursor.execute("SELECT COUNT(*) FROM Prediction")	
 	size = cursor.fetchone()
 	conn.close()
-	if size[0] == 100:
+	if size[0] == 100:												# Limit the size to 100 entries by default		
 		return 1
 	else:
 		return 0
-	
-def modify_cache(Symbol,List):
-
+		
+# Input:	String (Symbol of the Company)
+# Output:	None	(Updates Database)
+def modify_cache(Symbol,List):										# This updates the most recently accessed entries in the cache, and "moves up" the entry that was stored previously
+																	
 	conn = sqlite3.connect("base.db")
 	max_size = 4
 	cursor = conn.cursor()
-	cursor.execute("DELETE FROM Prediction WHERE Priority =?",[(max_size)])	# 
+	cursor.execute("DELETE FROM Prediction WHERE Priority =?",[(max_size)])	
 	conn.commit()
 	cursor.execute("UPDATE Prediction SET Priority = Priority+1")
 	conn.commit()
@@ -64,10 +86,12 @@ def modify_cache(Symbol,List):
 	date = date.strftime("%d-%m-%y-%H-%M")
 	cursor.execute(command,( (Symbol),("1"),(List[0]),(List[1]),(List[2]),(List[3]),(List[4]),(List[5]),(List[6]),(List[7]),(List[8]),(List[9]),(List[10]),(date) ))
 	conn.commit()
-	conn.close()
+	conn.close()						
 
+# Input:	String (Symbol of the Company)
+# Output:	Boolean ( check duplicate entries that match symbol of the company )
 def check_unique(Symbol):
-	conn=sqlite3.connect("base.db")
+	conn=sqlite3.connect("base.db")											# This function ensures that if you add companies with the same name twice, there aren't any duplicates
 	cursor=conn.cursor()
 	cursor.execute("SELECT COUNT(*) FROM Prediction WHERE Symbol=?", [(Symbol)])
 	result=cursor.fetchone()
@@ -76,7 +100,8 @@ def check_unique(Symbol):
 	else:
 		return 1
 
-		
+# Input:	String (Symbol of the Company )
+# Output:	None ( performs operation on SQL database)		
 def update_priority(Symbol):											# This function just sets the entry of the symbol passed as the 1st priority
 	conn=sqlite3.connect("base.db")										
 	cursor=conn.cursor()												# so for a cache of 4 entries  A = 1st, B=2nd, C=3rd, D=4th and someone just accessed entry "C"
@@ -90,13 +115,18 @@ def update_priority(Symbol):											# This function just sets the entry of th
 	conn.commit()
 	conn.close()
 
+# Input:	A Matrix of 11x1
+# Output:	A List of 11 variables 	
 def Parse(Matrix):
 
 	List = []
 	for x in range (0,11):
 		List.append(Matrix[x,0])
-	return List
 
+		return List
+		
+# Input:	String (Symbol of the Company) 
+# Output:	Boolean (Checks whether the specified Company is in the Cache ( returns 1 if true, 0 if false) )
 def Search(Symbol):
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
@@ -106,27 +136,30 @@ def Search(Symbol):
 		return check_date(Symbol)
 	else:	
 		return 0
-	
+# Input:	String (Symbol of the Company )
+# Output:  	Matrix of 11x1 (Returns the Prediction values from the cache)
 def Fetch_Cache(Symbol):
 
 	cache__info = numpy.zeros((11,1))
 	
-	conn=sqlite3.connect("base.db")
-	cursor=conn.cursor()
+	conn=sqlite3.connect("base.db")					# Access the Database
+	cursor=conn.cursor()						
 	command = "SELECT "
 	command2 = "Value"
 	for x in range(0,10):
 		command =command +command2 +str(x)+ ", "
 	command = command +command2 +str(x+1)+" "
-	command = command+"FROM Prediction"									#
+	command = command+"FROM Prediction"						
 	quote ="'"
-	command = command+" WHERE Symbol ="+quote+Symbol+quote				
+	command = command+" WHERE Symbol ="+quote+Symbol+quote			# Fetch Stored Algorithm Prediction values from the database 	
 	cursor.execute(command)
 	values = cursor.fetchall()
-	for x in range(0,10):
+	for x in range(0,10):											# Convert the retrieved Matrix into a list 
 		cache__info[x][0]=values[0][x]
-	return cache__info
+	return cache__info												# and return it to the main function 
 
+# Input: Symbol of the Company 
+# Output: Checks whether the info of the company in the cache is less than 3 days since it was added
 def check_date(Symbol):
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
@@ -143,17 +176,20 @@ def check_date(Symbol):
 		return 0
 	else:
 		return 1
-
-def return_cache_symbols():												# LITERALLY returns the symbols of tickers in the cache
+# Input:	String (Symbol of the Company )
+# Output:	List of String ( Retrieves every Stock Symbol in the cache)
+def return_cache_symbols():												#  returns all the symbols of tickers in the cache
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
 	cursor.execute("SELECT Symbol FROM Prediction")
 	list = cursor.fetchall()
 	return list		
 		
-		
-		
-def Cache_Predictions(Symbol,Matrix):									# var1 = Company Symbol, and List is the matrix that you pass in co-efficients
+# Input:	String (Symbol of the Company) , Matrix of 11x1 ( Prediction Values from Algorithm)
+# Output:	None ( Inserts/ Updates Database)		
+# Main function that is called to store prediction values in the cache, doesn't return anything as it's a call to update values in the database. it updates the priority of the entries
+# depending on whether a duplicate is called through check_unique(), and if the size is full, it replaces entries via modify_cache()		
+def Cache_Predictions(Symbol,Matrix):									# Receive the Coefficient data that was calculated by the Algorithm
 
 	
 	List = Parse(Matrix)	
