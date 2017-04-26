@@ -1,4 +1,13 @@
-/* Ticker */
+/* ************************************************************************** */
+// Written by: 		Gregory Leonberg
+// Tested by: 		Skyler Malinowski, Gregory Leonberg
+// Debugged by: 	Gregory Leonberg, Skyler Malinowski
+// Integrated by: 	Skyler Malinowski
+/* ************************************************************************** */
+
+// Description: gets ticker information via HTTP get request
+// Input: ticker symbol (type: string)
+// Output: response (type: string)
 function price(s) {
 	var req = new XMLHttpRequest();
 	req.onload = function()
@@ -10,7 +19,9 @@ function price(s) {
 	return req.responseText
 }
 
-/* News */
+// Description: gets revelvant news titles and links via HTTP get request
+// Input: ticker symbol (type: string)
+// Output: response (type: string)
 function news(s) {
 	var req = new XMLHttpRequest();
 	req.onload = function()
@@ -22,7 +33,9 @@ function news(s) {
 	return req.responseText
 }
 
-/* Plotly Graph */
+// Description: gets plotly graph and links via HTTP get request
+// Input: ticker symbol (type: string)
+// Output: response (type: string)
 function getGraph(s) {
 
 	var req = new XMLHttpRequest();
@@ -35,7 +48,9 @@ function getGraph(s) {
 	return req.responseText;
 }
 
-/* Prediction */
+// Description: gets predicted accuracy of graph via HTTP get request
+// Input: ticker symbol (type: string)
+// Output: response (type: string)
 function getAcc(s) {
 
 	var req = new XMLHttpRequest();
@@ -48,7 +63,9 @@ function getAcc(s) {
 	return req.responseText;
 }
 
-/* Slope Matching */
+// Description: gets relative error (sloping error) of graph via HTTP get request
+// Input: ticker symbol (type: string)
+// Output: response (type: string)
 function getRelAcc(s) {
 
 	var req = new XMLHttpRequest();
@@ -56,19 +73,6 @@ function getRelAcc(s) {
 	{	return req.responseText;	}
 
 	req.open("GET", "/plot/relAcc/?s=" + s, false);
-
-	req.send();
-	return req.responseText;
-}
-
-/* Stock Auto Complete List */
-function getStocks() {
-
-	var req = new XMLHttpRequest();
-	req.onload = function()
-	{	return req.responseText;	}
-
-	req.open("GET", "/plot/stockNames, false);
 
 	req.send();
 	return req.responseText;

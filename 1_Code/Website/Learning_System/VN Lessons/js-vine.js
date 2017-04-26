@@ -1,3 +1,8 @@
+/* **************************************************************
+	VISUAL NOVEL ENGINE PULEED FROM THE INTERNET
+	Not written by anyone in our group
+******************************************************************
+
 /*
     Copyright (C) 2011 by J. David Eisenberg
     

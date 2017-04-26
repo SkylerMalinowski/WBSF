@@ -1,3 +1,8 @@
+# Written by: Greg
+# Tested by: Greg
+# Debugged by: Greg, Skyler
+# Integrated by: Greg, Skyler
+
 from yahoo_finance import Share
 import feedparser
 import hashlib
@@ -6,42 +11,57 @@ from flask import Flask, render_template, request, jsonify, make_response, send_
 
 app = Flask(__name__)
 
-# admin password for database management
+# default admin password for database management, stored hashed
 ADMIN = "GSVRJJJ"
 ADMIN = (hashlib.sha256(ADMIN.encode())).hexdigest()
 
-# used to verify user is logged in
+# used to create session IDs for users
 sessionID = 0
 
 # main function, initialize web app with IP and port
 if __name__ == '__main__':
 	app.run(host = "127.0.0.1", port = 80, debug = False)
 
+# takes in an XMLHTTPRequest with no arguments
+# returns the asset in response
 @app.route('/logo.jpg')
 def logo():
 	return send_file('logo.jpg', mimetype='image/jpg')
 
 # original home page
+# takes in an XMLHTTPRequest with no arguments
+# returns the asset in response
 @app.route('/index.html')
 def homePage():
 	return render_template('index.html')
 
+# takes in an XMLHTTPRequest with no arguments
+# returns the asset in response
 @app.route('/print.html')
 def testprint():
 	return render_template('print.html')
 
+# takes in an XMLHTTPRequest with no arguments
+# returns the asset in response
 @app.route('/reg.html')
 def testreg():
 	return render_template('reg.html')
 
+# takes in an XMLHTTPRequest with no arguments
+# returns the asset in response
 @app.route('/logout.html')
 def testout():
 	return render_template('out.html')
 
+# takes in an XMLHTTPRequest with no arguments
+# returns the asset in response
 @app.route('/dereg.html')
 def testdereg():
 	return render_template('dereg.html')
 
+# takes in a password as a URL parameter via an XMLHTTPRequest
+# returns "true" if the password is equivalent to the admin password
+# returns "false" otherwise
 @app.route('/isAdmin/')
 def isAdmin():
 	password = request.args.get('p')
@@ -51,6 +71,9 @@ def isAdmin():
 	else:
 		return "false"
 
+# takes in a the old password and new password as URL parameters via an XMLHTTPRequest
+# returns "true" if the password is equivalent to the admin password, and changes the password to the new one
+# returns "false" otherwise and password is unchanged
 @app.route('/setAdmin/')
 def setAdmin():
 	global ADMIN
@@ -65,8 +88,9 @@ def setAdmin():
 	else:
 		return "false"
 
-# creates user database if it does not exist already
-# otherwise, does nothing
+# takes in the admin password as a URL parameter via an XMLHTTPRequest
+# creates user database if it does not exist already and returns "true"
+# otherwise, does nothing and returns "false"
 @app.route("/openTable/")
 def openTable():
 	password = request.args.get('p')
@@ -93,7 +117,7 @@ def openTable():
 		return 'false'
 
 # adds user to database
-# takes username and password as input
+# takes username and password as input URL arguments in XMLHTTPRequest
 # returns False if user already exists with this username
 # otherwise returns True and creates new user
 @app.route("/addUser/")
@@ -126,8 +150,11 @@ def addUser():
 		conn.close()
 		return "false"
 
-# deletes user from database
-# takes username and password as input
+# removes user from database
+# takes username and password as input URL arguments in XMLHTTPRequest
+# returns "User Deleted" if username exists and password is correct
+# returns "Invalid Password!" if username exists and password is not correct
+# returns "User does not exist!" If username does not exist
 @app.route("/remUser/")
 def remUser():
 	username = request.args.get('u')
@@ -165,7 +192,10 @@ def remUser():
 		return "User does not exist!"
 
 # compares credentials to user DB for login attempt
-# takes username and password as input
+# takes username and password as input URL arguments in XMLHTTPRequest
+# returns a session ID if user exists and password is correct
+# returns "User does not exist!" if user does not exist
+# returns "Invalid Password!" if password is incorrect
 @app.route("/login/")
 def login():
 	global sessionID
@@ -193,6 +223,10 @@ def login():
 		conn.close()
 		return "Invalid password!"
 
+# attempts to log out user
+# takes session ID as input URL argument in XMLHTTPRequest
+# returns "true" if user exists with that sessionID and marks the user logged out in the database
+# returns "false" no user with that sessionID exists
 @app.route("/logout/")
 def logout():
 	session = request.args.get('s')
@@ -215,6 +249,9 @@ def logout():
 		return "true"
 
 # prints the contents of the user database
+# takes admin password as input URL argument in XMLHTTPRequest
+# returns "false" if password incorrect
+# otherwise returns the user database
 @app.route("/printTable/")
 def printTable():
 	password = request.args.get('p')
@@ -232,6 +269,9 @@ def printTable():
 		return str(contents)
 
 # deletes the user database
+# takes admin password as input URL argument in XMLHTTPRequest
+# deletes the SQL table if the admin password is correct and returns "true"
+# returns "false" otherwise
 @app.route("/delTable/")
 def delTable():
 	password = request.args.get('p')
@@ -247,6 +287,10 @@ def delTable():
 		conn.close
 		return "true"
 
+# sets the user's quiz flag
+# takes in the sessionID, quiz index, and flag value as arguments via an XMLHTTPRequest
+# if user with sessionID exists, updates flag at the index with the new value and returns "true"
+# returns "false" otherwise
 @app.route("/setQuiz/")
 def setQuizTaken():
 	session = request.args.get('s')
@@ -277,6 +321,10 @@ def setQuizTaken():
 		conn.close()
 		return "true"
 
+# gets the user's quiz flag
+# takes in the sessionID and quiz index as arguments via an XMLHTTPRequest
+# if user with sessionID exists, returns flag at the index
+# returns "false" otherwise
 @app.route("/getQuiz/")
 def getQuizTaken():
 	session = request.args.get('s')
@@ -299,6 +347,10 @@ def getQuizTaken():
 		conn.close()
 		return str(temp.split(',')[index-1])
 
+# sets the user's lesson flag
+# takes in the sessionID, lesson index, and flag value as arguments via an XMLHTTPRequest
+# if user with sessionID exists, updates flag at the index with the new value and returns "true"
+# returns "false" otherwise
 @app.route("/setLesson/")
 def setLesson():
 	session = request.args.get('s')
@@ -330,6 +382,10 @@ def setLesson():
 		conn.close()
 		return "true"
 
+# gets the user's lesson flag
+# takes in the sessionID and quiz index as arguments via an XMLHTTPRequest
+# if user with sessionID exists, returns flag at the index
+# returns "false" otherwise
 @app.route("/getLesson/")
 def getLesson():
 	session = request.args.get('s')
@@ -352,6 +408,10 @@ def getLesson():
 		conn.close()
 		return str((temp.split(',')[index-1]))
 
+# gets the user's placement flag
+# takes in the sessionID as argument via an XMLHTTPRequest
+# returns "false" if no user with that sessionID exists
+# otherwise returns the user's placement flag
 @app.route("/getPlacement/")
 def getPlacement():
 	session = request.args.get('s')
@@ -368,6 +428,10 @@ def getPlacement():
 	else:
 		return str(temp[0])
 
+# sets the user's placement flag
+# takes in the sessionID and flag value as arguments via an XMLHTTPRequest
+# returns "false" if no user with that sessionID exists
+# otherwise updates the user's placement flag and returns "true"
 @app.route("/setPlacement/")
 def setPlacement():
 	session = request.args.get('s')
@@ -388,6 +452,10 @@ def setPlacement():
 		conn.close()
 		return "true"
 
+# gets the user's mode flag
+# takes in the sessionID as argument via an XMLHTTPRequest
+# returns "false" if no user with that sessionID exists
+# otherwise returns the user's mode flag
 @app.route("/getMode/")
 def getMode():
 	session = request.args.get('s')
@@ -408,6 +476,10 @@ def getMode():
 		conn.close()
 		return str(temp[0])
 
+# sets the user's mode flag
+# takes in the sessionID and flag value as arguments via an XMLHTTPRequest
+# returns "false" if no user with that sessionID exists
+# otherwise updates the user's mode flag and returns "true"
 @app.route("/setMode/")
 def setMode():
 	session = request.args.get('s')
@@ -428,6 +500,10 @@ def setMode():
 		conn.close()
 		return "true"
 
+# gets the user's portfolio ticker
+# takes in the sessionID and portfolio index as arguments via an XMLHTTPRequest
+# if user with sessionID exists, returns ticker at the index
+# returns "false" otherwise
 @app.route("/getPortfolio/")
 def getPortfolio():
 	session = request.args.get('s')
@@ -480,6 +556,10 @@ def setPortfolio():
 		conn.close()
 		return "true"
 
+# adds the ticker to the user's portfolio
+# takes in the sessionID and ticker as arguments via an XMLHTTPRequest
+# returns "false" if no user with that sessionID exists or portfolio is full
+# otherwise adds the ticker to the portfolio and returns "true"
 @app.route("/addPortfolio/")
 def addPortfolio():
 	session = request.args.get('s')
@@ -516,7 +596,11 @@ def addPortfolio():
 		conn.commit()
 		conn.close()
 		return flag
-
+	
+# removes the ticker from the user's portfolio
+# takes in the sessionID and ticker as arguments via an XMLHTTPRequest
+# returns "false" if no user with that sessionID exists or ticker is not in portfolio
+# otherwise removes the ticker from the portfolio and returns "true"
 @app.route("/remPortfolio/")
 def remPortfolio():
 	session = request.args.get('s')

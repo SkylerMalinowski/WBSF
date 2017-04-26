@@ -1,24 +1,11 @@
-/*
-    Fill this array with a list of names of images
-    to be pre-loaded.
-*/
-var preload = [
-  "ClassroomCorridor.png","EllenBaker.png",
-  "ClassroomInterior.jpg","kyouya_neutral.png",
-  "kyouya_happy.png"
-];
-
-/*
-    This section pre-loads your images.
-    Don't change it unless you know what you're doing.
-*/
-var preloadObj = new Array(preload.length);
-for (var i = 0; i < preload.length; i++)
-{
-    preloadObj[i] = new Image();
-    preloadObj[i].src = "images/" + preload[i];
-}
-
+/*	*************************************
+Obtained online as part of the js-vine visual novel engine, meant to be used in
+	conjunction with js-vine.js and the corresponding html file to play a visual novel.
+script variable written by: Jack Aquino
+tested by: Jack Aquino
+integrated by: Jack Aquino
+debugged by: Jack Aquino
+****************************************** */
 /* Declare variables for characters, positions, and text blocks here */
 var script; // this variable will hold your script
 var tyler;
@@ -57,11 +44,14 @@ function prepareNovel()
     
     // and put your script commands into this array
 	
-	/*
-	
-		A NOTE FROM JACK:
-		When writing the script, be mindful of commas.  you'll need them
-	
+/*
+		The script variable is a list, consisting of commands and strings, that define the behavior of the Visual Novel.
+		The commands are as follows: 
+		label : used for denoting a section of the code
+		jump : used to run the script from a specific label
+		scene : used to change the background image presentations
+		<character>, {image: <string>, position: right side} : used to draw a character at a given position.  In this lesson, westley is the only character
+		menu: present choices to the player.  Each choice is associated with its own command (i.e. jump to a label)
 	*/
 	
 	script = [

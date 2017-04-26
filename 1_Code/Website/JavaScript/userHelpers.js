@@ -1,4 +1,13 @@
-/* Account Database */
+/* ************************************************************************** */
+// Written by: 		Gregory Leonberg
+// Tested by: 		Skyler Malinowski, Gregory Leonberg
+// Debugged by: 	Gregory Leonberg, Skyler Malinowski
+// Integrated by: 	Skyler Malinowski
+/* ************************************************************************** */
+
+// Description: prints user database via HTTP get request
+// Input: password (type: string)
+// Output: response (type: string)
 function print(p) {
 	var req = new XMLHttpRequest();
 	req.onload = function()
@@ -9,6 +18,9 @@ function print(p) {
 	return req.responseText;
 }
 
+// Description: registers user account to user database via HTTP get request
+// Input: ussername and password (type: string)
+// Output: response (type: string)
 function reg(u, p) {
 	var req = new XMLHttpRequest();
 	req.onload = function()
