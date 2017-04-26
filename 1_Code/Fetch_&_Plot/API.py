@@ -1,3 +1,8 @@
+# Written by: Vince, Greg, Jake, Raj
+# Tested by: Vince, Greg, Raj
+# Debugged by: Greg
+# Integrated by Greg, Skyler
+
 # Api Backend
 import plotly.plotly as py #Plotly Api
 import plotly.figure_factory as go
@@ -32,35 +37,42 @@ if __name__ == '__main__':
 
 	app.run(host = "127.0.0.1", port = 4000, debug = False)
 
-# Function by Jake, gets the current price of any stock (using yahoo finance API)
-# receives a stock symbol in the form of a string. The Share(Sym) function takes this string and turns it into a special type in the yahoo finance library, which contains stock share information.
+# Function by Jake
+# gets the current price of any stock (using yahoo finance API)
+# receives a stock symbol in the form of a string
+# The Share(Sym) function takes this string and turns it into a special type in the yahoo finance library
 # The get_price() function returns a string that contains the current price of the given company's stock.
 def getCurrentPrice(Sym):
 	ticker = Share(Sym)
 	return ticker.get_price()
 
-#Function by  Jake, gets tht percent change in price of the stock (using yahoo finance API)
-# receives a stock symbol in the form of a string. The Share(Sym) function takes this string and turns it into a special type in the yahoo finance library, which contains stock share information.
+# Function by  Jake
+# gets tht percent change in price of the stock (using yahoo finance API)
+# receives a stock symbol in the form of a string. 
+# The Share(Sym) function takes this string and turns it into a special type in the yahoo finance library
 # The get_percent_change function returns a string that contains the percent change of the given company's stock.
 def getPercentChange(Sym):
 	ticker = Share(Sym)
 	return ticker.get_percent_change()
 
-#Function by Jake, returns the name of the source of the RSS feed, "Yahoo! Finance: News"(from yahoo finance RSS feed, deciphered using a feedparser)
+# Function by Jake
+# returns the name of the source of the RSS feed, "Yahoo! Finance: News"(from yahoo finance RSS feed, deciphered using a feedparser)
 # this function is sent a feed of a special type defined in the feedparser library, which contains information from the RSS feed of the given company.
-# the indexes 'feed' and 'title' return the title from the feed variable
+# returns a string with the news title
 def getNewsTitle(feed):
 	return feed['feed']['title']
 
-# Function by Jake, gets the top n news headlines for the given stock (from yahoo finance RSS feed, deciphered using a feedparser)
-# this function is sent a feed of a special type defined in the feedparser library, which contains information from the RSS feed of the given company.
-# the indexes 'entries', 'n' and 'title' returns the titles for the 'n' most recent entries on the feed
+# Function by Jake
+# gets the nth news headlines for the given stock (from yahoo finance RSS feed, deciphered using a feedparser)
+# this function is sent a feed of a special type defined in the feedparser library
+# returns a string with the news description
 def getNews(feed, n):
 	return feed['entries'][n]['title']
 
-# Function by Jake, gets link for the top n newsheadlines for the given stock (from yahoo finance RSS feed, deciphered using a feedparser) 
+# Function by Greg
+# gets link for the nth newsheadline for the given stock (from yahoo finance RSS feed, deciphered using a feedparser) 
 # the indexes 'feed' and 'title' return the title from the feed variable
-# the indexes 'entries', 'n' and 'link' returns the links for the 'n' most recent entries on the feed
+# returns a string with the url of the news article
 def getLink(feed, n):
 	return feed['entries'][n]['link']
 
