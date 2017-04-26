@@ -66,18 +66,18 @@ def getLink(feed, n):
 	return feed['entries'][n]['link']
 
 # Used for displaying the current price and percent change of the given stock
-@app.route('/ticker/')
+@app.route('/ticker/') # @app.route is used to route URLs to code
 def ticker():
-	tick = request.args.get('s')
-	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
+	tick = request.args.get('s') #used to assign the company name to a variable
+	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick) #parses the RSS feed of the company with symbol saved in "tick"
 	ret = "The current price of " + tick + " is $" + getCurrentPrice(tick) + ". This is a " + getPercentChange(tick) + " change."
 	return ret
 
 # Used for displaying the top news headlines for the given stock (using yahoo finance RSS feed and feed parser)
 @app.route('/news/')
 def news():
-	tick = request.args.get('s')
-	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)
+	tick = request.args.get('s') #used to assign company name to a variable
+	feed = feedparser.parse('http://finance.yahoo.com/rss/headline?s=%s' %tick)  #parses the RSS feed of the company with symbol saved in "tick"
 	
 	a = "<a href='" + getLink(feed, 0) + "'>" + getNews(feed, 0) + " </a> <br>"
 	b = "<a href='" + getLink(feed, 1) + "'>" + getNews(feed, 1) + " </a> <br>"
