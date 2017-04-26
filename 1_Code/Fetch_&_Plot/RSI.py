@@ -1,18 +1,16 @@
 """
 Created/Debugged by Jonatan Yanovsky - 4/21/2017
 Code adapted from previous year's group. 
+See wikipedia for more information about this algorithm: 
+https://en.wikipedia.org/wiki/Relative_strength_index
 """
 
-
-# RSI FILE
 import time # Time
 import pandas
 import numpy as np #Numpy
 
-
-
-# input: a class pandas.core.series.Series of numpy.float64 (floats containing price data)
-# output: a numpy.ndarray of numpy.float64 (floats ranging from 0-100)
+# input: a list of floats containing price data. Specifically, an object of type pandas.core.series.Series containing array elements of type numpy.float64
+# output: a list of floats ranging from 0-100 (in units of percent). Specifically, an object of type numpy.ndarray containing array elements of numpy.float64
 # explanation: This function is a stock indicator that the stock is over bought/sold. 
 def PredictRSI(prices):
 	
@@ -41,25 +39,26 @@ def PredictRSI(prices):
 	avg_up = np.mean(gains[:period]) # Calculate the mean of the up days
 	avg_down = np.mean(losses[:period]) # Calculate the mean of the down days
 
-	# Only for first element:
+	# Only for first day:
 	
 	if avg_down == 0:
 		rsi[0] = 100 
 	else:
 		RS = avg_up/avg_down
-		rsi[0] = 100 - (100/(1+RS)) # this is RSI formula
+		rsi[0] = 100 - (100/(1+RS)) # this is the RSI formula
 
-	# for other elements:
+	# for all other days:
 	
-	for i in range(1, data_range - 1): # rsi formula, discussed in report 3
+	for i in range(1, data_range - 1): # for each day in range
+		# Calculate Smoothed Moving Average:
 		avg_up = (avg_up * (period-1) + gains[i + (period - 1)]) / period
 		avg_down = (avg_down * (period-1) + losses[i + (period - 1)]) / period
 
 		if avg_down == 0: 
 			rsi[i] = 100
 		else:
-			RS = avg_up/avg_down
-			rsi[i] = 100 - (100/(1+RS)) # rsi formula
+			RS = avg_up/avg_down # compute Relative Strength
+			rsi[i] = 100 - (100/(1+RS)) # Compute RSI for that day
 
 	rsi = rsi[:len(rsi)-1] # cut off the last element (which equals 0)
 	
