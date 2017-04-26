@@ -2,7 +2,7 @@
 # Made By Raj
 # Tested by Raj
 # Debugged by Raj
-# Integrated by Vince/Raj/Greg
+# Integrated by Vince/Raj/Gregx
 # /***************************************************/
 
 
@@ -18,6 +18,7 @@ import time
 
 # Input:	None ( Makes the table, called at the start of the Main Function)
 # Output:	None  
+# Connects Python to an SQL Database through Sqlite3. cursor.execute is used to execute SQL queries by passing a string to the function 
 def MakeTable():
 	conn = sqlite3.connect("base.db")									# Make a table whenever they call for stock information 
 									
@@ -31,6 +32,7 @@ def MakeTable():
 	
 # Input:	None ( Adds columns to the table)
 # Output:	None 	
+# This function is called in MakeTable, and is here for simplicity and clean up of code. Builds a string that is then executed as a query 
 def AddColumns():											
 	conn =sqlite3.connect("base.db")
 	cursor = conn.cursor()
@@ -44,6 +46,7 @@ def AddColumns():
 		
 # Input:	None (Can be called at any time)
 # Output:	None (Prints table on screen)		
+# Prints the SQL table that has the prediction value 
 def PrintTable():
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
@@ -175,7 +178,6 @@ def check_date(Symbol):
 		return 1
 # Input:	String (Symbol of the Company )
 # Output:	List of String ( Retrieves every Stock Symbol in the cache)
-
 def return_cache_symbols():												#  returns all the symbols of tickers in the cache
 	conn=sqlite3.connect("base.db")
 	cursor=conn.cursor()
@@ -185,7 +187,8 @@ def return_cache_symbols():												#  returns all the symbols of tickers in 
 		
 # Input:	String (Symbol of the Company) , Matrix of 11x1 ( Prediction Values from Algorithm)
 # Output:	None ( Inserts/ Updates Database)		
-		
+# Main function that is called to store prediction values in the cache, doesn't return anything as it's a call to update values in the database. it updates the priority of the entries
+# depending on whether a duplicate is called through check_unique(), and if the size is full, it replaces entries via modify_cache()		
 def Cache_Predictions(Symbol,Matrix):									# Receive the Coefficient data that was calculated by the Algorithm
 
 	
