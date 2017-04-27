@@ -7,6 +7,8 @@
 1) If Python 3 is not installed, download and install Python 3 from  "https://www.python.org/downloads/"  
 2) Download and install the following Python libraries:  
 
+(If sqlite3 errors on install, it is already installed on your system)
+
 ```
 > pip install sqlite3
 > pip install pandas
@@ -20,8 +22,6 @@
 > pip install feedparser
 > pip install holidays
 > pip install datetime
-> pip install simplejson
-> pip install yahoo-finance
 ```
 
 3) Download WBSF-master.zip  
