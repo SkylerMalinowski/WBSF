@@ -12,7 +12,7 @@
 > pip install pandas
 > pip install plotly
 > pip install googlefinance
-> pip install numpy
+> pip install numpy --upgrade
 > pip install pandas_datareader
 > pip install flask
 > pip install simplejson
