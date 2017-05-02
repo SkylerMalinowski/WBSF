@@ -43,7 +43,7 @@ def fetchData(stockSymbol,startYear,endYear): # Fecthes the data between any two
 	#	This calls yahoo finance api and reterive data from 1-1-startyear to current Date
 def fetchDataToday(stockSymbol,startYear): # Fethes  past data to today
 
-	info=web.DataReader(stockSymbol,'yahoo',datetime(startYear,1,1),time.strftime("%d-%m-%Y"))
+	info=web.DataReader(stockSymbol,'yahoo',datetime(startYear,1,1),(datetime.now()).date())
 
 	return info
 
@@ -60,7 +60,7 @@ def fetchDataToday(stockSymbol,startYear): # Fethes  past data to today
 	#	This calls yahoo finance api and reterive data from date to current Date
 def fetchDataSpec(stockSymbol,date):
 
-	info=web.DataReader(stockSymbol,'yahoo',date,time.strftime("%d-%m-%Y"))
+	info=web.DataReader(stockSymbol,'yahoo',date.date(),(datetime.now()).date())
 
 	return info
 	
