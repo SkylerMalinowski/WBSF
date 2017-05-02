@@ -118,15 +118,15 @@ def getGraph():
 			Prediction_Data_Length=len(Prediction_Data.Close) # Lenght of the predictin Data to save the recalc of it
 
 			
-			if Cache2.Search(var) ==0:
+			#if Cache2.Search(var) ==0:
 			
-				Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
-				
-				Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
-				
-			else:
+			Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
 			
-				Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
+			#Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
+			
+			#else:
+			
+				#Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 			
 			
 			Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
@@ -170,14 +170,14 @@ def getAcc():
 			
 		Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
 
-		if Cache2.Search(var) ==0:
+		#if Cache2.Search(var) ==0:
 			
-			Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+		Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
 				
-			Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
+		#Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
 				
-		else:
-			Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
+		#else:
+			#Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 		
 		Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 		
@@ -210,14 +210,14 @@ def getRelativeAcc():
 		Prediction_Data_Length=len(Prediction_Data.High) # Lenght of the predictin Data to save the recalc of it
 		
 		
-		if Cache2.Search(var) ==0:
+		#if Cache2.Search(var) ==0:
 			
-			Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
+		Coefficients=LinearAlgebra.coefficients_Generator(LinearAlgebra.makeXVals_Matrix(10,timeBegin,Prediction_Data_Length),LinearAlgebra.makeY_Matrix(Prediction_Data.Low)) #coeffcients for prediction fucntion a0-a10		
 				
-			Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
+		#Cache2.Cache_Predictions(var,Coefficients)		# after calculating store the data in cache
 				
-		else:
-			Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
+		#else:
+		#Coefficients = Cache2.Fetch_Cache(var)		# fetch from cache if the company data is stored and it's recent ( less than 3 days from prediction)
 			
 		Prediction_Model=LinearAlgebra.makeOutY(Coefficients,Prediction_Data_Length,timeBegin,totalDataCurrent.High,googData) # Gets Prediciton Model or scatter of predicted points these points are also normalized
 		
