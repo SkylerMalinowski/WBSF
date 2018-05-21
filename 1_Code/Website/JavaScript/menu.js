@@ -1,8 +1,8 @@
 /* ************************************************************************** */
-// Written by: 		Skyler Malinowski
-// Tested by: 		Skyler Malinowski
-// Debugged by: 	Skyler Malinowski
-// Integrated by: 	Skyler Malinowski
+// Written by: Skyler Malinowski
+// Tested by: Skyler Malinowski
+// Debugged by: Skyler Malinowski
+// Integrated by: Skyler Malinowski
 /* ************************************************************************** */
 
 // Description: resets Mode status in userDB and removes either

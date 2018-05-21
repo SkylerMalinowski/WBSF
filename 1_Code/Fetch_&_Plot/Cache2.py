@@ -122,8 +122,7 @@ def Parse(Matrix):
 	List = []
 	for x in range (0,11):
 		List.append(Matrix[x,0])
-		
-	return List
+return List
 		
 # Input:	String (Symbol of the Company) 
 # Output:	Boolean (Checks whether the specified Company is in the Cache ( returns 1 if true, 0 if false) )

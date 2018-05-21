@@ -1,9 +1,9 @@
 # Array Manip / Calculations
 
 # /******************************************************************/
-# Made By Vince,Jon
-# Tested By Vince
-# Debugged By Vince
+# Made By Vince, Jon
+# Tested By Vince, Jon
+# Debugged By Vince, Jon
 # Ingegrated By Greg/Skyler
 # /******************************************************************/
 import time # Time
@@ -19,8 +19,17 @@ from math import pow #Math pow
 from datetime import datetime #Date
 from datetime import timedelta #Adding to date
 
-# Function by Jon
-# assume that we are not storing confidence data in a dB, so we cannot calculate prediction over time
+# /******************************************************************/
+# Made By Jon
+# Tested By Jon
+# Debugged By Jon
+# Ingegrated By Greg/Skyler
+# /******************************************************************/
+# CalculateConfidenceRating(predictedValues, historicalValues):
+# 	Input: two lists of floats containing price data
+# 	Output: a float
+# 	Explanation: compares data points from the two lists and computes 
+# 	the percent error between the actual and predicted values.
 def CalculateConfidenceRating(predictedValues, historicalValues):
 	# there will be more data points from historicalValues than predictedValues so
 	# cut off part of historicalIndex, to make the two "list-indexes" the same length
@@ -157,8 +166,6 @@ def Normalize(differData,baseData):
 	differData[len(differData)-1]=differData[len(differData)-2] # Last Spot Error Fix
 	return differData
 
-	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)
-
 # /******************************************************************/
 # Made By Vince
 # Tested By Vince
@@ -237,4 +244,3 @@ def getWorkDates(length):
 		pass
 
 	return a
-	#(Prediction DO NOT TOUCH WIHTOUT NOTIFYING ME)C:\\cygwin\bin\Main.py
